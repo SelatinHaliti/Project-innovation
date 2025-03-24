@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Houses - MySpace</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<header>
+    <h1>Houses for Sale</h1>
+    <div class="search-bar">
+        <input type="text" id="search" placeholder="Search for houses...">
+        <button onclick="searchProperties()">Search</button>
+    </div>
+    <div class="filter-icons">
+        <i class="fas fa-home" onclick="window.location.href='houses.html'" title="Houses"></i>
+        <i class="fas fa-building" onclick="window.location.href='apartments.html'" title="Apartments"></i>
+        <i class="fas fa-briefcase" onclick="window.location.href='offices.html'" title="Offices"></i>
+        <i class="fas fa-warehouse" onclick="window.location.href='commercial.html'" title="Commercial Properties"></i>
+    </div>
+</header>
+
+<div class="container">
+    <div class="listing" data-type="house">
+        <h2>Beautiful Family Home</h2>
+        <img src="https://via.placeholder.com/400" alt="Beautiful Family Home">
+        <p>Price: $500,000</p>
+        <p>Location: 123 Main St, Anytown, USA</p>
+        <p>Description: A beautiful family home with 4 bedrooms and 3 bathrooms.</p>
+        <button class="btn" onclick="viewDetails('Beautiful Family Home')">View Details</button>
+    </div>
+
+    <div class="listing" data-type="house">
+        <h2>Cozy Cottage</h2>
+        <img src="https://via.placeholder.com/400" alt="Cozy Cottage">
+        <p>Price: $250,000</p>
+        <p>Location: 789 Oak St, Anytown, USA</p>
+        <p>Description: A cozy cottage perfect for weekend getaways.</p>
+        <button class="btn" onclick="viewDetails('Cozy Cottage')">View Details</button>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2023 Real Estate Company. All rights reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
