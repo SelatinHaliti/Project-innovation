@@ -18,6 +18,9 @@
         
     </head>
     <body>
+
+    </head>
+    <body>
         <header class="advanced-header">
             <div class="nav-container">
                 <div class="logo">
@@ -35,15 +38,15 @@
                 </div>
                 
                 <div class="quick-links">
-                    <a href="#" class="nav-link">
+                    <a href="houses.html" class="nav-link">
                         <i class="fas fa-home"></i>
                         <span>Homes</span>
                     </a>
-                    <a href="#" class="nav-link">
+                    <a href="apartments.html" class="nav-link">
                         <i class="fas fa-building"></i>
                         <span>Apartments</span>
                     </a>
-                    <a href="#" class="nav-link">
+                    <a href="commercial.html" class="nav-link">
                         <i class="fas fa-briefcase"></i>
                         <span>Commercial</span>
                     </a>
@@ -94,59 +97,435 @@
                 </button>
             </div>
         </header>
-    
+        
+        <!-- Header-i i dytë me foto dhe tekst -->
+        <div class="hero-header">
+            <img class="hero-image" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Modern House">
+            
+            <div class="hero-text">
+                <h1 class="hero-title">Gjeni Pronen Tuaj të Ëndrrave</h1>
+                <p class="hero-subtitle">Eksploroni pronat tona premium në lokacionet më të mira të qytetit</p>
+                <button class="hero-btn">Shiko Pronat</button>
+            </div>
+        </div>
+        
+        <main>
+            <!-- Përmbajtja e faqes këtu -->
+        </main>
        
    
-<div class="container">
-    <div class="listing" data-type="house">
-        <h2>Beautiful Family Home</h2>
-        <img src="https://via.placeholder.com/400" alt="Beautiful Family Home">
-        <p>Price: $500,000</p>
-        <p>Location: 123 Main St, Anytown, USA</p>
-        <p>Description: A beautiful family home with 4 bedrooms and 3 bathrooms.</p>
-        <button class="btn" onclick="viewDetails('Beautiful Family Home')">View Details</button>
+<!-- Seksioni i Pronave të Fundit -->
+<section class="latest-properties">
+    <div class="containers">
+        <h2 class="section-title">Pronat e Fundit</h2>
+        <p class="section-subtitle">Zbuloni ofertat tona më të reja</p>
+        
+        <div class="properties-grid">
+            <!-- Prona 1 -->
+            <div class="property-card">
+                <div class="property-badge">E Re</div>
+                <div class="property-image" style="background-image: url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">
+                    <div class="property-price">$350,000</div>
+                </div>
+                <div class="property-details">
+                    <h3>Vilë Moderne në Vushtrri</h3>
+                    <p class="property-location"><i class="fas fa-map-marker-alt"></i>  Vushtrri, Kovose</p>
+                    <div class="property-features">
+                        <span><i class="fas fa-bed"></i> 4 Dhoma</span>
+                        <span><i class="fas fa-bath"></i> 3 Banjo</span>
+                        <span><i class="fas fa-vector-square"></i> 220m²</span>
+                    </div>
+                    <button class="property-btn">Shiko Detajet</button>
+                </div>
+            </div>
+            
+            <!-- Prona 2 -->
+            <div class="property-card featured">
+                <div class="property-badge">Featured</div>
+                <div class="property-image" style="background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">
+                    <div class="property-price">$275,000</div>
+                </div>
+                <div class="property-details">
+                    <h3>Apartament Premium në Prishtine</h3>
+                    <p class="property-location"><i class="fas fa-map-marker-alt"></i> Blloku4, Prishtinë</p>
+                    <div class="property-features">
+                        <span><i class="fas fa-bed"></i> 3 Dhoma</span>
+                        <span><i class="fas fa-bath"></i> 2 Banjo</span>
+                        <span><i class="fas fa-vector-square"></i> 145m²</span>
+                    </div>
+                    <button class="property-btn">Shiko Detajet</button>
+                </div>
+            </div>
+            
+            <!-- Prona 3 -->
+            <div class="property-card">
+                <div class="property-image" style="background-image: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">
+                    <div class="property-price">$180,000</div>
+                </div>
+                <div class="property-details">
+                    <h3>Shtëpi Familjare në Prishtine</h3>
+                    <p class="property-location"><i class="fas fa-map-marker-alt"></i>  Prishtine, Kosove</p>
+                    <div class="property-features">
+                        <span><i class="fas fa-bed"></i> 5 Dhoma</span>
+                        <span><i class="fas fa-bath"></i> 3 Banjo</span>
+                        <span><i class="fas fa-vector-square"></i> 320m²</span>
+                    </div>
+                    <button class="property-btn">Shiko Detajet</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="view-all-container">
+            <button class="view-all-btn">Shiko Të Gjitha Pronat <i class="fas fa-arrow-right"></i></button>
+        </div>
     </div>
+</section>
 
-    <div class="listing" data-type="apartment">
-        <h2>Modern Apartment</h2>
-        <img src="https://via.placeholder.com/400" alt="Modern Apartment">
-        <p>Price: $300,000</p>
-        <p>Location: 456 Elm St, Anytown, USA</p>
-        <p>Description: A modern apartment in the heart of the city.</p>
-        <button class="btn" onclick="viewDetails('Modern Apartment')">View Details</button>
+
+
+
+<!-- Seksioni i Zonave - Version i Thjeshtuar dhe i Testuar -->
+<section class="neighborhood-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Zonat më të Kërkuara</h2>
+        <p>Zbuloni lagjet më të njohura të qytetit tonë</p>
+      </div>
+  
+      <div class="neighborhood-tabs">
+        <button class="tab-btn active" data-tab="blloku">Rruga B</button>
+        <button class="tab-btn" data-tab="liqeni">Marigona Hill</button>
+        <button class="tab-btn" data-tab="ish-blloku">Lagja Marigona</button>
+      </div>
+  
+      <div class="tab-content active" id="blloku">
+        <div class="neighborhood-card">
+          <img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Blloku">
+          <div class="neighborhood-info">
+            <h3>Rruga B, Prishtinë</h3>
+            <div class="stats">
+              <div class="stat">
+                <span class="value">€2,800/m²</span>
+                <span class="label">Çmim Mesatar</span>
+              </div>
+              <div class="stat">
+                <span class="value">+12%</span>
+                <span class="label">Rritje Vjetore</span>
+              </div>
+            </div>
+            <p>Zona më e njohur e Prishtinës me jetë natërore dhe restorante të shumta.</p>
+            <button class="cta-btn">Shiko Pronat</button>
+          </div>
+        </div>
+      </div>
+  
+      <div class="tab-content" id="liqeni">
+        <div class="neighborhood-card">
+          <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Liqeni">
+          <div class="neighborhood-info">
+            <h3>Marigona Hill, Prishtinë</h3>
+            <div class="stats">
+              <div class="stat">
+                <span class="value">€2,200/m²</span>
+                <span class="label">Çmim Mesatar</span>
+              </div>
+              <div class="stat">
+                <span class="value">+8%</span>
+                <span class="label">Rritje Vjetore</span>
+              </div>
+            </div>
+            <p>Zonë e qetë pranë Marigona Hill, ideale për familje.</p>
+            <button class="cta-btn">Shiko Pronat</button>
+          </div>
+        </div>
+      </div>
+  
+      <div class="tab-content" id="ish-blloku">
+        <div class="neighborhood-card">
+          <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Ish-Blloku">
+          <div class="neighborhood-info">
+            <h3>Lagja Marigona,Prishtinë</h3>
+            <div class="stats">
+              <div class="stat">
+                <span class="value">€2,500/m²</span>
+                <span class="label">Çmim Mesatar</span>
+              </div>
+              <div class="stat">
+                <span class="value">+10%</span>
+                <span class="label">Rritje Vjetore</span>
+              </div>
+            </div>
+            <p>Zonë në zhvillim me projekte të reja banimi.</p>
+            <button class="cta-btn">Shiko Pronat</button>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
+  
+ 
+  
+  <script>
+    // JavaScript i thjeshtë për ndërrimin e tab-ve
+    document.addEventListener('DOMContentLoaded', function() {
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      const tabContents = document.querySelectorAll('.tab-content');
+      
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          const tabId = this.getAttribute('data-tab');
+          
+          // Hiq klasën active nga të gjitha butonat dhe përmbajtjet
+          tabBtns.forEach(btn => btn.classList.remove('active'));
+          tabContents.forEach(content => content.classList.remove('active'));
+          
+          // Shto klasën active për butonin dhe përmbajtjen e zgjedhur
+          this.classList.add('active');
+          document.getElementById(tabId).classList.add('active');
+        });
+      });
+    });
+  </script>
 
-    <div class="listing" data-type="office">
-        <h2>Spacious Office Space</h2>
-        <img src="https://via.placeholder.com/400" alt="Spacious Office Space">
-        <p>Price: $800,000</p>
-        <p>Location: 321 Business Rd, Anytown, USA</p>
-        <p>Description: A spacious office space perfect for startups.</p>
-        <button class="btn" onclick="viewDetails('Spacious Office Space')">View Details</button>
+
+
+
+<!-- Seksioni i Pronave Premium -->
+<section class="property-showcase">
+    <div class="container">
+      <div class="section-header">
+        <h2>Prona Premium në Dispozicion</h2>
+        <p>Zbuloni koleksionin tonë të pronave të zgjedhura me kujdes</p>
+      </div>
+  
+      <!-- Filter Controls -->
+      <div class="property-filters">
+        <div class="filter-group">
+          <label for="property-type">Lloji i Pronës:</label>
+          <select id="property-type">
+            <option value="all">Të Gjitha</option>
+            <option value="apartment">Apartament</option>
+            <option value="house">Shtëpi</option>
+            <option value="villa">Vilë</option>
+            <option value="commercial">Komerciale</option>
+          </select>
+        </div>
+  
+        <div class="filter-group">
+          <label for="bedrooms">Dhoma:</label>
+          <select id="bedrooms">
+            <option value="any">Çdo</option>
+            <option value="1">1+</option>
+            <option value="2">2+</option>
+            <option value="3">3+</option>
+            <option value="4">4+</option>
+          </select>
+        </div>
+  
+        <div class="filter-group">
+          <label for="price-range">Çmimi:</label>
+          <select id="price-range">
+            <option value="any">Çdo</option>
+            <option value="0-100000">Deri €100,000</option>
+            <option value="100000-200000">€100,000-€200,000</option>
+            <option value="200000-300000">€200,000-€300,000</option>
+            <option value="300000+">Mbi €300,000</option>
+          </select>
+        </div>
+  
+        <div class="filter-group">
+          <label for="location">Zona:</label>
+          <select id="location">
+            <option value="any">Çdo</option>
+            <option value="tirana">Prishtinë</option>
+            <option value="durres">Vushtrri</option>
+            <option value="vlora">Pejë</option>
+            <option value="saranda">Prizren</option>
+          </select>
+        </div>
+      </div>
+  
+      <!-- Property Grid -->
+      <div class="property-grid">
+        <!-- Property 1 -->
+        <div class="property-card" data-type="apartment" data-bedrooms="2" data-price="180000" data-location="tirana">
+          <div class="property-badge">E Re</div>
+          <div class="property-image">
+            <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Apartament në Tiranë">
+            <div class="property-price">€180,000</div>
+          </div>
+          <div class="property-details">
+            <h3>Apartament Modern</h3>
+            <p class="property-location"><i class="fas fa-map-marker-alt"></i>Prishtinë</p>
+            <div class="property-features">
+              <span><i class="fas fa-bed"></i> 2 Dhoma</span>
+              <span><i class="fas fa-expand"></i> 85m²</span>
+              <span><i class="fas fa-building"></i> Kati 5</span>
+            </div>
+            <button class="property-btn">Shiko Detajet</button>
+          </div>
+        </div>
+  
+        <!-- Property 2 -->
+        <div class="property-card" data-type="villa" data-bedrooms="4" data-price="350000" data-location="durres">
+          <div class="property-badge">Premium</div>
+          <div class="property-image">
+            <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Vilë në Durrës">
+            <div class="property-price">€350,000</div>
+          </div>
+          <div class="property-details">
+            <h3>Vilë Pranë Natyres</h3>
+            <p class="property-location"><i class="fas fa-map-marker-alt"></i>Prishtinë</p>
+            <div class="property-features">
+              <span><i class="fas fa-bed"></i> 4 Dhoma</span>
+              <span><i class="fas fa-expand"></i> 220m²</span>
+              <span><i class="fas fa-swimming-pool"></i> Pishinë</span>
+            </div>
+            <button class="property-btn">Shiko Detajet</button>
+          </div>
+        </div>
+  
+        <!-- Property 3 -->
+        <div class="property-card" data-type="house" data-bedrooms="3" data-price="275000" data-location="vlora">
+          <div class="property-image">
+            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Shtëpi në Vlorë">
+            <div class="property-price">€275,000</div>
+          </div>
+          <div class="property-details">
+            <h3>Shtëpi Familjare</h3>
+            <p class="property-location"><i class="fas fa-map-marker-alt"></i>Prishtinë</p>
+            <div class="property-features">
+              <span><i class="fas fa-bed"></i> 3 Dhoma</span>
+              <span><i class="fas fa-expand"></i> 150m²</span>
+              <span><i class="fas fa-tree"></i> Kopsht</span>
+            </div>
+            <button class="property-btn">Shiko Detajet</button>
+          </div>
+        </div>
+  
+        <!-- Property 4 -->
+        <div class="property-card" data-type="apartment" data-bedrooms="1" data-price="120000" data-location="tirana">
+          <div class="property-image">
+            <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Studio Apartament">
+            <div class="property-price">€120,000</div>
+          </div>
+          <div class="property-details">
+            <h3>Studio Apartament</h3>
+            <p class="property-location"><i class="fas fa-map-marker-alt"></i>Vushtrri</p>
+            <div class="property-features">
+              <span><i class="fas fa-bed"></i> 1 Dhomë</span>
+              <span><i class="fas fa-expand"></i> 45m²</span>
+              <span><i class="fas fa-warehouse"></i> Parking</span>
+            </div>
+            <button class="property-btn">Shiko Detajet</button>
+          </div>
+        </div>
+  
+        <!-- Property 5 -->
+        <div class="property-card" data-type="commercial" data-bedrooms="0" data-price="420000" data-location="saranda">
+          <div class="property-badge">Ofertë</div>
+          <div class="property-image">
+            <img src="https://images.unsplash.com/photo-1554469384-e58fac16e23a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Hapësirë Komerciale">
+            <div class="property-price">€420,000</div>
+          </div>
+          <div class="property-details">
+            <h3>Hapësirë Komerciale</h3>
+            <p class="property-location"><i class="fas fa-map-marker-alt"></i> Qendra e Prishtinës</p>
+            <div class="property-features">
+              <span><i class="fas fa-expand"></i> 320m²</span>
+              <span><i class="fas fa-users"></i> Zonë Me Këmbësorë</span>
+              <span><i class="fas fa-store"></i> Dyqan</span>
+            </div>
+            <button class="property-btn">Shiko Detajet</button>
+          </div>
+        </div>
+  
+        <!-- Property 6 -->
+        <div class="property-card" data-type="house" data-bedrooms="5" data-price="380000" data-location="tirana">
+          <div class="property-badge">Ekskluzive</div>
+          <div class="property-image">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Shtëpi Luksoze">
+            <div class="property-price">€380,000</div>
+          </div>
+          <div class="property-details">
+            <h3>Shtëpi Luksoze</h3>
+            <p class="property-location"><i class="fas fa-map-marker-alt"></i> Prishtinë</p>
+            <div class="property-features">
+              <span><i class="fas fa-bed"></i> 5 Dhoma</span>
+              <span><i class="fas fa-expand"></i> 280m²</span>
+              <span><i class="fas fa-car"></i> 2 Garazhe</span>
+            </div>
+            <button class="property-btn">Shiko Detajet</button>
+          </div>
+        </div>
+      </div>
+  
+      <div class="view-all">
+        <button class="view-all-btn">Shiko Më Shumë Prona <i class="fas fa-arrow-right"></i></button>
+      </div>
     </div>
+  </section>
+  
+  
+  <script>
+    // JavaScript for Filter Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const filterType = document.getElementById('property-type');
+      const filterBedrooms = document.getElementById('bedrooms');
+      const filterPrice = document.getElementById('price-range');
+      const filterLocation = document.getElementById('location');
+      const propertyCards = document.querySelectorAll('.property-card');
+  
+      function filterProperties() {
+        const typeValue = filterType.value;
+        const bedroomsValue = filterBedrooms.value;
+        const priceValue = filterPrice.value;
+        const locationValue = filterLocation.value;
+  
+        propertyCards.forEach(card => {
+          const cardType = card.getAttribute('data-type');
+          const cardBedrooms = parseInt(card.getAttribute('data-bedrooms'));
+          const cardPrice = parseInt(card.getAttribute('data-price'));
+          const cardLocation = card.getAttribute('data-location');
+  
+          // Check type filter
+          const typeMatch = typeValue === 'all' || cardType === typeValue;
+          
+          // Check bedrooms filter
+          const bedroomsMatch = bedroomsValue === 'any' || cardBedrooms >= parseInt(bedroomsValue);
+          
+          // Check price filter
+          let priceMatch = true;
+          if (priceValue !== 'any') {
+            if (priceValue === '300000+') {
+              priceMatch = cardPrice >= 300000;
+            } else {
+              const [min, max] = priceValue.split('-').map(Number);
+              priceMatch = cardPrice >= min && cardPrice <= max;
+            }
+          }
+          
+          // Check location filter
+          const locationMatch = locationValue === 'any' || cardLocation === locationValue;
+  
+          // Show or hide card based on all filters
+          if (typeMatch && bedroomsMatch && priceMatch && locationMatch) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
+  
+      // Add event listeners to all filters
+      filterType.addEventListener('change', filterProperties);
+      filterBedrooms.addEventListener('change', filterProperties);
+      filterPrice.addEventListener('change', filterProperties);
+      filterLocation.addEventListener('change', filterProperties);
+    });
+  </script>
 
-    <div class="listing" data-type="commercial">
-        <h2>Commercial Warehouse</h2>
-        <img src="https://via.placeholder.com/400" alt="Commercial Warehouse">
-        <p>Price: $1,200,000</p>
-        <p>Location: 654 Industrial Ave, Anytown, USA</p>
-        <p>Description: A large warehouse suitable for various businesses.</p>
-        <button class="btn" onclick="viewDetails('Commercial Warehouse')">View Details</button>
-    </div>
 
-    <div class="listing" data-type="house">
-        <h2>Cozy Cottage</h2>
-        <img src="https://via.placeholder.com/400" alt="Cozy Cottage">
-        <p>Price: $250,000</p>
-        <p>Location: 789 Oak St, Anytown, USA</p>
-        <p>Description: A cozy cottage perfect for weekend getaways.</p>
-        <button class="btn" onclick="viewDetails('Cozy Cottage')">View Details</button>
-    </div>
-</div>
-
-
-</head>
-<body>
     <!-- Header/Navigation -->
    
             <div class="mobile-menu-btn">
@@ -178,32 +557,32 @@
         <div class="container">
             <div class="about-content">
                 <h2>Historia Jonë</h2>
-                <p> Real Estate u themelua në vitin 2025 me qëllimin e sjelljes së një standardi të ri në tregun e pasurive të paluajtshme në Shqipëri. Nga një ekip i vogël me 2 persona, ne jemi rritur në një agjenci me më shumë se 20 punonjës dhe qindra klientë të kënaqur.</p>
+                <p> MySpace u themelua në vitin 2025 me qëllimin e sjelljes së një standardi të ri në tregun e pasurive të paluajtshme në Kosovë. Nga një ekip i vogël me 4 persona, ne jemi rritur në një agjenci me më shumë se 20 punonjës dhe qindra klientë të kënaqur.</p>
                 
                 <p>Gjatë këtyre viteve, ne kemi ndihmuar mbi 500 familje të gjejnë shtëpinë e ëndrrave dhe kemi përmirësuar vazhdimisht shërbimet tona për të përmbushur nevojat e tregut.</p>
                 
                 <div class="stats">
                     <div class="stat-item">
-                        <span class="counter" data-target="500">0</span>+
+                        <span class="counter" data-target="500">500</span>+
                         <p>Klientë të Kënaqur</p>
                     </div>
                     <div class="stat-item">
-                        <span class="counter" data-target="8">0</span>+
+                        <span class="counter" data-target="8">8</span>+
                         <p>Vite Eksperiencë</p>
                     </div>
                     <div class="stat-item">
-                        <span class="counter" data-target="1200">0</span>+
+                        <span class="counter" data-target="1200">1200</span>+
                         <p>Prona të Shitura</p>
                     </div>
                     <div class="stat-item">
-                        <span class="counter" data-target="20">0</span>+
+                        <span class="counter" data-target="20">20</span>+
                         <p>Profesionistë</p>
                     </div>
                 </div>
             </div>
             
             <div class="about-image">
-                <img src="assets/office-building.jpg" alt="Zyra jonë" loading="lazy">
+                <img src="https://cdn.sanity.io/images/uqxwe2qj/production/62db3c671745e98cb27690dff96f8033d2bb7f35-2048x1010.jpg" alt="Zyra jonë" loading="lazy">
             </div>
         </div>
     </section>
@@ -230,158 +609,266 @@
             </div>
         </div>
     </section>
-    <!-- Team Section -->
-    <section class="team-section">
-        <div class="containerr">
-            <h2>Ekipi Jonë</h2>
-            <p class="section-subtitle">Njohuni me profesionistët tanë</p>
-            
-            <div class="team-grid">
-                <div class="team-member">
-                    <div class="member-image">
-                        <img src="assets/team-member1.jpg" alt="Selatin Haliti" loading="lazy">
-                        <div class="social-links">
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                            <a href="#"><i class="fab fa-facebook"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                        </div>
-                    </div>
-                    <div class="member-info">
-                        <h3>Selatin Haliti</h3>
-                        <p>Themelues & CEO</p>
-                        <p class="member-bio">Me më shumë se 15 vjet përvojë në tregun e pasurive të paluajtshme, Selatin ka ndihmuar në zhvillimin e strategjive tona të suksesshme.</p>
-                    </div>
-                </div>
-                
-                <div class="team-member">
-                    <div class="member-image">
-                        <img src="assets/team-member2.jpg" alt="Anjeza Kulla" loading="lazy">
-                        <div class="social-links">
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                            <a href="#"><i class="fab fa-facebook"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                        </div>
-                    </div>
-                    <div class="member-info">
-                        <h3>Anjeza Kulla</h3>
-                        <p>Drejtore e Shitjeve</p>
-                        <p class="member-bio">Specializuar në tregun e banesave të reja, Anjeza ka një rekord të shkëlqyer në lidhjen e blerësve me pronat perfekte.</p>
-                    </div>
-                </div>
-                
-                <div class="team-member">
-                    <div class="member-image">
-                        <img src="assets/team-member3.jpg" alt="Endrit Prifti" loading="lazy">
-                        <div class="social-links">
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                            <a href="#"><i class="fab fa-facebook"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                        </div>
-                    </div>
-                    <div class="member-info">
-                        <h3>Endrit Prifti</h3>
-                        <p>Menaxher i Marketingut</p>
-                        <p class="member-bio">Ekspert në marketingun dixhital, Endrit drejton strategjitë tona të komunikimit dhe prezantimin e pronave.</p>
-                    </div>
-                </div>
-                
-                <div class="team-member">
-                    <div class="member-image">
-                        <img src="assets/team-member4.jpg" alt="Bora Doda" loading="lazy">
-                        <div class="social-links">
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                            <a href="#"><i class="fab fa-facebook"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                        </div>
-                    </div>
-                    <div class="member-info">
-                        <h3>Bora Doda</h3>
-                        <p>Agjente e Pronave</p>
-                        <p class="member-bio">Me njohuri të thella të tregut lokal, Bora ndihmon klientët të gjejnë pronën ideale për nevojat e tyre.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+   
 
-    <!-- Testimonials Section -->
-    <section class="testimonials-sections">
-        <div class="container">
-            <h2>Çfarë Thonë Klientët Tanë</h2>
-            <p class="section-subtitle">Opinione të vërteta nga njerëzit që kanë punuar me ne</p>
-            
-            <div class="testimonials-slider">
-                <div class="testimonial active">
-                    <div class="quote">
-                        <i class="fas fa-quote-left"></i>
-                        <p>Faleminderit Rrofshi Real Estate për ndihmën e tyre profesionale. Gjetëm shtëpinë e ëndrrave brenda buxhetit tonë dhe në kohë rekord!</p>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
+    <!-- Seksioni i Përmirësuar i Dëshmive -->
+<section class="testimonials-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Klientët Tanë Flasin</h2>
+            <p class="section-subtitle">Përvoja e tyre me MySpace</p>
+            <div class="section-divider"></div>
+        </div>
+        
+        <div class="testimonials-container">
+            <!-- Dëshmia 1 -->
+            <div class="testimonial-card">
+                <div class="quote-icon">
+                    <i class="fas fa-quote-left"></i>
+                </div>
+                <div class="testimonial-content">
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
                     </div>
-                    <div class="client">
-                        <img src="assets/client1.jpg" alt="Klient 1" loading="lazy">
-                        <div class="client-info">
-                            <h4>Artan Hoxha</h4>
-                            <p>Blerës i Banesës</p>
+                    <p class="testimonial-text">
+                        "MySpace shpërbleu besimin tim duke gjetur saktësisht atë që kërkoja. Proces i qartë dhe transparent nga fillimi deri në fund."
+                    </p>
+                    <div class="client-info">
+                        <div class="client-image">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Klientja Anisa">
+                        </div>
+                        <div class="client-details">
+                            <h4>Anisa Hoxha</h4>
+                            <p>Blerëse Apartamenti</p>
+                            <div class="location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Prishtinë</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="testimonial">
-                    <div class="quote">
-                        <i class="fas fa-quote-left"></i>
-                        <p>Ekipi i shkëlqyer dhe shumë profesional. Na ndihmuan të shisnim pronën tonë me një çmim shumë të mirë dhe me proces të shpejtë.</p>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <div class="client">
-                        <img src="assets/client2.jpg" alt="Klient 2" loading="lazy">
-                        <div class="client-info">
-                            <h4>Elda Gjoni</h4>
-                            <p>Shitëse e Pronës</p>
-                        </div>
-                    </div>
+            </div>
+
+            <!-- Dëshmia 2 -->
+            <div class="testimonial-card featured">
+                <div class="featured-badge">Dëshmia e Muajit</div>
+                <div class="quote-icon">
+                    <i class="fas fa-quote-left"></i>
                 </div>
-                
-                <div class="testimonial">
-                    <div class="quote">
-                        <i class="fas fa-quote-left"></i>
-                        <p>Si investitor i huaj, isha i shqetësuar për të blerë pronë në Shqipëri, por Rrofshi Real Estate më udhëhoqi në çdo hap me profesionalizëm.</p>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
+                <div class="testimonial-content">
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
                     </div>
-                    <div class="client">
-                        <img src="assets/client3.jpg" alt="Klient 3" loading="lazy">
-                        <div class="client-info">
-                            <h4>Marko luciano</h4>
+                    <p class="testimonial-text">
+                        "Si investitor i huaj, nuk dija si të filloj në tregun shqiptar. Stafi i MySpace më udhëzoi në çdo hap dhe më gjetën një pronë me ROI të shkëlqyer."
+                    </p>
+                    <div class="client-info">
+                        <div class="client-image">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Klienti Endrit">
+                        </div>
+                        <div class="client-details">
+                            <h4>Endrit Kulla</h4>
                             <p>Investitor</p>
+                            <div class="location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Prishtinë</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="slider-controls">
-                    <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
-                    <div class="slider-dots"></div>
-                    <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+
+            <!-- Dëshmia 3 -->
+            <div class="testimonial-card">
+                <div class="quote-icon">
+                    <i class="fas fa-quote-left"></i>
+                </div>
+                <div class="testimonial-content">
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "Shërbim i personalizuar dhe profesional. Gjetëm vilën tonë të ëndrrave brenda 2 javësh. Rekomandoj MySpace për këdo që kërkon seriozisht pronë në Kosovë."
+                    </p>
+                    <div class="client-info">
+                        <div class="client-image">
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Klientja Era">
+                        </div>
+                        <div class="client-details">
+                            <h4>Era Dervishi</h4>
+                            <p>Blerëse Vilë</p>
+                            <div class="location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Prishtinë</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+
+        <div class="testimonials-controls">
+            <button class="control-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+            <div class="dots-container"></div>
+            <button class="control-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+</section>
+
+<!-- Seksioni i Shërbimeve -->
+<section class="services-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Shërbimet Tona Ekskluzive</h2>
+            <p class="section-subtitle">Zgjidhje të personalizuara për çdo nevojë të pasurive të paluajtshme</p>
+            <div class="section-divider"></div>
+        </div>
+
+        <div class="services-grid">
+            <!-- Shërbimi 1 -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-home"></i>
+                    <div class="icon-bg"></div>
+                </div>
+                <h3>Blerje Shtëpish</h3>
+                <p>Zbuloni shtëpinë tuaj të ëndrrave me koleksionin tonë të gjerë të pronave rezidenciale.</p>
+                <a href="#" class="service-link">
+                    Mëso më shumë
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <div class="hover-content">
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Vlerësime të sakta të pronave</li>
+                        <li><i class="fas fa-check-circle"></i> Vizita virtuale 3D</li>
+                        <li><i class="fas fa-check-circle"></i> Negociim çmimi</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Shërbimi 2 -->
+            <div class="service-card featured">
+                <div class="featured-ribbon">POPULLORE</div>
+                <div class="service-icon">
+                    <i class="fas fa-building"></i>
+                    <div class="icon-bg"></div>
+                </div>
+                <h3>Menaxhim Pronash</h3>
+                <p>Shërbim kompleks menaxhimi për pronarët që dëshirojnë të marrin të ardhura nga pronat e tyre.</p>
+                <a href="#" class="service-link">
+                    Mëso më shumë
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <div class="hover-content">
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Gjetje qirasesh</li>
+                        <li><i class="fas fa-check-circle"></i> Mbledhje qiraje</li>
+                        <li><i class="fas fa-check-circle"></i> Mirëmbajtje dhe riparime</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Shërbimi 3 -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-chart-line"></i>
+                    <div class="icon-bg"></div>
+                </div>
+                <h3>Konsulencë Investimesh</h3>
+                <p>Strategji të personalizuara për maksimizimin e kthimit nga investimet në pasuri të paluajtshme.</p>
+                <a href="#" class="service-link">
+                    Mëso më shumë
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <div class="hover-content">
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Analizë tregu</li>
+                        <li><i class="fas fa-check-circle"></i> Identifikim oportunitetesh</li>
+                        <li><i class="fas fa-check-circle"></i> Projekte të reja</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Shërbimi 4 -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-file-contract"></i>
+                    <div class="icon-bg"></div>
+                </div>
+                <h3>Shërbime Ligjore</h3>
+                <p>Asistencë e plotë ligjore për të gjitha aspektet e transaksioneve të pasurive të paluajtshme.</p>
+                <a href="#" class="service-link">
+                    Mëso më shumë
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <div class="hover-content">
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Verifikim dokumentesh</li>
+                        <li><i class="fas fa-check-circle"></i> Përgatitje kontratash</li>
+                        <li><i class="fas fa-check-circle"></i> Regjistrim pronësie</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Shërbimi 5 -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-search-dollar"></i>
+                    <div class="icon-bg"></div>
+                </div>
+                <h3>Vlerësime Pronash</h3>
+                <p>Vlerësime profesionale dhe të pavarura të pronave bazuar në treg dhe karakteristika.</p>
+                <a href="#" class="service-link">
+                    Mëso më shumë
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <div class="hover-content">
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Raporte të detajuara</li>
+                        <li><i class="fas fa-check-circle"></i> Analizë krahasuese</li>
+                        <li><i class="fas fa-check-circle"></i> Këshilla për vlerë maksimale</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Shërbimi 6 -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-handshake"></i>
+                    <div class="icon-bg"></div>
+                </div>
+                <h3>Shitje me Besim</h3>
+                <p>Strategji efektive shitjeje për të maksimizuar vlerën dhe për të gjetur blerësin ideal.</p>
+                <a href="#" class="service-link">
+                    Mëso më shumë
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <div class="hover-content">
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Marketing i përqendruar</li>
+                        <li><i class="fas fa-check-circle"></i> Prezantime profesionale</li>
+                        <li><i class="fas fa-check-circle"></i> Koordinim vizitash</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
 
     <!-- CTA Section -->
     <section class="cta-section">
@@ -392,7 +879,7 @@
             </div>
             <div class="cta-buttons">
                 <a href="contact.html" class="btn btn-primary">Kontaktoni Ne</a>
-                <a href="tel:+355123456789" class="btn btn-secondary"><i class="fas fa-phone"></i> +355 12 345 6789</a>
+                <a href="tel:+383123456789" class="btn btn-secondary"><i class="fas fa-phone"></i> +383 12 345 6789</a>
             </div>
         </div>
     </section>
@@ -402,7 +889,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <h3> Real Estate</h3>
+                    <h3>  MySpace</h3>
                     <p>Agjencia jonë ofron shërbime të specializuara në shitje, blerje dhe qira të banesave, shtëpive dhe zyrave në të gjithë Shqipërinë.</p>
                     <div class="social-icons">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -439,14 +926,14 @@
                     <ul class="contact-info">
                         <li><i class="fas fa-map-marker-alt"></i> Vushtrri, Kosovë</li>
                         <li><i class="fas fa-phone"></i> +383 123 123 67</li>
-                        <li><i class="fas fa-envelope"></i> info@realestate.com</li>
+                        <li><i class="fas fa-envelope"></i> info@MySpace.com</li>
                         <li><i class="fas fa-clock"></i> Hënë-Delle: 24H</li>
                     </ul>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2025  Real Estate. Të drejtat e rezervuara</p>
+                <p>&copy; 2025  MySpace. Të drejtat e rezervuara</p>
             </div>
         </div>
     </footer>

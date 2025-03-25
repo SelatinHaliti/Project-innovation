@@ -218,3 +218,77 @@ testimonials.forEach((_, index) => {
 
 
 
+
+// JavaScript për slider functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const container = document.querySelector('.testimonials-container');
+        const cards = document.querySelectorAll('.testimonial-card');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        const dotsContainer = document.querySelector('.dots-container');
+        
+        let currentIndex = 0;
+        const cardWidth = cards[0].offsetWidth + 30; // Width + gap
+        
+        // Krijo dot për çdo kartë
+        cards.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                goToSlide(index);
+            });
+            dotsContainer.appendChild(dot);
+        });
+        
+        // Funksioni për të shkuar në një slide specifik
+        function goToSlide(index) {
+            currentIndex = index;
+            container.scrollTo({
+                left: index * cardWidth,
+                behavior: 'smooth'
+            });
+            updateDots();
+        }
+        
+        // Përditësoni dot-et aktive
+        function updateDots() {
+            document.querySelectorAll('.dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+        
+        // Butoni Previous
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : cards.length - 1;
+            goToSlide(currentIndex);
+        });
+        
+        // Butoni Next
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex < cards.length - 1) ? currentIndex + 1 : 0;
+            goToSlide(currentIndex);
+        });
+        
+        // Auto-slide çdo 5 sekonda
+        let slideInterval = setInterval(() => {
+            currentIndex = (currentIndex < cards.length - 1) ? currentIndex + 1 : 0;
+            goToSlide(currentIndex);
+        }, 5000);
+        
+        // Pause auto-slide kur përdoruesi ndërvepron
+        container.addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
+        
+        container.addEventListener('mouseleave', () => {
+            slideInterval = setInterval(() => {
+                currentIndex = (currentIndex < cards.length - 1) ? currentIndex + 1 : 0;
+                goToSlide(currentIndex);
+            }, 5000);
+        });
+    });
+
+
+
+    
