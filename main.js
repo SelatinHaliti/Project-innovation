@@ -64,7 +64,7 @@ function viewDetails(propertyName) {
  
  // Close dropdown when clicking outside
  document.addEventListener('click', (e) => {
-     if (!filtersDropdown.contains(e.target) {
+     if (!filtersDropdown.contains(e.target)) {
          filtersDropdown.classList.remove('active');
      }
  });
@@ -288,7 +288,6 @@ testimonials.forEach((_, index) => {
             }, 5000);
         });
     });
-
 
 
     
