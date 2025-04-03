@@ -98,9 +98,52 @@
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
-            <button class="add-buton">
-                <i class="fas fa-plus"></i>
-              </button>
+            <button class="add-buton" id="addBtn">
+                <i class="fas fa-plus"></i>  
+            </button>
+        
+            
+            <div class="overlay" id="overlay"></div>
+        
+            
+            <div class="add-options" id="addOptions">
+                <h2 class="form-title">Add Your Property</h2>
+            
+                
+                <div class="input-group">
+                    <input type="text" id="nameInput" placeholder="First Name" required>
+                    <input type="text" id="surnameInput" placeholder="Last Name" required>
+                </div>
+            
+               
+                <input type="email" id="emailInput" placeholder="Email Address" required>
+            
+            
+                <div class="property-type">
+                    <label class="radio-label">
+                        <input type="radio" name="propertyType" value="house" required>
+                        <span class="radio-custom"></span> House for Sale
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="propertyType" value="apartment-sale">
+                        <span class="radio-custom"></span> Apartment for Sale
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="propertyType" value="apartment-rent">
+                        <span class="radio-custom"></span> Apartment for Rent
+                    </label>
+                </div>
+        
+                <label for="propertyImage" class="file-label">Upload Image</label>
+                <input type="file" id="propertyImage" accept="image/*">
+            
+                <textarea id="descriptionInput" placeholder="Property Description (optional)"></textarea>
+        
+                <input type="number" id="priceInput" placeholder="Enter Price (€)" required>
+            
+                <button class="submit-btn" id="payAndSubmit">Pay €10 & Submit</button>
+            </div>
+        
         </header>
         
         <!-- Header-i i dytë me foto dhe tekst -->
@@ -1232,7 +1275,7 @@
             }
         }
 
-        // Shto kartën e pronës në chat
+        
         function addPropertyCard(title, location, size, rooms, bathrooms, price, imageUrl) {
             const propertyDiv = document.createElement('div');
             propertyDiv.className = 'message bot-message';
@@ -1259,7 +1302,7 @@
             `;
             chatbotMessages.appendChild(propertyDiv);
             
-            // Add click event to contact button
+            
             propertyDiv.querySelector('.contact-btn')?.addEventListener('click', function() {
                 addUserMessage("Dëshiroj të kontaktoj për këtë pronë");
                 showTypingIndicator();
@@ -1272,19 +1315,47 @@
             scrollToBottom();
         }
 
-        // Aktivizo chatbot-in kur faqja të ngarkohet
+        
         window.addEventListener('load', function() {
-            // Vonesë për të shfaqur automatikisht chatbot-in
+            
             setTimeout(() => {
                 chatbotButton.classList.add('pulse');
             }, 3000);
         });
 </script>
+<script>
+    document.getElementById("addBtn").addEventListener("click", function () {
+        const addOptions = document.getElementById("addOptions");
+        const overlay = document.getElementById("overlay");
+
+        this.classList.toggle("open");
+
+        if (addOptions.classList.contains("show")) {
+            addOptions.classList.remove("show");
+            overlay.classList.remove("active");
+            setTimeout(() => {
+                addOptions.style.display = "none";
+            }, 500); 
+        } else {
+            addOptions.style.display = "block";
+            setTimeout(() => {
+                addOptions.classList.add("show");
+                overlay.classList.add("active");
+            }, 10);
+        }
+    });
+
+    document.getElementById("overlay").addEventListener("click", function () {
+        document.getElementById("addOptions").classList.remove("show");
+        this.classList.remove("active");
+        setTimeout(() => {
+            document.getElementById("addOptions").style.display = "none";
+        }, 500); 
+    });
+</script>
+
 </body>
 </html>
-
-
-
 
 <script src="script.js"></script>
 </body>
