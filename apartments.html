@@ -1,51 +1,460 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apartments - MySpace</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
-<header>
-    <h1>Apartments for Sale</h1>
-    <div class="search-bar">
-        <input type="text" id="search" placeholder="Search for apartments...">
-        <button onclick="searchProperties()">Search</button>
-    </div>
-    <div class="filter-icons">
-        <i class="fas fa-home" onclick="window.location.href='houses.html'" title="Houses"></i>
-        <i class="fas fa-building" onclick="window.location.href='apartments.html'" title="Apartments"></i>
-        <i class="fas fa-briefcase" onclick="window.location.href='offices.html'" title="Offices"></i>
-        <i class="fas fa-warehouse" onclick="window.location.href='commercial.html'" title="Commercial Properties"></i>
-    </div>
-</header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MySpace Real Estate</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header class="advanced-header">
+      <div class="nav-container">
+        <div class="logo">
+          <a href="indexi.html">
+            <i class="fas fa-home logo-icon"></i>
+          </a>
+          <span class="logo-text"><a href="indexi.html">MySpace</a></span>
+        </div>
+        <div class="search-container">
+          <div class="search-bar">
+            <input
+              type="text"
+              class="search-input"
+              placeholder="Search by location, property type..."
+            />
+            <button class="search-btn">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
 
-<div class="container">
-    <div class="listing" data-type="apartment">
-        <h2>Modern Apartment</h2>
-        <img src="https://via.placeholder.com/400" alt="Modern Apartment">
-        <p>Price: $300,000</p>
-        <p>Location: 456 Elm St, Anytown, USA</p>
-        <p>Description: A modern apartment in the heart of the city.</p>
-        <button class="btn" onclick="viewDetails('Modern Apartment')">View Details</button>
-    </div>
+        <div class="quick-links">
+          <a href="houses.html" class="nav-link">
+            <i class="fas fa-home"></i>
+            <span>Homes</span>
+          </a>
+          <a href="apartments.html" class="nav-link">
+            <i class="fas fa-building"></i>
+            <span>Apartments</span>
+          </a>
+          <a href="commercial.html" class="nav-link">
+            <i class="fas fa-briefcase"></i>
+            <span>Commercial</span>
+          </a>
+        </div>
 
-    <div class="listing" data-type="apartment">
-        <h2>Luxury Penthouse</h2>
-        <img src="https://via.placeholder.com/400" alt="Luxury Penthouse">
-        <p>Price: $1,500,000</p>
-        <p>Location: 789 Skyline Dr, Anytown, USA</p>
-        <p>Description: A stunning penthouse with panoramic city views.</p>
-        <button class="btn" onclick="viewDetails('Luxury Penthouse')">View Details</button>
-    </div>
-</div>
+        <div class="filters-dropdown">
+          <button class="filters-toggle">
+            <i class="fas fa-sliders-h"></i>
+            <span>Filters</span>
+          </button>
+          <div class="filters-panel">
+            <div class="filter-group">
+              <h4>Property Type</h4>
+              <div class="filter-options">
+                <div class="filter-option active">All</div>
+                <div class="filter-option">House</div>
+                <div class="filter-option">Apartment</div>
+                <div class="filter-option">Office</div>
+                <div class="filter-option">Commercial</div>
+              </div>
+            </div>
 
-<footer>
-    <p>&copy; 2023 Real Estate Company. All rights reserved.</p>
-</footer>
+            <div class="filter-group">
+              <h4>Price Range</h4>
+              <input
+                type="range"
+                class="range-slider"
+                min="0"
+                max="1000000"
+                step="10000"
+              />
+              <div class="range-values">
+                <span>$0</span>
+                <span>$1,000,000</span>
+              </div>
+            </div>
 
-<script src="script.js"></script>
-</body>
+            <div class="filter-group">
+              <h4>Bedrooms</h4>
+              <div class="filter-options">
+                <div class="filter-option">Studio</div>
+                <div class="filter-option">1</div>
+                <div class="filter-option">2</div>
+                <div class="filter-option">3+</div>
+              </div>
+            </div>
+
+            <button class="apply-filters">Apply Filters</button>
+          </div>
+        </div>
+
+        <button class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </header>
+    <section class="latest-properties">
+      <div class="containers">
+        <h2 class="section-title">Pronat e Fundit</h2>
+        <p class="section-subtitle">Zbuloni ofertat tona më të reja</p>
+
+        <div class="properties-grid">
+          <div class="property-card">
+            <div
+              class="property-image"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+              "
+            >
+              <div class="property-price">$180,000</div>
+            </div>
+            <div class="property-details">
+              <h3>Shtëpi Familjare në Prishtine</h3>
+              <p class="property-location">
+                <i class="fas fa-map-marker-alt"></i> Prishtine, Kosove
+              </p>
+              <div class="property-features">
+                <span><i class="fas fa-bed"></i> 5 Dhoma</span>
+                <span><i class="fas fa-bath"></i> 3 Banjo</span>
+                <span><i class="fas fa-vector-square"></i> 320m²</span>
+              </div>
+              <button class="property-btn">Shiko Detajet</button>
+            </div>
+          </div>
+          <div class="property-card">
+            <div
+              class="property-image"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+              "
+            >
+              <div class="property-price">$180,000</div>
+            </div>
+            <div class="property-details">
+              <h3>Shtëpi Familjare në Prishtine</h3>
+              <p class="property-location">
+                <i class="fas fa-map-marker-alt"></i> Prishtine, Kosove
+              </p>
+              <div class="property-features">
+                <span><i class="fas fa-bed"></i> 5 Dhoma</span>
+                <span><i class="fas fa-bath"></i> 3 Banjo</span>
+                <span><i class="fas fa-vector-square"></i> 320m²</span>
+              </div>
+              <button class="property-btn">Shiko Detajet</button>
+            </div>
+          </div>
+          <div class="property-card">
+            <div
+              class="property-image"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+              "
+            >
+              <div class="property-price">$180,000</div>
+            </div>
+            <div class="property-details">
+              <h3>Shtëpi Familjare në Prishtine</h3>
+              <p class="property-location">
+                <i class="fas fa-map-marker-alt"></i> Prishtine, Kosove
+              </p>
+              <div class="property-features">
+                <span><i class="fas fa-bed"></i> 5 Dhoma</span>
+                <span><i class="fas fa-bath"></i> 3 Banjo</span>
+                <span><i class="fas fa-vector-square"></i> 320m²</span>
+              </div>
+              <button class="property-btn">Shiko Detajet</button>
+            </div>
+          </div>
+          <div class="property-card">
+            <div
+              class="property-image"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+              "
+            >
+              <div class="property-price">$180,000</div>
+            </div>
+            <div class="property-details">
+              <h3>Shtëpi Familjare në Prishtine</h3>
+              <p class="property-location">
+                <i class="fas fa-map-marker-alt"></i> Prishtine, Kosove
+              </p>
+              <div class="property-features">
+                <span><i class="fas fa-bed"></i> 5 Dhoma</span>
+                <span><i class="fas fa-bath"></i> 3 Banjo</span>
+                <span><i class="fas fa-vector-square"></i> 320m²</span>
+              </div>
+              <button class="property-btn">Shiko Detajet</button>
+            </div>
+          </div>
+          <div class="property-card">
+            <div
+              class="property-image"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+              "
+            >
+              <div class="property-price">$180,000</div>
+            </div>
+            <div class="property-details">
+              <h3>Shtëpi Familjare në Prishtine</h3>
+              <p class="property-location">
+                <i class="fas fa-map-marker-alt"></i> Prishtine, Kosove
+              </p>
+              <div class="property-features">
+                <span><i class="fas fa-bed"></i> 5 Dhoma</span>
+                <span><i class="fas fa-bath"></i> 3 Banjo</span>
+                <span><i class="fas fa-vector-square"></i> 320m²</span>
+              </div>
+              <button class="property-btn">Shiko Detajet</button>
+            </div>
+          </div>
+          <div class="property-card">
+            <div
+              class="property-image"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+              "
+            >
+              <div class="property-price">$180,000</div>
+            </div>
+            <div class="property-details">
+              <h3>Shtëpi Familjare në Prishtine</h3>
+              <p class="property-location">
+                <i class="fas fa-map-marker-alt"></i> Prishtine, Kosove
+              </p>
+              <div class="property-features">
+                <span><i class="fas fa-bed"></i> 5 Dhoma</span>
+                <span><i class="fas fa-bath"></i> 3 Banjo</span>
+                <span><i class="fas fa-vector-square"></i> 320m²</span>
+              </div>
+              <button class="property-btn">Shiko Detajet</button>
+            </div>
+          </div>
+          <div class="property-card">
+            <div
+              class="property-image"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+              "
+            >
+              <div class="property-price">$180,000</div>
+            </div>
+            <div class="property-details">
+              <h3>Shtëpi Familjare në Prishtine</h3>
+              <p class="property-location">
+                <i class="fas fa-map-marker-alt"></i> Prishtine, Kosove
+              </p>
+              <div class="property-features">
+                <span><i class="fas fa-bed"></i> 5 Dhoma</span>
+                <span><i class="fas fa-bath"></i> 3 Banjo</span>
+                <span><i class="fas fa-vector-square"></i> 320m²</span>
+              </div>
+              <button class="property-btn">Shiko Detajet</button>
+            </div>
+          </div>
+          <div class="property-card">
+            <div
+              class="property-image"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+              "
+            >
+              <div class="property-price">$180,000</div>
+            </div>
+            <div class="property-details">
+              <h3>Shtëpi Familjare në Prishtine</h3>
+              <p class="property-location">
+                <i class="fas fa-map-marker-alt"></i> Prishtine, Kosove
+              </p>
+              <div class="property-features">
+                <span><i class="fas fa-bed"></i> 5 Dhoma</span>
+                <span><i class="fas fa-bath"></i> 3 Banjo</span>
+                <span><i class="fas fa-vector-square"></i> 320m²</span>
+              </div>
+              <button class="property-btn">Shiko Detajet</button>
+            </div>
+          </div>
+          <div class="property-card">
+            <div
+              class="property-image"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+              "
+            >
+              <div class="property-price">$180,000</div>
+            </div>
+            <div class="property-details">
+              <h3>Shtëpi Familjare në Prishtine</h3>
+              <p class="property-location">
+                <i class="fas fa-map-marker-alt"></i> Prishtine, Kosove
+              </p>
+              <div class="property-features">
+                <span><i class="fas fa-bed"></i> 5 Dhoma</span>
+                <span><i class="fas fa-bath"></i> 3 Banjo</span>
+                <span><i class="fas fa-vector-square"></i> 320m²</span>
+              </div>
+              <button class="property-btn">Shiko Detajet</button>
+            </div>
+          </div>
+          <div class="property-card">
+            <div
+              class="property-image"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+              "
+            >
+              <div class="property-price">$180,000</div>
+            </div>
+            <div class="property-details">
+              <h3>Shtëpi Familjare në Prishtine</h3>
+              <p class="property-location">
+                <i class="fas fa-map-marker-alt"></i> Prishtine, Kosove
+              </p>
+              <div class="property-features">
+                <span><i class="fas fa-bed"></i> 5 Dhoma</span>
+                <span><i class="fas fa-bath"></i> 3 Banjo</span>
+                <span><i class="fas fa-vector-square"></i> 320m²</span>
+              </div>
+              <button class="property-btn">Shiko Detajet</button>
+            </div>
+          </div>
+          <div class="property-card">
+            <div
+              class="property-image"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+              "
+            >
+              <div class="property-price">$180,000</div>
+            </div>
+            <div class="property-details">
+              <h3>Shtëpi Familjare në Prishtine</h3>
+              <p class="property-location">
+                <i class="fas fa-map-marker-alt"></i> Prishtine, Kosove
+              </p>
+              <div class="property-features">
+                <span><i class="fas fa-bed"></i> 5 Dhoma</span>
+                <span><i class="fas fa-bath"></i> 3 Banjo</span>
+                <span><i class="fas fa-vector-square"></i> 320m²</span>
+              </div>
+              <button class="property-btn">Shiko Detajet</button>
+            </div>
+          </div>
+          <div class="property-card">
+            <div
+              class="property-image"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+              "
+            >
+              <div class="property-price">$180,000</div>
+            </div>
+            <div class="property-details">
+              <h3>Shtëpi Familjare në Prishtine</h3>
+              <p class="property-location">
+                <i class="fas fa-map-marker-alt"></i> Prishtine, Kosove
+              </p>
+              <div class="property-features">
+                <span><i class="fas fa-bed"></i> 5 Dhoma</span>
+                <span><i class="fas fa-bath"></i> 3 Banjo</span>
+                <span><i class="fas fa-vector-square"></i> 320m²</span>
+              </div>
+              <button class="property-btn">Shiko Detajet</button>
+            </div>
+          </div>
+        </div>
+        <div class="testimonials-controls">
+          <button class="control-btn prev-btn">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <p class="control-btn prev-btn dots-container next-btn">1</p>
+          <p class="control-btn prev-btn dots-container next-btn">2</p>
+          <p class="control-btn prev-btn dots-container next-btn">3</p>
+          <p class="control-btn prev-btn dots-container next-btn">4</p>
+          <p class="control-btn prev-btn dots-container next-btn">5</p>
+          <div class="dots-container"></div>
+          <button class="control-btn next-btn">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-content">
+          <h2>Gati për të Filluar Kërkimin e Pronës Sonde?</h2>
+          <p>
+            Na kontaktoni sot për një konsultim falas me një nga ekspertët tanë
+          </p>
+        </div>
+        <div class="cta-buttons">
+          <a href="contact.html" class="btn btn-primary">Kontaktoni Ne</a>
+          <a href="tel:+383123456789" class="btn btn-secondary"
+            ><i class="fas fa-phone"></i> +383 12 345 6789</a
+          >
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h3>MySpace</h3>
+            <p>
+              Agjencia jonë ofron shërbime të specializuara në shitje, blerje
+              dhe qira të banesave, shtëpive dhe zyrave në të gjithë Shqipërinë.
+            </p>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h3>Linqe të Shpejta</h3>
+            <ul>
+              <li><a href="index.html">Kryefaqja</a></li>
+              <li><a href="properties.html">Pronat</a></li>
+              <li><a href="about.html">Rreth Nesh</a></li>
+              <li><a href="services.html">Shërbimet</a></li>
+              <li><a href="contact.html">Kontakt</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h3>Shërbimet</h3>
+            <ul>
+              <li><a href="#">Vlerësimi i Pronës</a></li>
+              <li><a href="#">Menaxhimi i Pronës</a></li>
+              <li><a href="#">Këshilla për Investime</a></li>
+              <li><a href="#">Konsulencë Hipotekore</a></li>
+              <li><a href="#">Legalizimi i Pronës</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h3>Na Kontaktoni</h3>
+            <ul class="contact-info">
+              <li><i class="fas fa-map-marker-alt"></i> Vushtrri, Kosovë</li>
+              <li><i class="fas fa-phone"></i> +383 123 123 67</li>
+              <li><i class="fas fa-envelope"></i> info@MySpace.com</li>
+              <li><i class="fas fa-clock"></i> Hënë-Delle: 24H</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 MySpace. Të drejtat e rezervuara</p>
+        </div>
+      </div>
+    </footer>
+    <script src="main.js"></script>
+  </body>
 </html>

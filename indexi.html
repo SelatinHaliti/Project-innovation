@@ -8,19 +8,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>MySpace Real Estate</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        
-    </head>
-    <body>
+    
+  
 
     </head>
     <body>
+        <div id="loginOverlay" class="login-overlay">
+            <div class="login-container">
+                <h2>Login Required</h2>
+                <p>Please login to continue using MySpace</p>
+                <form id="loginForm" class="login-form">
+                    <input type="text" placeholder="Username" required>
+                    <input type="password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+                <div class="login-footer">
+                    <p>Don't have an account? <a href="#">Sign up</a></p>
+                </div>
+            </div>
+        </div>
+    
         <header class="advanced-header">
             <div class="nav-container">
                 <div class="logo">
@@ -92,12 +99,116 @@
                     </div>
                 </div>
                 
+                <div class="user-section">
+                    <button id="loginBtn" class="user-btn">
+                        <i class="fas fa-user"></i>
+                        <span>Login</span>
+                    </button>
+                </div>
+                
                 <button class="mobile-menu-btn">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
+            
         </header>
-        
+    
+        <style>
+            .login-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.8);
+                z-index: 1000;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .login-container {
+                background: white;
+                padding: 2rem;
+                border-radius: 8px;
+                width: 350px;
+                text-align: center;
+            }
+            
+            .login-form {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                margin-top: 1.5rem;
+            }
+            
+            .login-form input {
+                padding: 0.8rem;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                font-size: 1rem;
+            }
+            
+            .login-form button {
+                padding: 0.8rem;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1rem;
+            }
+            
+            .login-footer {
+                margin-top: 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .user-section {
+                margin-left: auto;
+                margin-right: 1rem;
+            }
+            
+            .user-btn {
+                background: none;
+                border: none;
+                color: white;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                font-size: 1rem;
+            }
+        </style>
+    
+        <script>
+            // Show login overlay after 3 seconds
+            setTimeout(function() {
+                document.getElementById('loginOverlay').style.display = 'flex';
+            }, 3000);
+            
+            // Login button functionality
+            document.getElementById('loginBtn').addEventListener('click', function() {
+                document.getElementById('loginOverlay').style.display = 'flex';
+            });
+            
+            // Simple login form handling
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Here you would normally validate credentials
+                // For demo, we'll just close the overlay
+                document.getElementById('loginOverlay').style.display = 'none';
+            });
+            
+            // Prevent interaction with the page when login overlay is shown
+            document.getElementById('loginOverlay').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    // Only allow closing by clicking outside if you want
+                    // this.style.display = 'none';
+                }
+            });
+        </script>
+    </body>
         <!-- Header-i i dytë me foto dhe tekst -->
         <div class="hero-header">
             <img class="hero-image" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Modern House">
@@ -883,6 +994,8 @@
             </div>
         </div>
     </section>
+
+    
 
     <!-- Footer -->
     <footer class="footer">

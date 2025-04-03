@@ -55,32 +55,91 @@ function viewDetails(propertyName) {
 }
 
  // Toggle filters dropdown
- const filtersToggle = document.querySelector('.filters-toggle');
- const filtersDropdown = document.querySelector('.filters-dropdown');
- 
- filtersToggle.addEventListener('click', () => {
-     filtersDropdown.classList.toggle('active');
- });
- 
- // Close dropdown when clicking outside
- document.addEventListener('click', (e) => {
-     if (!filtersDropdown.contains(e.target) {
-         filtersDropdown.classList.remove('active');
-     }
- });
- 
- // Filter option selection
- const filterOptions = document.querySelectorAll('.filter-option');
- filterOptions.forEach(option => {
-     option.addEventListener('click', () => {
-         if (option.parentElement.querySelector('.active')) {
-             option.parentElement.querySelector('.active').classList.remove('active');
-         }
-         option.classList.add('active');
-     });
- });
+const filtersToggle = document.querySelector('.filters-toggle');
+const filtersDropdown = document.querySelector('.filters-dropdown');
 
+// Toggle dropdown kur klikohet butoni
+filtersToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    filtersDropdown.classList.toggle('active');
+});
 
+// Mbylle dropdown kur klikohet jashtë
+document.addEventListener('click', (e) => {
+    if (!filtersDropdown.contains(e.target) && e.target !== filtersToggle) {
+        filtersDropdown.classList.remove('active');
+    }
+});
+
+// Për zgjedhjen e filtrave
+const filterOptions = document.querySelectorAll('.filter-option');
+filterOptions.forEach(option => {
+    option.addEventListener('click', (e) => {
+        e.stopPropagation();
+        
+        // Hiq klasën 'active' nga të gjithë vëllezërit në të njëjtin grup
+        const siblings = Array.from(option.parentElement.children);
+        siblings.forEach(sib => sib.classList.remove('active'));
+        
+        // Shto klasën 'active' për opsionin e zgjedhur
+        option.classList.add('active');
+    });
+});
+
+// Për slider-in e çmimit
+const rangeSlider = document.querySelector('.range-slider');
+const rangeValues = document.querySelector('.range-values');
+if (rangeSlider && rangeValues) {
+    rangeSlider.addEventListener('input', (e) => {
+        const value = e.target.value;
+        rangeValues.firstElementChild.textContent = `$${parseInt(value).toLocaleString()}`;
+    });
+}
+
+// Për butonin e aplikimit të filtrave
+const applyFiltersBtn = document.querySelector('.apply-filters');
+if (applyFiltersBtn) {
+    applyFiltersBtn.addEventListener('click', () => {
+        applyAllFilters();
+    });
+}
+
+// Funksioni për të aplikuar të gjitha filtrat
+function applyAllFilters() {
+    // Merr filtrin e dhomave të gjumit
+    const selectedBedroom = document.querySelector('.filter-option.active');
+    const bedroomFilter = selectedBedroom ? selectedBedroom.textContent.trim() : 'all';
+    
+    // Merr filtrin e çmimit
+    const priceFilter = rangeSlider ? rangeSlider.value : null;
+    
+    console.log('Bedroom filter:', bedroomFilter);
+    console.log('Price filter:', priceFilter);
+    
+    // Apliko filtrat në elementet
+    const items = document.querySelectorAll('.item-to-filter');
+    items.forEach(item => {
+        const itemPrice = item.dataset.price || 0;
+        const itemBedrooms = item.dataset.bedrooms || '';
+        
+        // Kontrollo nëse elementi plotëson kushtet e filtrave
+        const priceMatch = !priceFilter || parseInt(itemPrice) <= parseInt(priceFilter);
+        const bedroomMatch = bedroomFilter === 'all' || 
+                           (bedroomFilter === 'Studio' && itemBedrooms === 'Studio') ||
+                           (bedroomFilter === '1' && itemBedrooms === '1') ||
+                           (bedroomFilter === '2' && itemBedrooms === '2') ||
+                           (bedroomFilter === '3+' && parseInt(itemBedrooms) >= 3);
+        
+        if (priceMatch && bedroomMatch) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+    
+    // Mbylle dropdown pas aplikimit të filtrave
+    filtersDropdown.classList.remove('active');
+}
  //about us js//
 
    // Mobile Menu Toggle
