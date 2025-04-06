@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagesa për Pronën</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.payment-section {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+#card-element {
+    margin-bottom: 20px;
+}
+
+#card-errors {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+#submit-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 16px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#submit-btn:hover {
+    background-color: #218838;
+}
+
+    </style>
+</head>
+<body>
+
+    <section class="payment-section">
+        <h2>Pagesa për Pronën</h2>
+        
+        <form id="payment-form">
+            <div id="card-element">
+                <!-- Stripe's Card Element will be inserted here -->
+            </div>
+
+            <!-- Display error message -->
+            <div id="card-errors" role="alert"></div>
+
+            <button type="submit" id="submit-btn">Paguaj €10 dhe Dërgo</button>
+        </form>
+    </section>
+
+    <script>
+
+        // Payment.js
+var stripe = Stripe('pk_test_51RACzSRjGiyNVx7klgg7BYwtyREqge6Yidy2EnXUuy4ssgCqny8W5BLc3fgUBPtNy6Cpyn6sD8H5fAVGp45hKbF300tZ3ssFK5'); // Vendosni "publishable key" tuaj të Stripe
+var elements = stripe.elements();
+var card = elements.create('card'); // Krijoni kartën
+
+// Vendi për të vendosur elementin e kartës
+card.mount('#card-element');
+
+// Merrni formularin dhe butonin për dërgimin e pagesës
+var form = document.getElementById('payment-form');
+var submitButton = document.getElementById('submit-btn');
+
+// Kur përdoruesi klikon "submit" për të kryer pagesën
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    stripe.confirmCardPayment("cus_S4zMB6TTDBRwyM", {
+        payment_method: {
+            card: card,
+            billing_details: {
+                name: 'selatin', // Këtu mund të merrni emrin nga formulari
+                email: 'selatinhaliti6@gmail.com' // Merrni emailin nga formulari
+            }
+        }
+    }).then(function(result) {
+        if (result.error) {
+            // Ndodhi një gabim gjatë pagesës
+            var errorElement = document.getElementById('card-errors');
+            errorElement.textContent = result.error.message;
+        } else {
+            // Pagesa ishte e suksesshme, mund të dërgoni një mesazh falenderimi ose të kaloni në një faqe tjetër
+            window.location.href = '/thank-you'; // Mund të dërgoni përdoruesin në një faqe falenderimi
+        }
+    });
+});
+
+
+// server.js
+const express = require('express');
+const bodyParser = require('body-parser');
+const stripe = require('stripe')('sk_test_51RACzSRjGiyNVx7kOvzJx1U9bTCnei6XdoUkgSvLGmCi38o2O58eHH3lntfrMrXtBIPE6v6yoehl9TErs7l8dPBM00twq30rAQ'); // Vendosni "secret key" tuaj të Stripe
+
+const app = express();
+app.use(bodyParser.json());
+
+app.post('/create-payment-intent', async (req, res) => {
+    const paymentIntent = await stripe.paymentIntents.create({
+        amount: 1000, // Shuma për pagesën në qindarka (€10 = 1000 cent)
+        currency: 'eur',
+    });
+
+    res.send({
+        clientSecret: paymentIntent.client_secret,
+    });
+});
+
+app.listen(3000, () => console.log('Serveri po dëgjon në portën 3000'));
+
+
+fetch('/create-payment-intent', {
+    method: 'POST',
+})
+.then(function(response) {
+    return response.json();
+})
+.then(function(data) {
+    stripe.confirmCardPayment(data.clientSecret, {
+        payment_method: {
+            card: card,
+            billing_details: {
+                name: 'Customer Name', // merrni emrin nga formulari
+                email: 'email@example.com' // merrni emailin nga formulari
+            }
+        }
+    }).then(function(result) {
+        if (result.error) {
+            // Ndodhi një gabim gjatë pagesës
+            var errorElement = document.getElementById('card-errors');
+            errorElement.textContent = result.error.message;
+        } else {
+            // Pagesa ishte e suksesshme
+            window.location.href = '/thank-you';
+        }
+    });
+});
+
+    </script>
+</body>
+</html>

@@ -2685,3 +2685,274 @@ body {
 
 
 
+.blog-section {
+  padding: 80px 0;
+  background-color: #f5f5f5;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.section-title h2 {
+  font-size: 36px;
+  color: #1a3e72;
+  margin-bottom: 15px;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title h2:after {
+  content: '';
+  position: absolute;
+  width: 70px;
+  height: 3px;
+  background-color: #d4a017;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.section-title p {
+  color: #555;
+  font-size: 18px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Artikujt e Blogut */
+.blog-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.blog-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 350px;
+  border: 1px solid #e0e0e0;
+}
+
+.blog-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+}
+
+.blog-image {
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+}
+
+.blog-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.blog-card:hover .blog-image img {
+  transform: scale(1.05);
+}
+
+.blog-content {
+  padding: 25px;
+}
+
+.blog-date {
+  color: #d4a017;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.blog-title {
+  font-size: 20px;
+  color: #1a3e72;
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+
+.blog-excerpt {
+  color: #666;
+  margin-bottom: 20px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.read-more {
+  display: inline-block;
+  color: #1a3e72;
+  font-weight: 600;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 3px;
+}
+
+.read-more:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: #d4a017;
+  bottom: 0;
+  left: 0;
+  transition: width 0.3s ease;
+}
+
+.read-more:hover:after {
+  width: 100%;
+}
+
+/* Butoni Shiko të Gjitha */
+.view-all {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.view-all-btn {
+  display: inline-block;
+  background-color: #1a3e72;
+  color: white;
+  padding: 12px 30px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border: 2px solid #1a3e72;
+}
+
+.view-all-btn:hover {
+  background-color: transparent;
+  color: #1a3e72;
+  transform: translateY(-3px);
+}
+
+/* Stili për qytetet e Kosovës */
+.city-tag {
+  display: inline-block;
+  background-color: #f0f7ff;
+  color: #1a3e72;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+/* Artikujt shtesë (të fshehur fillimisht) */
+.additional-articles {
+  display: none;
+  width: 100%;
+}
+
+.additional-articles.show {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .blog-container, .additional-articles.show {
+      flex-direction: column;
+      align-items: center;
+  }
+  
+  .blog-card {
+      max-width: 100%;
+  }
+  
+  .section-title h2 {
+      font-size: 28px;
+  }
+}
+
+/* Ky stil do të sigurojë që faqja të përshtatet me madhësinë e ekranit */
+@media (max-width: 768px) {
+  .property-details h1 {
+    font-size: 24px;
+  }
+  
+  .property-details img {
+    width: 100%;
+    height: auto;
+  }
+
+  .property-details p {
+    font-size: 14px;
+  }
+}
+.faq-section {
+  background-color: #ecf0f1;
+  padding: 40px 0;
+  text-align: center;
+}
+
+.faq-section h2 {
+  font-size: 2rem;
+  color: #34495e;
+  margin-bottom: 30px;
+}
+
+.faq-item {
+  background-color: white;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.faq-question {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  cursor: pointer;
+  margin-bottom: 15px;
+  text-align: left;
+  padding: 10px;
+  background-color: #3498db;
+  color: white;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.faq-question:hover {
+  background-color: #2980b9;
+}
+
+.faq-answer {
+  display: none; /* Initially hidden */
+  margin-top: 15px;
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: #333;
+  text-align: left;
+}
+
+
+
+
+
+

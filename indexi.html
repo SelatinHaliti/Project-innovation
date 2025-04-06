@@ -5,38 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MySpace</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://js.stripe.com/v3/"></script>
+    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+   
+   
     <body>
-        <div id="loginOverlay" class="login-overlay">
-            <div class="login-container">
-              <h2>Login Required</h2>
-              <p>Please login to continue using MySpace</p>
-              <form id="loginForm" class="login-form">
-                <input type="text" placeholder="Username" required>
-                <input type="password" placeholder="Password" required>
-                <button type="submit">Login</button>
-              </form>
-              <div class="login-footer">
-                <p>Don't have an account? <a href="#" id="showSignup">Sign up</a></p>
-              </div>
-            </div>
-          </div>
-          <div id="signupOverlay" class="login-overlay">
-            <div class="login-container">
-              <h2>Create an Account</h2>
-              <form id="signupForm" class="login-form">
-                <input type="text" placeholder="Username" required>
-                <input type="email" placeholder="Email" required>
-                <input type="password" placeholder="Password" required>
-                <button type="submit">Sign Up</button>
-              </form>
-              <div class="login-footer">
-                <p>Already have an account? <a href="#" id="showLogin">Login</a></p>
-              </div>
-            </div>
-          </div>
+    </head>
+    <body>
+        
         <header class="advanced-header">
             <div class="nav-container">
                 <div class="logo">
@@ -45,6 +25,8 @@
                     </a>
                     <span class="logo-text"><a href="indexi.html">MySpace</a></span>
                   </div>
+                  
+                
                 <div class="search-container">
                     <div class="search-bar">
                         <input type="text" class="search-input" placeholder="Search by location, property type...">
@@ -53,6 +35,7 @@
                         </button>
                     </div>
                 </div>
+                
                 
                 <div class="quick-links">
                     <a href="houses.html" class="nav-link">
@@ -108,13 +91,14 @@
                         <button class="apply-filters">Apply Filters</button>
                     </div>
                 </div>
-                
-                <div class="user-section">
-                    <button id="loginBtn" class="user-btn">
-                        <i class="fas fa-user"></i>
-                        <span>Login</span>
-                    </button>
-                </div>
+                <head>
+  <title>Shitje Apartamentesh në Prishtinë | MySpace</title>
+  <meta name="description" content="Gjeni apartamente të shkëlqyera për shitje në Prishtinë. Zgjidhni nga një gamë e gjerë e pasurive të paluajtshme. Shikoni tani ofertat e fundit në MySpace!">
+  <meta name="keywords" content="apartamente për shitje, Prishtinë, prona, shitje apartamentesh, pasuri të paluajtshme">
+  <meta charset="UTF-8">
+  <meta name="robots" content="index, follow">
+</head>
+
                 
                 <button class="mobile-menu-btn">
                     <i class="fas fa-bars"></i>
@@ -163,45 +147,127 @@
         
                 <input type="number" id="priceInput" placeholder="Enter Price (€)" required>
             
-                <button class="submit-btn" id="payAndSubmit">Pay €10 & Submit</button>
+                <button class="submit-btn" id="payAndSubmit"> <a href="pagesa.html">Paguaj €10 & Abonohu</a></button>
+                
+                
             </div>
+            <script>
+                // Get the necessary DOM elements
+const addBtn = document.getElementById('addBtn');
+const overlay = document.getElementById('overlay');
+const addOptions = document.getElementById('addOptions');
+const payAndSubmit = document.getElementById('payAndSubmit');
+const nameInput = document.getElementById('nameInput');
+const surnameInput = document.getElementById('surnameInput');
+const emailInput = document.getElementById('emailInput');
+const propertyImage = document.getElementById('propertyImage');
+const descriptionInput = document.getElementById('descriptionInput');
+const priceInput = document.getElementById('priceInput');
+const radioInputs = document.querySelectorAll('input[name="propertyType"]');
 
+// Function to validate the form
+function validateForm() {
+    let isFormValid = true;
+
+    // Clear previous error messages
+    document.querySelectorAll('.error-message').forEach((el) => {
+        el.textContent = '';
+    });
+
+    // Validate name
+    const isNameValid = nameInput.value.trim() !== '';
+    if (!isNameValid) {
+        document.getElementById('nameError').textContent = 'Please enter your first name';
+        isFormValid = false;
+    }
+
+    // Validate surname
+    const isSurnameValid = surnameInput.value.trim() !== '';
+    if (!isSurnameValid) {
+        document.getElementById('surnameError').textContent = 'Please enter your last name';
+        isFormValid = false;
+    }
+
+    // Validate email
+    const isEmailValid = emailInput.value.trim() !== '' && emailInput.validity.valid;
+    if (!isEmailValid) {
+        document.getElementById('emailError').textContent = 'Please enter a valid email address';
+        isFormValid = false;
+    }
+
+    // Validate property type
+    const isRadioSelected = Array.from(radioInputs).some(input => input.checked);
+    if (!isRadioSelected) {
+        document.getElementById('propertyTypeError').textContent = 'Please select a property type';
+        isFormValid = false;
+    }
+
+    // Validate image
+    const isImageValid = propertyImage.files.length > 0;
+    if (!isImageValid) {
+        document.getElementById('imageError').textContent = 'Please upload an image';
+        isFormValid = false;
+    }
+
+    // Validate price
+    const isPriceValid = priceInput.value.trim() !== '' && !isNaN(priceInput.value) && priceInput.value > 0;
+    if (!isPriceValid) {
+        document.getElementById('priceError').textContent = 'Please enter a valid price';
+        isFormValid = false;
+    }
+
+    // Enable/disable submit button based on form validity
+    if (isFormValid) {
+        payAndSubmit.disabled = false;
+        payAndSubmit.style.pointerEvents = 'auto'; // Allow click
+    } else {
+        payAndSubmit.disabled = true;
+        payAndSubmit.style.pointerEvents = 'none'; // Prevent click
+    }
+}
+
+// Event listener to show the form when the "Add" button is clicked
+addBtn.addEventListener('click', function () {
+    overlay.style.display = 'block';
+    addOptions.style.display = 'block';
+});
+
+// Event listener to close the form when the overlay is clicked
+overlay.addEventListener('click', function () {
+    overlay.style.display = 'none';
+    addOptions.style.display = 'none';
+});
+
+// Event listener for the submit button (to prevent default and validate)
+payAndSubmit.addEventListener('click', function (e) {
+    if (payAndSubmit.disabled) {
+        e.preventDefault(); // Prevent the link from working if the form is invalid
+    } else {
+        // Optionally, add form submission or redirection after successful validation
+        window.location.href = "pagesa.html"; // Redirect to the payment page
+    }
+});
+
+// Event listener for input fields to check form validity
+nameInput.addEventListener('input', validateForm);
+surnameInput.addEventListener('input', validateForm);
+emailInput.addEventListener('input', validateForm);
+propertyImage.addEventListener('change', validateForm);
+descriptionInput.addEventListener('input', validateForm);
+priceInput.addEventListener('input', validateForm);
+radioInputs.forEach(input => input.addEventListener('change', validateForm));
+
+// Initial state: disable the submit button
+payAndSubmit.disabled = true;
+payAndSubmit.style.pointerEvents = 'none'; // Prevent click until form is valid
+
+            </script>
+
+            
+            
+        
         </header>
-    
-        <script>
-              setTimeout(function() {
-                document.getElementById('loginOverlay').style.display = 'flex';
-            }, 3000);
-            // Handle login form
-            document.getElementById('loginForm').addEventListener('submit', function (e) {
-             e.preventDefault();
-            alert("Logged in!");
-            document.getElementById('loginOverlay').style.display = 'none';
-        });
-
-  
-             document.getElementById('signupForm').addEventListener('submit', function (e) {
-                e.preventDefault();
-    alert("Account created!");
-    document.getElementById('signupOverlay').style.display = 'none';
-  });
-
-    
-  // Switch to signup
-  document.getElementById('showSignup').addEventListener('click', function (e) {
-    e.preventDefault();
-    document.getElementById('loginOverlay').style.display = 'none';
-    document.getElementById('signupOverlay').style.display = 'flex';
-  });
-
-    document.getElementById('showLogin').addEventListener('click', function (e) {
-    e.preventDefault();
-    document.getElementById('signupOverlay').style.display = 'none';
-    document.getElementById('loginOverlay').style.display = 'flex';
-  });
-
-        </script>
-    </body>
+        
         <!-- Header-i i dytë me foto dhe tekst -->
         <div class="hero-header">
             <img class="hero-image" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Modern House">
@@ -209,7 +275,7 @@
             <div class="hero-text">
                 <h1 class="hero-title">Gjeni Pronen Tuaj të Ëndrrave</h1>
                 <p class="hero-subtitle">Eksploroni pronat tona premium në lokacionet më të mira të qytetit</p>
-                <button class="hero-btn">Shiko Pronat</button>
+                <button class="hero-btn"> <a href="houses.html">Shiko Pronat</a> </button>
             </div>
         </div>
         
@@ -231,7 +297,7 @@
                     </div>
                     <div class="property-badge">E Re</div>
                     <div class="property-details">
-                        <h3>Vilë Moderne në Vushtrri</h3>
+                        <h3>Banesë Moderne në Vushtrri</h3>
                         <p class="property-location"><i class="fas fa-map-marker-alt"></i> Vushtrri, Kovose</p>
                         <div class="property-features">
                             <span><i class="fas fa-bed"></i> 4 Dhoma</span>
@@ -282,7 +348,7 @@
     
     
         <div class="view-all-container">
-            <button class="view-all-btn">Shiko Të Gjitha Pronat <i class="fas fa-arrow-right"></i></button>
+            <button class="view-all-btn"> <a href="apartments.html">Shiko te gjitha pronat</a> <i class="fas fa-arrow-right"></i></button>
         </div>
     </div>
 </section>
@@ -336,7 +402,7 @@
               </div>
             </div>
             <p>Zonë e qetë pranë Marigona Hill, ideale për familje.</p>
-            <button class="cta-btn">Shiko Pronat</button>
+            <button class="cta-btn"> <a href="houses.html">Shiko Pronat</a></button>
           </div>
         </div>
       </div>
@@ -357,7 +423,7 @@
               </div>
             </div>
             <p>Zonë në zhvillim me projekte të reja banimi.</p>
-            <button class="cta-btn">Shiko Pronat</button>
+            <button class="cta-btn"> <a href="houses.html">Shiko te gjith pronat</a></button>
           </div>
         </div>
       </div>
@@ -471,7 +537,7 @@
         <div class="property-card" data-type="villa" data-bedrooms="4" data-price="350000" data-location="durres">
           <div class="property-badge">Premium</div>
           <div class="property-image">
-            <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Vilë në Durrës">
+            <img src="https://prorealestate.s3.eu-central-1.amazonaws.com/media/2023-03/ad7f46f3-a3c0-4703-9716-3a1d2cfb9d67-lg.png" alt="Vilë në Durrës">
             <div class="property-price">€350,000</div>
           </div>
           <div class="property-details">
@@ -489,12 +555,12 @@
         <!-- Property 3 -->
         <div class="property-card" data-type="house" data-bedrooms="3" data-price="275000" data-location="vlora">
           <div class="property-image">
-            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Shtëpi në Vlorë">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTq97sLdl_ahH0PvPrVuOp2q_Kj8RquRViiXQ&s" alt="Shtëpi në Vlorë">
             <div class="property-price">€275,000</div>
           </div>
           <div class="property-details">
             <h3>Shtëpi Familjare</h3>
-            <p class="property-location"><i class="fas fa-map-marker-alt"></i>Prishtinë</p>
+            <p class="property-location"><i class="fas fa-map-marker-alt"></i>Fushë Kosovë</p>
             <div class="property-features">
               <span><i class="fas fa-bed"></i> 3 Dhoma</span>
               <span><i class="fas fa-expand"></i> 150m²</span>
@@ -507,12 +573,12 @@
         <!-- Property 4 -->
         <div class="property-card" data-type="apartment" data-bedrooms="1" data-price="120000" data-location="tirana">
           <div class="property-image">
-            <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Studio Apartament">
+            <img src="https://crm-cdn.ams3.cdn.digitaloceanspaces.com/anem/storage/anem/2024/September/week4/1024x768/41531_IMG_2797_resize.jpg" alt="Studio Apartament">
             <div class="property-price">€120,000</div>
           </div>
           <div class="property-details">
             <h3>Studio Apartament</h3>
-            <p class="property-location"><i class="fas fa-map-marker-alt"></i>Vushtrri</p>
+            <p class="property-location"><i class="fas fa-map-marker-alt"></i>Arberi Prishtinë</p>
             <div class="property-features">
               <span><i class="fas fa-bed"></i> 1 Dhomë</span>
               <span><i class="fas fa-expand"></i> 45m²</span>
@@ -526,12 +592,12 @@
         <div class="property-card" data-type="commercial" data-bedrooms="0" data-price="420000" data-location="saranda">
           <div class="property-badge">Ofertë</div>
           <div class="property-image">
-            <img src="https://images.unsplash.com/photo-1554469384-e58fac16e23a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Hapësirë Komerciale">
+            <img src="https://crm-cdn.ams3.cdn.digitaloceanspaces.com/topia/storage/topia/2025/January/week2/original/49891_0_wm.jpg" alt="Hapësirë Komerciale">
             <div class="property-price">€420,000</div>
           </div>
           <div class="property-details">
             <h3>Hapësirë Komerciale</h3>
-            <p class="property-location"><i class="fas fa-map-marker-alt"></i> Qendra e Prishtinës</p>
+            <p class="property-location"><i class="fas fa-map-marker-alt"></i> Dukagjini center Prishtinë</p>
             <div class="property-features">
               <span><i class="fas fa-expand"></i> 320m²</span>
               <span><i class="fas fa-users"></i> Zonë Me Këmbësorë</span>
@@ -545,12 +611,12 @@
         <div class="property-card" data-type="house" data-bedrooms="5" data-price="380000" data-location="tirana">
           <div class="property-badge">Ekskluzive</div>
           <div class="property-image">
-            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Shtëpi Luksoze">
+            <img src="https://old.pro-rks.com/wp-content/uploads/2020/11/2-15.jpg" alt="Shtëpi Luksoze">
             <div class="property-price">€380,000</div>
           </div>
           <div class="property-details">
             <h3>Shtëpi Luksoze</h3>
-            <p class="property-location"><i class="fas fa-map-marker-alt"></i> Prishtinë</p>
+            <p class="property-location"><i class="fas fa-map-marker-alt"></i>  Royal  green rezidence Prishtinë</p>
             <div class="property-features">
               <span><i class="fas fa-bed"></i> 5 Dhoma</span>
               <span><i class="fas fa-expand"></i> 280m²</span>
@@ -560,17 +626,9 @@
           </div>
         </div>
       </div>
-  
-      <div class="view-all">
-        <button class="view-all-btn">Shiko Më Shumë Prona <i class="fas fa-arrow-right"></i></button>
-      </div>
-    </div>
-  </section>
-  
-  
-  <script>
-    // JavaScript for Filter Functionality
-    document.addEventListener('DOMContentLoaded', function() {
+      <script>
+        // JavaScript for Filter Functionality
+     document.addEventListener('DOMContentLoaded', function() {
       const filterType = document.getElementById('property-type');
       const filterBedrooms = document.getElementById('bedrooms');
       const filterPrice = document.getElementById('price-range');
@@ -624,8 +682,17 @@
       filterPrice.addEventListener('change', filterProperties);
       filterLocation.addEventListener('change', filterProperties);
     });
-  </script>
 
+      </script>
+  
+      <div class="view-all">
+        <button class="view-all-btn"> <a href="houses.html">Shiko Më Shumë Prona</a>  <i class="fas fa-arrow-right"></i></button>
+      </div>
+    </div>
+  </section>
+
+  
+  
 
     <!-- Header/Navigation -->
    
@@ -658,35 +725,214 @@
         <div class="container">
             <div class="about-content">
                 <h2>Historia Jonë</h2>
-                <p> MySpace u themelua në vitin 2025 me qëllimin e sjelljes së një standardi të ri në tregun e pasurive të paluajtshme në Kosovë. Nga një ekip i vogël me 4 persona, ne jemi rritur në një agjenci me më shumë se 20 punonjës dhe qindra klientë të kënaqur.</p>
+                <p> 🌍 MySpace është një platformë e themeluar nga 4 persona pasionantë, me qëllimin për të sjellë një vend ku mund të shihni dhe blini pronat më të mira që shiten në Kosovë. 🏡💼 E thjeshtë, e besueshme dhe e përkushtuar për të ofruar mundësi të shkëlqyera për çdo klient! 🔑 #MySpace #RealEstate #Kosovo #PropertyForSale #HomeSweetHome</p>
                 
                 <p>Gjatë këtyre viteve, ne kemi ndihmuar mbi 500 familje të gjejnë shtëpinë e ëndrrave dhe kemi përmirësuar vazhdimisht shërbimet tona për të përmbushur nevojat e tregut.</p>
                 
                 <div class="stats">
                     <div class="stat-item">
-                        <span class="counter" data-target="500">500</span>+
+                        <span class="counter" data-target="9000">9000</span>+
                         <p>Klientë të Kënaqur</p>
                     </div>
                     <div class="stat-item">
-                        <span class="counter" data-target="8">8</span>+
+                        <span class="counter" data-target="4">4</span>+
                         <p>Vite Eksperiencë</p>
                     </div>
                     <div class="stat-item">
-                        <span class="counter" data-target="1200">1200</span>+
+                        <span class="counter" data-target="6500">6500</span>+
                         <p>Prona të Shitura</p>
                     </div>
                     <div class="stat-item">
-                        <span class="counter" data-target="20">20</span>+
+                        <span class="counter" data-target="1000">1000</span>+
                         <p>Profesionistë</p>
                     </div>
                 </div>
             </div>
+            <script>
+       document.addEventListener('DOMContentLoaded', function () {
+    const counters = document.querySelectorAll('.counter');
+
+    const animateCounters = () => {
+        const windowHeight = window.innerHeight;
+        counters.forEach(counter => {
+            const counterPosition = counter.getBoundingClientRect().top;
+            if (counterPosition < windowHeight - 100 && !counter.classList.contains('animated')) {
+                counter.classList.add('animated');
+                const target = +counter.getAttribute('data-target');
+                let count = 0;
+                const interval = setInterval(() => {
+                    count++;
+                    counter.textContent = count;
+                    if (count === target) {
+                        clearInterval(interval);
+                    }
+                }, 20); // Interval to animate the counter
+            }
+        });
+    };
+
+    window.addEventListener('scroll', animateCounters);
+    animateCounters(); // To trigger on page load if already in view
+});
+
+
+            </script>
             
             <div class="about-image">
                 <img src="https://cdn.sanity.io/images/uqxwe2qj/production/62db3c671745e98cb27690dff96f8033d2bb7f35-2048x1010.jpg" alt="Zyra jonë" loading="lazy">
             </div>
         </div>
     </section>
+
+    <!--blog-->
+    <section class="blog-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Blogu i MySpace Kosovë</h2>
+                <p>Ekspertizë dhe këshilla për shitjen dhe blerjen e pasurive të paluajtshme në Kosovë</p>
+            </div>
+            
+            <div class="blog-container">
+                <!-- Artikulli 1 -->
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Tregu i pasurive në Prishtinë">
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-date">10 Korrik 2023</span>
+                        <h3 class="blog-title">Analizë e tregut të pasurive të paluajtshme në Prishtinë për vitin 2023</h3>
+                        <p class="blog-excerpt">Një vështrim i thellë në trendet aktuale të çmimeve, zonat më të kërkuara dhe parashikime për të ardhmen e tregut në kryeqytetin tonë...</p>
+                        <div>
+                            <span class="city-tag">Prishtinë</span>
+                            <span class="city-tag">Tregu</span>
+                        </div>
+                        <a href="#" class="read-more">Lexo më shumë →</a>
+                    </div>
+                </article>
+                
+                <!-- Artikulli 2 -->
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Kreditë për shtëpi në Kosovë">
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-date">25 Qershor 2024</span>
+                        <h3 class="blog-title">Udhëzues për Shitjen e Pronave në Kosovë: Si të merrni çmimin më të mirë</h3>
+                        <p class="blog-excerpt">Nëse po planifikoni të shitni pronën tuaj në Kosovë, është e rëndësishme të dini se si ta përgatitni atë, ta promovoni në mënyrë efektive dhe të merrni çmimin më të favorshëm.</p>
+                        <div>
+                            <span class="city-tag">Kosovë</span>
+                            <span class="city-tag">Shitje</span>
+                        </div>
+                        <a href="#" class="read-more">Lexo më shumë →</a>
+                    </div>
+                </article>
+                
+                <!-- Artikulli 3 -->
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Investime në Pejë">
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-date">7 Gusht 2024</span>
+                        <h3 class="blog-title">Pse Peja po bëhet destinacion preferuar për investime në pasuri të paluajtshme?</h3>
+                        <p class="blog-excerpt">Eksploroni mundësitë e reja të investimit në qytetin e Pejës, zhvillimet e reja dhe potencialin e rritjes së vlerës së pronës...</p>
+                        <div>
+                            <span class="city-tag">Pejë</span>
+                            <span class="city-tag">Investime</span>
+                        </div>
+                        <a href="#" class="read-more">Lexo më shumë →</a>
+                    </div>
+                </article>
+            </div>
+            
+            <!-- Artikuj shtesë (të fshehur fillimisht) -->
+            <div class="additional-articles" id="additionalArticles">
+                <!-- Artikulli 4 -->
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Ligjet e reja në Kosovë">
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-date">28 Maj 2024</span>
+                        <h3 class="blog-title">Ndryshimet në ligjet e pasurive të paluajtshme në Kosovë: Çfarë duhet të dini</h3>
+                        <p class="blog-excerpt">Përmbledhje e ndryshimeve të fundit në legjislacion dhe si ato ndikojnë në pronarët dhe investitorët në tregun tonë...</p>
+                        <div>
+                            <span class="city-tag">Kosovë</span>
+                            <span class="city-tag">Ligje</span>
+                        </div>
+                        <a href="#" class="read-more">Lexo më shumë →</a>
+                    </div>
+                </article>
+                
+                <!-- Artikulli 5 -->
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Zhvillimet në Gjilan">
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-date">15 mars 2023</span>
+                        <h3 class="blog-title">Zhvillimet e reja në Gjilan: Ku janë mundësitë më të mira të investimit?</h3>
+                        <p class="blog-excerpt">Një analizë e projekteve të reja të ndërtimit dhe zonave me potencial të lartë të rritjes në qytetin e Gjilanit...</p>
+                        <div>
+                            <span class="city-tag">Gjilan</span>
+                            <span class="city-tag">Zhvillime</span>
+                        </div>
+                        <a href="#" class="read-more">Lexo më shumë →</a>
+                    </div>
+                </article>
+                
+                <!-- Artikulli 6 -->
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1605146769289-440113cc3d00?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Çmimet në Prizren">
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-date">1 Maj 2023</span>
+                        <h3 class="blog-title">Tregu i pasurive në Prizren: Çmimet dhe kërkesa në vitin 2023</h3>
+                        <p class="blog-excerpt">Një vështrim i detajuar në dinamikën e çmimeve dhe karakteristikat më të kërkuara të banesave në qytetin kulturor të Prizrenit...</p>
+                        <div>
+                            <span class="city-tag">Prizren</span>
+                            <span class="city-tag">Çmime</span>
+                        </div>
+                        <a href="#" class="read-more">Lexo më shumë →</a>
+                    </div>
+                </article>
+            </div>
+            
+            <div class="view-all">
+                <button id="viewAllBtn" class="view-all-btn">Shiko të Gjitha Artikujt</button>
+            </div>
+        </div>
+    </section>
+<script>
+      document.addEventListener('DOMContentLoaded', function() {
+            const viewAllBtn = document.getElementById('viewAllBtn');
+            const additionalArticles = document.getElementById('additionalArticles');
+            let articlesVisible = false;
+            
+            viewAllBtn.addEventListener('click', function() {
+                if (articlesVisible) {
+                    additionalArticles.classList.remove('show');
+                    viewAllBtn.textContent = 'Shiko të Gjitha Artikujt';
+                    // Shkon në fillim të seksionit
+                    window.scrollTo({
+                        top: additionalArticles.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                } else {
+                    additionalArticles.classList.add('show');
+                    viewAllBtn.textContent = 'Shfaq Më Pak';
+                    // Shkon në fillim të artikujve shtesë
+                    window.scrollTo({
+                        top: additionalArticles.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+                
+                articlesVisible = !articlesVisible;
+            });
+        });
+</script>
 
     <!-- Mission/Vision Section -->
     <section class="mission-section">
@@ -817,6 +1063,7 @@
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
 
@@ -977,6 +1224,59 @@
     </div>
 </section>
 
+<section class="faq-section" id="faq">
+    <div class="container">
+        <h2>Pyetje të Shpeshta (FAQ)</h2>
+
+        <div class="faq-item">
+            <h3 class="faq-question">Si mund të blej një pronë përmes faqeve të My Space?</h3>
+            <div class="faq-answer">
+                <p>Për të blerë një pronë, ju mund të shfletoni listat tona të pronave në seksionin e "Shitje Prona". Pasi të keni gjetur pronën që ju intereson, mund të na kontaktoni për detaje shtesë dhe për të caktuar një takim.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <h3 class="faq-question">Si mund të kontaktoj për informacion më të hollësishëm mbi një pronë?</h3>
+            <div class="faq-answer">
+                <p>Çdo pronë ka një buton "Shiko Më Shumë" që mund ta klikoni për të marrë informacione shtesë. Gjithashtu mund të na kontaktoni përmes formularit të kontaktit në faqen e "Kontakti".</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <h3 class="faq-question">A mund të shes një pronë nëpërmjet My Space?</h3>
+            <div class="faq-answer">
+                <p>Po, nëse keni një pronë që dëshironi të shisni, mund të na kontaktoni dhe ne do të ju udhëzojmë për procesin e regjistrimit dhe shfaqjes së pronës tuaj në faqe.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <h3 class="faq-question">Cilat janë opsionet e financimit për blerjen e pronës?</h3>
+            <div class="faq-answer">
+                <p>Ne ofrojmë mundësi financimi përmes partnerëve tanë bankar. Për më shumë detaje, mund të kontaktoni me ekipin tonë të shitjeve për t'u informuar mbi mundësitë e financimit dhe kushteve të duhura.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+<script>
+    // JavaScript to toggle the visibility of answers
+const faqQuestions = document.querySelectorAll('.faq-question');
+
+faqQuestions.forEach(question => {
+    question.addEventListener('click', () => {
+        const answer = question.nextElementSibling;
+
+        // Toggle the visibility of the answer
+        if (answer.style.display === 'block') {
+            answer.style.display = 'none';
+        } else {
+            answer.style.display = 'block';
+        }
+    });
+});
+
+</script>
+
 
 
 
@@ -994,8 +1294,7 @@
         </div>
     </section>
 
-    
-
+   
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
