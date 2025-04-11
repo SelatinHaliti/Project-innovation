@@ -51,6 +51,34 @@
                         <span>Commercial</span>
                     </a>
                 </div>
+                <div id="loginOverlay" class="login-overlay">
+                    <div class="login-container">
+                      <h2>Login Required</h2>
+                      <p>Please login to continue using MySpace</p>
+                      <form id="loginForm" class="login-form">
+                        <input type="text" placeholder="Username" required>
+                        <input type="password" placeholder="Password" required>
+                        <button type="submit">Login</button>
+                      </form>
+                      <div class="login-footer">
+                        <p>Don't have an account? <a href="#" id="showSignup">Sign up</a></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="signupOverlay" class="login-overlay">
+                    <div class="login-container">
+                      <h2>Create an Account</h2>
+                      <form id="signupForm" class="login-form">
+                        <input type="text" placeholder="Username" required>
+                        <input type="email" placeholder="Email" required>
+                        <input type="password" placeholder="Password" required>
+                        <button type="submit">Sign Up</button>
+                      </form>
+                      <div class="login-footer">
+                        <p>Already have an account? <a href="#" id="showLogin">Login</a></p>
+                      </div>
+                    </div>
+                  </div>
                 
                 <div class="filters-dropdown">
                     <button class="filters-toggle">
@@ -90,6 +118,12 @@
                         
                         <button class="apply-filters">Apply Filters</button>
                     </div>
+                </div>
+                <div class="user-section">
+                    <button id="loginBtn" class="user-btn">
+                        <i class="fas fa-user"></i>
+                        <span>Login</span>
+                    </button>
                 </div>
                 <head>
   <title>Shitje Apartamentesh në Prishtinë | MySpace</title>
@@ -1711,6 +1745,38 @@ faqQuestions.forEach(question => {
             document.getElementById("addOptions").style.display = "none";
         }, 500); 
     });
+</script>
+<script>
+    setTimeout(function() {
+      document.getElementById('loginOverlay').style.display = 'flex';
+  }, 3000);
+  // Handle login form
+  document.getElementById('loginForm').addEventListener('submit', function (e) {
+   e.preventDefault();
+  document.getElementById('loginOverlay').style.display = 'none';
+});
+
+
+   document.getElementById('signupForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+alert("Account created!");
+document.getElementById('signupOverlay').style.display = 'none';
+});
+
+
+// Switch to signup
+document.getElementById('showSignup').addEventListener('click', function (e) {
+e.preventDefault();
+document.getElementById('loginOverlay').style.display = 'none';
+document.getElementById('signupOverlay').style.display = 'flex';
+});
+
+document.getElementById('showLogin').addEventListener('click', function (e) {
+e.preventDefault();
+document.getElementById('signupOverlay').style.display = 'none';
+document.getElementById('loginOverlay').style.display = 'flex';
+});
+
 </script>
 
 </body>
