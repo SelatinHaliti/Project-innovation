@@ -1,3 +1,11 @@
+const priceRange = document.getElementById('priceRange');
+const currentValue = document.getElementById('currentValue');
+  priceRange.addEventListener('input', function() {
+  const value = priceRange.value;
+    currentValue.textContent = '$' + value.replace(/\B(?=(\d{3})+(?!\d))/g, ","); 
+    });
+  currentValue.textContent = '$' + priceRange.value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
 function filterByType(type) {
     const listings = document.querySelectorAll('.listing');
     listings.forEach(listing => {

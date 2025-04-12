@@ -63,22 +63,17 @@
                 <div class="filter-option">Commercial</div>
               </div>
             </div>
-
+        
             <div class="filter-group">
               <h4>Price Range</h4>
-              <input
-                type="range"
-                class="range-slider"
-                min="0"
-                max="1000000"
-                step="10000"
-              />
+              <input type="range" class="range-slider" min="0" max="1000000" step="10000" id="priceRange" value="500000">
               <div class="range-values">
-                <span>$0</span>
-                <span>$1,000,000</span>
+                <span id="minValue">$0</span>
+                <span id="maxValue"></span>
+                <span id="currentValue">$500,000</span>
               </div>
             </div>
-
+        
             <div class="filter-group">
               <h4>Bedrooms</h4>
               <div class="filter-options">
@@ -88,7 +83,7 @@
                 <div class="filter-option">3+</div>
               </div>
             </div>
-
+        
             <button class="apply-filters">Apply Filters</button>
           </div>
         </div>

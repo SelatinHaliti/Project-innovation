@@ -80,45 +80,46 @@
                     </div>
                   </div>
                 
-                <div class="filters-dropdown">
+                  <div class="filters-dropdown">
                     <button class="filters-toggle">
-                        <i class="fas fa-sliders-h"></i>
-                        <span>Filters</span>
+                      <i class="fas fa-sliders-h"></i>
+                      <span>Filters</span>
                     </button>
                     <div class="filters-panel">
-                        <div class="filter-group">
-                            <h4>Property Type</h4>
-                            <div class="filter-options">
-                                <div class="filter-option active">All</div>
-                                <div class="filter-option">House</div>
-                                <div class="filter-option">Apartment</div>
-                                <div class="filter-option">Office</div>
-                                <div class="filter-option">Commercial</div>
-                            </div>
+                      <div class="filter-group">
+                        <h4>Property Type</h4>
+                        <div class="filter-options">
+                          <div class="filter-option active">All</div>
+                          <div class="filter-option">House</div>
+                          <div class="filter-option">Apartment</div>
+                          <div class="filter-option">Office</div>
+                          <div class="filter-option">Commercial</div>
                         </div>
-                        
-                        <div class="filter-group">
-                            <h4>Price Range</h4>
-                            <input type="range" class="range-slider" min="0" max="1000000" step="10000">
-                            <div class="range-values">
-                                <span>$0</span>
-                                <span>$1,000,000</span>
-                            </div>
+                      </div>
+                  
+                      <div class="filter-group">
+                        <h4>Price Range</h4>
+                        <input type="range" class="range-slider" min="0" max="1000000" step="10000" id="priceRange" value="500000">
+                        <div class="range-values">
+                          <span id="minValue">$0</span>
+                          <span id="maxValue"></span>
+                          <span id="currentValue">$500,000</span>
                         </div>
-                        
-                        <div class="filter-group">
-                            <h4>Bedrooms</h4>
-                            <div class="filter-options">
-                                <div class="filter-option">Studio</div>
-                                <div class="filter-option">1</div>
-                                <div class="filter-option">2</div>
-                                <div class="filter-option">3+</div>
-                            </div>
+                      </div>
+                  
+                      <div class="filter-group">
+                        <h4>Bedrooms</h4>
+                        <div class="filter-options">
+                          <div class="filter-option">Studio</div>
+                          <div class="filter-option">1</div>
+                          <div class="filter-option">2</div>
+                          <div class="filter-option">3+</div>
                         </div>
-                        
-                        <button class="apply-filters">Apply Filters</button>
+                      </div>
+                  
+                      <button class="apply-filters">Apply Filters</button>
                     </div>
-                </div>
+                  </div>
                 <div class="user-section">
                     <button id="loginBtn" class="user-btn">
                         <i class="fas fa-user"></i>
@@ -185,6 +186,19 @@
                 
                 
             </div>
+            <script>
+                const priceRange = document.getElementById('priceRange');
+                const currentValue = document.getElementById('currentValue');
+                
+                // Function to update the current range value
+                priceRange.addEventListener('input', function() {
+                  const value = priceRange.value;
+                  currentValue.textContent = '$' + value.replace(/\B(?=(\d{3})+(?!\d))/g, ","); // Adding commas to the value
+                });
+                
+                // Initialize the value to the current position
+                currentValue.textContent = '$' + priceRange.value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+              </script>
             <script>
                 // Get the necessary DOM elements
 const addBtn = document.getElementById('addBtn');
