@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Premier Realty</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2b50aa;
+            --secondary-color: #ff7e36;
+            --dark-color: #1a1a2e;
+            --light-color: #f8f9fa;
+            --text-color: #333333;
+            --text-light: #6c757d;
+            --white: #ffffff;
+            --black: #000000;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+       
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+       
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+       
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+       
+        .contact-hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+       
+        .contact-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+       
+        .contact-hero p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+       
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            background: var(--white);
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+       
+        .form-section {
+            padding: 3rem;
+        }
+       
+        .info-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            padding: 3rem;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+       
+        .info-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+       
+        .info-section::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            right: -30px;
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+       
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+       
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+       
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            background-color: var(--light-color);
+        }
+       
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(43, 80, 170, 0.1);
+            background-color: var(--white);
+        }
+       
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+       
+        .btn {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--primary-color), var(--dark-color));
+            color: var(--white);
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--box-shadow);
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+       
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            background: linear-gradient(90deg, var(--dark-color), var(--primary-color));
+        }
+       
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+       
+        .checkbox-group input {
+            margin-right: 0.75rem;
+        }
+       
+        .info-card {
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+       
+        .info-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+       
+        .info-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+       
+        .info-card p {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+       
+        .contact-method {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+       
+        .contact-icon {
+            margin-right: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+       
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+       
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            transition: var(--transition);
+        }
+       
+        .social-link:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+       
+        .hotline {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+        }
+       
+        .hotline-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin: 0.5rem 0;
+        }
+       
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+           
+            .contact-hero h1 {
+                font-size: 2rem;
+            }
+        }
+       
+        /* Floating label effect */
+        .floating-label-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+       
+        .floating-label {
+            position: absolute;
+            left: 1rem;
+            top: 0.8rem;
+            color: var(--text-light);
+            transition: var(--transition);
+            pointer-events: none;
+            font-size: 0.95rem;
+        }
+       
+        .floating-input:focus + .floating-label,
+        .floating-input:not(:placeholder-shown) + .floating-label {
+            top: -0.5rem;
+            left: 0.8rem;
+            font-size: 0.75rem;
+            background: var(--white);
+            padding: 0 0.3rem;
+            color: var(--primary-color);
+        }
+       
+        .floating-input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            background-color: var(--light-color);
+        }
+       
+        .floating-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(43, 80, 170, 0.1);
+            background-color: var(--white);
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="contact-hero">
+            <h1>Connect With Our Real Estate Experts</h1>
+            <p>Whether you're buying, selling, or investing, our team is ready to provide personalized guidance for your real estate journey.</p>
+        </div>
+       
+        <div class="contact-grid">
+            <div class="form-section">
+                <form action="/submit-contact" method="POST">
+                    <div class="floating-label-group">
+                        <input type="text" id="name" name="name" class="floating-input" placeholder=" " required>
+                        <label for="name" class="floating-label">Your Full Name</label>
+                    </div>
+                   
+                    <div class="floating-label-group">
+                        <input type="email" id="email" name="email" class="floating-input" placeholder=" " required>
+                        <label for="email" class="floating-label">Email Address</label>
+                    </div>
+                   
+                    <div class="floating-label-group">
+                        <input type="tel" id="phone" name="phone" class="floating-input" placeholder=" ">
+                        <label for="phone" class="floating-label">Phone Number (Optional)</label>
+                    </div>
+                   
+                    <div class="form-group">
+                        <label for="interest">I'm interested in</label>
+                        <select id="interest" name="interest" class="form-control" required>
+                            <option value="" disabled selected>Select an option</option>
+                            <option value="buying">Buying a home</option>
+                            <option value="selling">Selling a home</option>
+                            <option value="renting">Renting a property</option>
+                            <option value="investing">Real estate investing</option>
+                            <option value="valuation">Property valuation</option>
+                            <option value="other">Other inquiry</option>
+                        </select>
+                    </div>
+                   
+                    <div class="form-group">
+                        <label for="location">Preferred Location(s)</label>
+                        <input type="text" id="location" name="location" class="form-control" placeholder="City, neighborhood, or ZIP">
+                    </div>
+                   
+                    <div class="form-group">
+                        <label for="budget">Price Range/Budget</label>
+                        <select id="budget" name="budget" class="form-control">
+                            <option value="" disabled selected>Select budget range</option>
+                            <option value="under-300k">Under $300K</option>
+                            <option value="300k-500k">$300K - $500K</option>
+                            <option value="500k-750k">$500K - $750K</option>
+                            <option value="750k-1m">$750K - $1M</option>
+                            <option value="1m-plus">$1M+</option>
+                            <option value="not-sure">Not sure yet</option>
+                        </select>
+                    </div>
+                   
+                    <div class="form-group">
+                        <label for="message">How Can We Help You?</label>
+                        <textarea id="message" name="message" class="form-control" required></textarea>
+                    </div>
+                   
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="newsletter" name="newsletter" checked>
+                        <label for="newsletter">Subscribe to our property newsletter</label>
+                    </div>
+                   
+                    <button type="submit"  class="btn" >Send Message →</button>
+                </form>
+            </div>
+           
+            <div class="info-section">
+                <div class="info-card">
+                    <h3>Our Office</h3>
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </div>
+                        <div>
+                            
+                            <p>Prishtina City, PC 10000</p>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="info-card">
+                    <h3>Contact Info</h3>
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <p>Main: (383) 123-4567</p>
+                            <p>Direct: (383) 765-4321</p>
+                        </div>
+                    </div>
+                   
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </div>
+                        <div>
+                            <p>info@MySpace.com</p>
+                            <p>sales@MySpace.com</p>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="hotline">
+                    <h3>24/7 Emergency Hotline</h3>
+                    <p>For urgent real estate matters</p>
+                    <div class="hotline-number">(383) 987-EMER</div>
+                </div>
+               
+                <div class="info-card">
+                    <h3>Follow Us</h3>
+                    <p>Discover exclusive listings and market insights</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    // Form elements
+    const contactForm = document.querySelector('form');
+    const floatingInputs = document.querySelectorAll('.floating-input');
+    const phoneInput = document.getElementById('phone');
+    const budgetSelect = document.getElementById('budget');
+    const interestSelect = document.getElementById('interest');
+    const locationInput = document.getElementById('location');
+    const submitBtn = document.querySelector('.btn');
+    
+    // Form validation state
+    let isFormValid = false;
+    
+    // Initialize form validation
+    initFormValidation();
+    
+    // Initialize phone number formatting
+    if (phoneInput) {
+        initPhoneInput();
+    }
+    
+    // Initialize location autocomplete
+    if (locationInput) {
+        initLocationAutocomplete();
+    }
+    
+    // Initialize budget range visual feedback
+    if (budgetSelect) {
+        initBudgetVisualizer();
+    }
+    
+    // Initialize interest select enhancement
+    if (interestSelect) {
+        initInterestSelect();
+    }
+    
+    // Form submission handler
+    if (contactForm) {
+        contactForm.addEventListener('submit', handleFormSubmission);
+    }
+    
+    // Floating label enhancement
+    floatingInputs.forEach(input => {
+        input.addEventListener('focus', () => {
+            const label = input.nextElementSibling;
+            label.classList.add('active');
+        });
+        
+        input.addEventListener('blur', () => {
+            if (!input.value) {
+                const label = input.nextElementSibling;
+                label.classList.remove('active');
+            }
+        });
+        
+        // Initialize labels based on existing values
+        if (input.value) {
+            const label = input.nextElementSibling;
+            label.classList.add('active');
+        }
+    });
+    
+    // -------------------------
+    // FUNCTIONS
+    // -------------------------
+    
+    function initFormValidation() {
+        const formFields = contactForm.querySelectorAll('[required]');
+        
+        formFields.forEach(field => {
+            field.addEventListener('input', () => validateField(field));
+            field.addEventListener('blur', () => validateField(field));
+            
+            // Initialize validation state
+            validateField(field);
+        });
+    }
+    
+    function validateField(field) {
+        const errorMessage = field.parentElement.querySelector('.error-message') || 
+                            document.createElement('div');
+        
+        if (!field.parentElement.querySelector('.error-message')) {
+            errorMessage.className = 'error-message';
+            field.parentElement.appendChild(errorMessage);
+        }
+        
+        let isValid = true;
+        let message = '';
+        
+        // Clear previous states
+        field.classList.remove('invalid');
+        errorMessage.textContent = '';
+        
+        // Required field validation
+        if (field.required && !field.value.trim()) {
+            isValid = false;
+            message = 'This field is required';
+        }
+        
+        // Email validation
+        if (field.type === 'email' && field.value.trim()) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(field.value)) {
+                isValid = false;
+                message = 'Please enter a valid email address';
+            }
+        }
+        
+        // Textarea validation (minimum length)
+        if (field.tagName === 'TEXTAREA' && field.value.trim().length < 10) {
+            isValid = false;
+            message = 'Please provide more details (at least 10 characters)';
+        }
+        
+        // Phone validation (if implemented)
+        if (field.id === 'phone' && field.value.trim() && !isValidPhoneNumber(field.value)) {
+            isValid = false;
+            message = 'Please enter a valid phone number';
+        }
+        
+        // Update field state
+        if (!isValid) {
+            field.classList.add('invalid');
+            errorMessage.textContent = message;
+        }
+        
+        // Update overall form validity
+        updateFormValidity();
+        return isValid;
+    }
+    
+    function isValidPhoneNumber(phone) {
+        // Simple phone validation - adjust as needed
+        const phoneRegex = /^[\d\s\+\-\(\)]{10,}$/;
+        return phoneRegex.test(phone);
+    }
+    
+    function updateFormValidity() {
+        const requiredFields = contactForm.querySelectorAll('[required]');
+        isFormValid = true;
+        
+        requiredFields.forEach(field => {
+            if (!validateField(field)) {
+                isFormValid = false;
+            }
+        });
+        
+        submitBtn.disabled = !isFormValid;
+    }
+    
+    function initPhoneInput() {
+        // Format phone number as user types
+        phoneInput.addEventListener('input', function(e) {
+            const input = e.target.value.replace(/\D/g, '').substring(0, 10);
+            const areaCode = input.substring(0, 3);
+            const middle = input.substring(3, 6);
+            const last = input.substring(6, 10);
+            
+            if (input.length > 6) {
+                e.target.value = `(${areaCode}) ${middle}-${last}`;
+            } else if (input.length > 3) {
+                e.target.value = `(${areaCode}) ${middle}`;
+            } else if (input.length > 0) {
+                e.target.value = `(${areaCode}`;
+            }
+        });
+    }
+    
+    function initLocationAutocomplete() {
+        // Simple implementation - in a real app you'd use a geocoding API
+        const popularLocations = [
+            'Prishtina Center', 
+            'Ulpiana', 
+            'Dardania', 
+            'Arberia', 
+            'Lakrishte', 
+            'Dragodan'
+        ];
+        
+        locationInput.addEventListener('input', function() {
+            const value = this.value.toLowerCase();
+            const datalist = document.createElement('datalist');
+            datalist.id = 'location-suggestions';
+            
+            if (value.length > 2) {
+                const filtered = popularLocations.filter(loc => 
+                    loc.toLowerCase().includes(value)
+                );
+                
+                filtered.forEach(loc => {
+                    const option = document.createElement('option');
+                    option.value = loc;
+                    datalist.appendChild(option);
+                });
+                
+                // Remove existing datalist if any
+                const existing = document.getElementById('location-suggestions');
+                if (existing) existing.remove();
+                
+                if (filtered.length) {
+                    document.body.appendChild(datalist);
+                    locationInput.setAttribute('list', 'location-suggestions');
+                } else {
+                    locationInput.removeAttribute('list');
+                }
+            }
+        });
+    }
+    
+    function initBudgetVisualizer() {
+        const budgetVisualizer = document.createElement('div');
+        budgetVisualizer.className = 'budget-visualizer';
+        budgetVisualizer.innerHTML = `
+            <div class="budget-scale">
+                <div class="budget-track"></div>
+                <div class="budget-thumb"></div>
+            </div>
+            <div class="budget-label"></div>
+        `;
+        
+        budgetSelect.parentElement.appendChild(budgetVisualizer);
+        
+        budgetSelect.addEventListener('change', updateBudgetVisualizer);
+        updateBudgetVisualizer();
+        
+        function updateBudgetVisualizer() {
+            const selectedOption = budgetSelect.options[budgetSelect.selectedIndex];
+            const value = selectedOption.value;
+            const label = selectedOption.text;
+            const visualizer = budgetSelect.nextElementSibling;
+            const budgetLabel = visualizer.querySelector('.budget-label');
+            const budgetThumb = visualizer.querySelector('.budget-thumb');
+            
+            budgetLabel.textContent = label;
+            
+            // Position the thumb based on the selected value
+            let position = 0;
+            switch(value) {
+                case 'under-300k': position = 0; break;
+                case '300k-500k': position = 25; break;
+                case '500k-750k': position = 50; break;
+                case '750k-1m': position = 75; break;
+                case '1m-plus': position = 100; break;
+                default: position = 50; // "Not sure"
+            }
+            
+            budgetThumb.style.left = `${position}%`;
+        }
+    }
+    
+    function initInterestSelect() {
+        // Enhance the select with custom styling and behavior
+        const customSelect = document.createElement('div');
+        customSelect.className = 'custom-select';
+        customSelect.innerHTML = `
+            <div class="select-selected">
+                ${interestSelect.options[interestSelect.selectedIndex].text}
+            </div>
+            <div class="select-items select-hide"></div>
+        `;
+        
+        // Add options to custom dropdown
+        const selectItems = customSelect.querySelector('.select-items');
+        Array.from(interestSelect.options).forEach(option => {
+            if (option.value) {
+                const item = document.createElement('div');
+                item.textContent = option.text;
+                item.addEventListener('click', () => {
+                    interestSelect.value = option.value;
+                    customSelect.querySelector('.select-selected').textContent = option.text;
+                    selectItems.classList.add('select-hide');
+                    validateField(interestSelect);
+                });
+                selectItems.appendChild(item);
+            }
+        });
+        
+        // Toggle dropdown
+        customSelect.querySelector('.select-selected').addEventListener('click', function(e) {
+            e.stopPropagation();
+            selectItems.classList.toggle('select-hide');
+        });
+        
+        // Close when clicking outside
+        document.addEventListener('click', () => {
+            selectItems.classList.add('select-hide');
+        });
+        
+        // Replace original select
+        interestSelect.style.display = 'none';
+        interestSelect.parentElement.appendChild(customSelect);
+        
+        // Update validation when selection changes
+        interestSelect.addEventListener('change', () => validateField(interestSelect));
+    }
+    
+    async function handleFormSubmission(e) {
+        e.preventDefault();
+        
+        if (!isFormValid) return;
+        
+        // Disable submit button during submission
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="spinner"></span> Sending...';
+        
+        try {
+            // Simulate API call (replace with actual fetch)
+            const formData = new FormData(contactForm);
+            const response = await simulateApiCall(formData);
+            
+            if (response.success) {
+                showSuccessMessage();
+                contactForm.reset();
+                
+                // Reset floating labels
+                floatingInputs.forEach(input => {
+                    const label = input.nextElementSibling;
+                    label.classList.remove('active');
+                });
+            } else {
+                throw new Error(response.message || 'Submission failed');
+            }
+        } catch (error) {
+            showErrorMessage(error.message);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send Message →';
+        }
+    }
+    
+    function simulateApiCall(formData) {
+        // In a real app, you would use fetch() to send data to your server
+        console.log('Form data to submit:', Object.fromEntries(formData.entries()));
+        
+        return new Promise(resolve => {
+            setTimeout(() => {
+                resolve({
+                    success: true,
+                    message: 'Your message has been received!'
+                });
+            }, 1500);
+        });
+    }
+    
+    function showSuccessMessage() {
+        const successMessage = document.createElement('div');
+        successMessage.className = 'alert alert-success';
+        successMessage.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            <div>
+                <h4>Thank you for contacting us!</h4>
+                <p>We've received your message and will get back to you within 24 hours.</p>
+            </div>
+        `;
+        
+        showAlert(successMessage);
+    }
+    
+    function showErrorMessage(message) {
+        const errorMessage = document.createElement('div');
+        errorMessage.className = 'alert alert-error';
+        errorMessage.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <div>
+                <h4>Something went wrong</h4>
+                <p>${message || 'Please try again later.'}</p>
+            </div>
+        `;
+        
+        showAlert(errorMessage);
+    }
+    
+    function showAlert(alertElement) {
+        const existingAlert = document.querySelector('.alert');
+        if (existingAlert) existingAlert.remove();
+        
+        document.body.appendChild(alertElement);
+        
+        setTimeout(() => {
+            alertElement.classList.add('show');
+        }, 10);
+        
+        setTimeout(() => {
+            alertElement.classList.remove('show');
+            setTimeout(() => {
+                if (alertElement.parentNode) {
+                    alertElement.parentNode.removeChild(alertElement);
+                }
+            }, 300);
+        }, 5000);
+    }
+});
+
+// Add the following CSS to your stylesheet to support the JavaScript enhancements
+const enhancedStyles = `
+    /* Validation styles */
+    .floating-input.invalid {
+        border-color: #e63946 !important;
+    }
+    
+    .error-message {
+        color: #e63946;
+        font-size: 0.8rem;
+        margin-top: 0.3rem;
+        display: block;
+    }
+    
+    /* Custom select styles */
+    .custom-select {
+        position: relative;
+        width: 100%;
+    }
+    
+    .select-selected {
+        padding: 0.8rem 1rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        background-color: var(--light-color);
+        transition: var(--transition);
+    }
+    
+    .select-selected:after {
+        position: absolute;
+        content: "";
+        top: 50%;
+        right: 1rem;
+        width: 0;
+        height: 0;
+        border: 6px solid transparent;
+        border-color: var(--text-light) transparent transparent transparent;
+        transform: translateY(-25%);
+    }
+    
+    .select-items {
+        position: absolute;
+        background-color: var(--white);
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 99;
+        border-radius: 0.5rem;
+        box-shadow: var(--box-shadow);
+        max-height: 200px;
+        overflow-y: auto;
+    }
+    
+    .select-items div {
+        padding: 0.8rem 1rem;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+    
+    .select-items div:hover {
+        background-color: rgba(43, 80, 170, 0.1);
+    }
+    
+    .select-hide {
+        display: none;
+    }
+    
+    /* Budget visualizer */
+    .budget-visualizer {
+        margin-top: 0.5rem;
+    }
+    
+    .budget-scale {
+        height: 4px;
+        background: #e2e8f0;
+        border-radius: 2px;
+        position: relative;
+        margin: 0.5rem 0;
+    }
+    
+    .budget-track {
+        position: absolute;
+        height: 100%;
+        background: var(--primary-color);
+        border-radius: 2px;
+        width: 0%;
+    }
+    
+    .budget-thumb {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        background: var(--primary-color);
+        border-radius: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    
+    .budget-label {
+        font-size: 0.9rem;
+        color: var(--text-light);
+    }
+    
+    /* Loading spinner */
+    .spinner {
+        display: inline-block;
+        width: 1rem;
+        height: 1rem;
+        border: 2px solid rgba(255,255,255,0.3);
+        border-radius: 50%;
+        border-top-color: var(--white);
+        animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+    
+    /* Alert messages */
+    .alert {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        padding: 1rem 1.5rem;
+        border-radius: 0.5rem;
+        box-shadow: var(--box-shadow);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        max-width: 400px;
+        transform: translateX(120%);
+        transition: transform 0.3s ease;
+        z-index: 1000;
+    }
+    
+    .alert.show {
+        transform: translateX(0);
+    }
+    
+    .alert-success {
+        background: #4caf50;
+        color: white;
+    }
+    
+    .alert-error {
+        background: #e63946;
+        color: white;
+    }
+    
+    .alert svg {
+        flex-shrink: 0;
+    }
+    
+    .alert h4 {
+        font-size: 1rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    .alert p {
+        font-size: 0.9rem;
+        opacity: 0.9;
+    }
+`;
+
+// Inject the additional styles
+const styleElement = document.createElement('style');
+styleElement.textContent = enhancedStyles;
+document.head.appendChild(styleElement);
+    </script>
+</body>
+</html>
