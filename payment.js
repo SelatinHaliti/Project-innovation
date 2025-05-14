@@ -178,7 +178,7 @@ const Property = require('../models/Property');
 // Include other resource routers
 const reviewRouter = require('./reviewRoutes');
 
-const router = express.Router();
+const outer = express.Router();
 
 const advancedResults = require('../middleware/advancedResults');
 const { protect, authorize } = require('../middleware/auth');
@@ -213,7 +213,7 @@ const {
   getUserPayments
 } = require('../controllers/paymentController');
 
-const router = express.Router();
+const Router = express.Router();
 
 const { protect } = require('../middleware/auth');
 
@@ -565,5 +565,3 @@ export const uploadPropertyImages = (id, images) => {
 export const createPaymentIntent = propertyId => api.post('/payments/create-payment-intent', { propertyId });
 export const processPayment = paymentData => api.post('/payments', paymentData);
 export const getUserPayments = () => api.get('/payments/user');
-
-export default api;

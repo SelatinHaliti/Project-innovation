@@ -689,7 +689,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 //proprerty
 
-const priceRange = document.getElementById('priceRange');
+const pricerange = document.getElementById('priceRange');
 const currentValue = document.getElementById('currentValue');
 // Function to update the current range value
 priceRange.addEventListener('input', function() {

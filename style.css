@@ -5444,3 +5444,406 @@ container{
   transform: translateY(0) scale(0.98);
   animation: pulse 0.5s ease;
 }
+
+/*e gjith faqja responsive*/
+/* Base responsive settings */
+html {
+  font-size: 16px;
+}
+
+@media (max-width: 1200px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 992px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 576px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+/* Container adjustments */
+.container {
+  width: 100%;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1320px;
+  }
+}
+/* Advanced Header */
+@media (max-width: 992px) {
+  .nav-container {
+    flex-wrap: wrap;
+  }
+  
+  .search-container {
+    order: 3;
+    width: 100%;
+    margin: 15px 0;
+  }
+  
+  .quick-links, .filters-dropdown {
+    display: none;
+  }
+  
+  .mobile-menu-btn {
+    display: block;
+  }
+}
+
+@media (max-width: 868px) {
+  .logo {
+    font-size: 1.2rem;
+  }
+  
+  .search-bar {
+    flex-direction: column;
+  }
+  
+  .search-input {
+    border-radius: 25px;
+    margin-bottom: 10px;
+  }
+  
+  .search-btn {
+    border-radius: 25px;
+    padding: 10px;
+  }
+}
+/* Hero Header */
+@media (max-width: 3200px) {
+  .hero-title {
+    font-size: 5rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .hero-title {
+    font-size: 4rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 1000px) {
+  .hero-header {
+    height: 600px;
+  }
+  
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .hero-header {
+    height: 600px;
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}
+/* Testimonials */
+@media (max-width: 992px) {
+  .testimonials-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .testimonial-card {
+    flex: 0 0 100%;
+    max-width: 80%;
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .testimonial-card {
+    max-width: 100%;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+}
+/* Services */
+@media (max-width: 992px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .service-card {
+    padding: 30px 20px;
+  }
+}
+/* Neighborhood */
+@media (max-width: 992px) {
+  .neighborhood-card {
+    flex-direction: column;
+  }
+  
+  .neighborhood-card img,
+  .neighborhood-info {
+    width: 100%;
+  }
+  
+  .stats {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .neighborhood-tabs {
+    flex-direction: column;
+  }
+  
+  .tab-btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+/* Property Showcase */
+@media (max-width: 1200px) {
+  .property-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .property-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .property-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .property-filters {
+    flex-direction: column;
+  }
+  
+  .filter-group {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+}
+/* Latest Properties */
+@media (max-width: 1200px) {
+  .properties-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .properties-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .properties-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+}
+/* Blog */
+@media (max-width: 1200px) {
+  .blog-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .blog-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .blog-card {
+    max-width: 100%;
+  }
+}
+/* Chatbot */
+@media (max-width: 576px) {
+  .chatbot-container {
+    width: calc(100% - 40px);
+    height: 70vh;
+    bottom: 80px;
+    right: 20px;
+    left: 20px;
+  }
+  
+  .chatbot-button {
+    bottom: 20px;
+    right: 20px;
+  }
+}
+/* FAQ */
+@media (max-width: 768px) {
+  .faq-question {
+    font-size: 1.2rem;
+    padding: 8px;
+  }
+  
+  .faq-answer {
+    padding: 10px;
+  }
+}
+/* Mission Section */
+@media (max-width: 992px) {
+  .mission-section .container {
+    flex-direction: column;
+  }
+  
+  .mission-card {
+    margin-bottom: 30px;
+    max-width: 100%;
+  }
+}
+/* Team Section */
+@media (max-width: 992px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* Auth Modal */
+@media (max-width: 576px) {
+  .auth-modal-content {
+    width: 95%;
+    margin: 20% auto;
+    padding: 15px;
+  }
+  
+  .tab-btn {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
+/* Floating Action Button */
+@media (max-width: 768px) {
+  .add-buton {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+  }
+}
+/* Mobile-specific adjustments */
+@media (max-width: 480px) {
+  /* Hide some elements on very small screens */
+  .hero-subtitle {
+    display: none;
+  }
+  
+  /* Adjust padding for better mobile experience */
+  section {
+    padding: 50px 0;
+  }
+  
+  /* Make buttons full width */
+  .btn, .property-btn, .cta-btn {
+    width: 100%;
+  }
+  
+  /* Adjust font sizes */
+  h1, h2, h3 {
+    font-size: 1.5rem;
+  }
+  
+  /* Stack elements vertically */
+  .client-info, .member-info {
+    text-align: center;
+  }
+  
+  /* Center align text in cards */
+  .service-card, .testimonial-card {
+    text-align: center;
+  }
+}
+/* Ensure touch targets are large enough */
+@media (hover: none) {
+  a, button, .tab-btn, .filter-option, .quick-reply {
+    min-height: 48px;
+    min-width: 48px;
+  }
+  
+  .control-btn {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .dot {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+
