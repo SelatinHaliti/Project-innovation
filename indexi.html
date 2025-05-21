@@ -43,7 +43,6 @@
   const searchInput = document.querySelector('.search-input');
   const searchBtn = document.querySelector('.search-btn');
 
-  // Event: Klikim ose ENTER në input
   searchBtn.addEventListener('click', handleSearch);
   searchInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') handleSearch();
@@ -61,8 +60,7 @@
 
     console.log("Te dhenat e kerkuara:", filters);
 
-    // Këtu mund të bësh filtrimin live ose kërkesë në server:
-    // fetch('/api/properties?search=' + encodeURIComponent(keyword), { method: 'GET' })...
+    
   }
 
   function getSelectedOptions(title) {
@@ -93,46 +91,9 @@
                 </div>
             
 
-                  <div class="filters-dropdown">
-                    <button class="filters-toggle">
-                      <i class="fas fa-sliders-h"></i>
-                      <span>Filters</span>
-                    </button>
-                    <div class="filters-panel">
-                      <div class="filter-group">
-                        <h4>Property Type</h4>
-                        <div class="filter-options">
-                          <div class="filter-option active">All</div>
-                          <div class="filter-option">Shtepi</div>
-                          <div class="filter-option">Apartment</div>
-                          <div class="filter-option">Zyre</div>
-                          <div class="filter-option">Komerciale</div>
-                        </div>
-                      </div>
                   
-                      <div class="filter-group">
-                        <h4>Price Range</h4>
-                        <input type="range" class="range-slider" min="0" max="1000000" step="10000" id="priceRange" value="500000">
-                        <div class="range-values">
-                          <span id="minValue">$0</span>
-                          <span id="maxValue"></span>
-                          <span id="currentValue">$500,000</span>
-                        </div>
-                      </div>
                   
-                      <div class="filter-group">
-                        <h4>Bedrooms</h4>
-                        <div class="filter-options">
-                          <div class="filter-option">Studio</div>
-                          <div class="filter-option">1</div>
-                          <div class="filter-option">2</div>
-                          <div class="filter-option">3+</div>
-                        </div>
-                      </div>
                   
-                      <button class="apply-filters">Apliko Filterin</button>
-                    </div>
-                  </div>
                   <script>
                     document.addEventListener("DOMContentLoaded", () => {
   const filterOptions = document.querySelectorAll('.filter-option');
@@ -206,60 +167,8 @@
 });
 
                   </script>
-                  <div class="user-section">
-                    <button id="loginBtn" class="user-btn">
-                        <i class="fas fa-user"></i>
-                        <span>Login</span>
-                    </button>
-                </div>
-                
-                <!-- Login/Register Modal -->
-                <div id="authModal" class="auth-modal">
-                    <div class="auth-modal-content">
-                        <span class="close-modal">&times;</span>
+                 
                         
-                        <!-- Tabs -->
-                        <div class="auth-tabs">
-                            <button class="tab-btn active" data-tab="login">Kyqu</button>
-                            <button class="tab-btn" data-tab="register">Regjistrohu</button>
-                        </div>
-                        
-                        <!-- Login Form -->
-                        <div id="loginTab" class="auth-tab-content active">
-                            <form class="auth-form">
-                                <div class="form-group">
-                                    <input type="email" placeholder="Emaili" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" placeholder="Paswordi" required>
-                                </div>
-                                <button type="submit" class="auth-submit-btn">Kyqu</button>
-                                <div class="auth-footer">
-                                    <a href="#" class="forgot-password">Reseto Paswordin?</a>
-                                </div>
-                            </form>
-                        </div>
-                        
-                        <!-- Register Form -->
-                        <div id="registerTab" class="auth-tab-content">
-                            <form class="auth-form">
-                                <div class="form-group">
-                                    <input type="text" placeholder="Emri i plotë" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" placeholder="Emaili" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" placeholder="Paswordi" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" placeholder="Konfirmo Paswordin" required>
-                                </div>
-                                <button type="submit" class="auth-submit-btn">Registrohu</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
                 
                 
                 
@@ -1099,131 +1008,88 @@
     </section>
    
 
-    <!-- Seksioni i Përmirësuar i Dëshmive -->
-<section class="testimonials-section">
-    <div class="container">
-        <div class="section-header">
-            <h2 class="section-title">Klientët Tanë Flasin</h2>
-            <p class="section-subtitle">Përvoja e tyre me MySpace</p>
-            <div class="section-divider"></div>
-        </div>
-        
-        <div class="testimonials-container">
-            <!-- Dëshmia 1 -->
-            <div class="testimonial-card">
-                <div class="quote-icon">
-                    <i class="fas fa-quote-left"></i>
-                </div>
-                <div class="testimonial-content">
-                    <div class="rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="testimonial-text">
-                        "MySpace shpërbleu besimin tim duke gjetur saktësisht atë që kërkoja. Proces i qartë dhe transparent nga fillimi deri në fund."
-                    </p>
-                    <div class="client-info">
-                        <div class="client-image">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Klientja Anisa">
-                        </div>
-                        <div class="client-details">
-                            <h4>Anisa Hoxha</h4>
-                            <p>Blerëse Apartamenti</p>
-                            <div class="location">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Prishtinë</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Dëshmia 2 -->
-            <div class="testimonial-card featured">
-                <div class="featured-badge">Dëshmia e Muajit</div>
-                <div class="quote-icon">
-                    <i class="fas fa-quote-left"></i>
-                </div>
-                <div class="testimonial-content">
-                    <div class="rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <p class="testimonial-text">
-                        "Si investitor i huaj, nuk dija si të filloj në tregun shqiptar. Stafi i MySpace më udhëzoi në çdo hap dhe më gjetën një pronë me ROI të shkëlqyer."
-                    </p>
-                    <div class="client-info">
-                        <div class="client-image">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Klienti Endrit">
-                        </div>
-                        <div class="client-details">
-                            <h4>Endrit Kulla</h4>
-                            <p>Investitor</p>
-                            <div class="location">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Prishtinë</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Dëshmia 3 -->
-            <div class="testimonial-card">
-                <div class="quote-icon">
-                    <i class="fas fa-quote-left"></i>
-                </div>
-                <div class="testimonial-content">
-                    <div class="rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="testimonial-text">
-                        "Shërbim i personalizuar dhe profesional. Gjetëm vilën tonë të ëndrrave brenda 2 javësh. Rekomandoj MySpace për këdo që kërkon seriozisht pronë në Kosovë."
-                    </p>
-                    <div class="client-info">
-                        <div class="client-image">
-                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Klientja Era">
-                        </div>
-                        <div class="client-details">
-                            <h4>Era Dervishi</h4>
-                            <p>Blerëse Vilë</p>
-                            <div class="location">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Prishtinë</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-
-        <div class="testimonials-controls">
-            <button class="control-btn prev-btn">
-              <i class="fas fa-chevron-left"></i>
-            </button>
-            <p class=" control-btn prev-btn dots-container next-btn">1</p>
-            <p class=" control-btn prev-btn dots-container next-btn">2</p>
-            <p class=" control-btn prev-btn dots-container next-btn">3</p>
-            <p class=" control-btn prev-btn dots-container next-btn">4</p>
-            <p class=" control-btn prev-btn dots-container next-btn">5</p>
-            <div class="dots-container"></div>
-            <button class="control-btn next-btn">
-              <i class="fas fa-chevron-right"></i>
-            </button>
-        </div>
+  <section class="testimonials-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Çfarë thonë klientët tanë</h2>
+      <p class="section-subtitle">Përvojat me agjencinë tonë në Kosovë</p>
     </div>
+
+    <div class="testimonial-slider">
+      <div class="testimonial-card active">
+        <p class="testimonial-text">“Shërbim i jashtëzakonshëm! E gjeta shtëpinë e ëndrrave në Prishtinë përmes kësaj agjencie.”</p>
+        <div class="client-info">
+          <img src="https://randomuser.me/api/portraits/men/10.jpg" alt="Klient 1">
+          <h4>Ardit Krasniqi</h4>
+          <p>Prishtinë</p>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <p class="testimonial-text">“Shumë profesionale dhe transparente gjatë gjithë procesit të blerjes.”</p>
+        <div class="client-info">
+          <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Klient 2">
+          <h4>Blerta Morina</h4>
+          <p>Pejë</p>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <p class="testimonial-text">“Agjentët ishin shumë të sjellshëm dhe ndihmuan në çdo hap për të investuar në pronë.”</p>
+        <div class="client-info">
+          <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Klient 3">
+          <h4>Ilir Dervishi</h4>
+          <p>Ferizaj</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="slider-controls">
+      <button class="prev-btn">&#10094;</button>
+      <div class="dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+      <button class="next-btn">&#10095;</button>
+    </div>
+  </div>
 </section>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const testimonials = document.querySelectorAll(".testimonial-card");
+  const dots = document.querySelectorAll(".dot");
+  const prevBtn = document.querySelector(".prev-btn");
+  const nextBtn = document.querySelector(".next-btn");
+  let currentIndex = 0;
+
+  function updateSlider(index) {
+    testimonials.forEach((t, i) => {
+      t.classList.toggle("active", i === index);
+      dots[i].classList.toggle("active", i === index);
+    });
+  }
+
+  prevBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
+    updateSlider(currentIndex);
+  });
+
+  nextBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % testimonials.length;
+    updateSlider(currentIndex);
+  });
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener("click", () => {
+      currentIndex = i;
+      updateSlider(i);
+    });
+  });
+});
+</script>
+
+
 
 <!-- Seksioni i Shërbimeve -->
 <section class="services-section">
@@ -1896,7 +1762,7 @@ document.getElementById('loginOverlay').style.display = 'flex';
 <script src="payment.js"></script>
 <script src="db.js"></script>
 
-<script src="script.js" defer></script>
+<script src="main.js" defer></script>
 </body>
 </html>
 
