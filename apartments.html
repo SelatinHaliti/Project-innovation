@@ -9,6 +9,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <link rel="stylesheet" href="aparatmants.css" />
   </head>
   <body>
     <header class="advanced-header">
@@ -114,7 +115,7 @@
                   }, 4000);
                   setTimeout(() => {
                       text.textContent = "Zyre";
-                  }, 8000); //1s = 1000 milliseconds
+                  }, 8000); 
               }
       
               textLoad();
@@ -126,7 +127,6 @@
   </div>
   
   <main>
-     <!--Permbajtja e Faqes-->
   </main>
     <section class="latest-properties">
       <div class="containers">
@@ -501,11 +501,9 @@
       </div>
   
       <div class="chatbot-messages" id="chatbotMessages">
-          <!-- Mesazhet do të shfaqen këtu -->
       </div>
   
       <div class="quick-replies" id="quickReplies">
-          <!-- Përgjigjet e shpejta do të shfaqen këtu -->
       </div>
   
       <div class="chatbot-input">
@@ -515,8 +513,100 @@
           </button>
       </div>
   </div>
+<div id="propertyModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-header">
+            <h2 id="modalTitle">Prona Title</h2>
+            <p class="modal-location"><i class="fas fa-map-marker-alt"></i> <span id="modalLocation">Location</span></p>
+            <div class="modal-price" id="modalPrice">$0</div>
+        </div>
+        
+        <div class="modal-body">
+            <div class="modal-gallery">
+                <img id="modalMainImage" src="" alt="Property Image">
+            </div>
+            
+            <div class="modal-details">
+                <h3>Detajet e Pronës</h3>
+                <div class="details-grid">
+                    <div class="detail-item">
+                        <i class="fas fa-bed"></i>
+                        <span>Dhoma: <strong id="modalBedrooms">0</strong></span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-bath"></i>
+                        <span>Banjo: <strong id="modalBathrooms">0</strong></span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-expand"></i>
+                        <span>Siperfaqja: <strong id="modalArea">0</strong>m²</span>
+                    </div>
+                </div>
+                
+                <div class="modal-description">
+                    <h3>Përshkrim</h3>
+                    <p id="modalDescription">No description available.</p>
+                </div>
+                
+                <div class="modal-contact">
+                    <h3>Kontakto</h3>
+                    <p><i class="fas fa-phone"></i> <strong>+383 44 123 456</strong></p>
+                    <button class="contact-btn"><i class="fas fa-envelope"></i> Dërgo Email</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function showPropertyDetails(propertyCard) {
+    const title = propertyCard.querySelector('h3').textContent;
+    const location = propertyCard.querySelector('.property-location').textContent;
+    const price = propertyCard.querySelector('.property-price').textContent;
+    const imageUrl = propertyCard.querySelector('.property-image').style.backgroundImage
+        .replace('url("', '').replace('")', '');
+    const features = propertyCard.querySelectorAll('.property-features span');
+    const bedrooms = features[0].textContent.replace('<i class="fas fa-bed"></i>', '').trim();
+    const bathrooms = features[1].textContent.replace('<i class="fas fa-bath"></i>', '').trim();
+    const area = features[2].textContent.replace('<i class="fas fa-vector-square"></i>', '').trim();
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalLocation').textContent = location;
+    document.getElementById('modalPrice').textContent = price;
+    document.getElementById('modalMainImage').src = imageUrl;
+    document.getElementById('modalBedrooms').textContent = bedrooms;
+    document.getElementById('modalBathrooms').textContent = bathrooms;
+    document.getElementById('modalArea').textContent = area;
+    const description = `${title} ${location}. Kjo pronë ka ${bedrooms} dhoma gjumi, ${bathrooms} banjo dhe siperfaqe ${area}.`;
+    document.getElementById('modalDescription').textContent = description;
+    document.getElementById('propertyModal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+    document.getElementById('propertyModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+document.addEventListener('DOMContentLoaded', function() {
+    const propertyButtons = document.querySelectorAll('.property-btn');
+    
+    propertyButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const propertyCard = this.closest('.property-card');
+            showPropertyDetails(propertyCard);
+        });
+    });
+    window.addEventListener('click', function(event) {
+        if (event.target === document.getElementById('propertyModal')) {
+            closeModal();
+        }
+    });
+    document.querySelector('.contact-btn').addEventListener('click', function() {
+        const propertyTitle = document.getElementById('modalTitle').textContent;
+        window.location.href = `mailto:info@myspace.com?subject=Pyetje për pronën: ${encodeURIComponent(propertyTitle)}`;
+    });
+});
+</script>
   <script>
-      // Elementet DOM
       const chatbotButton = document.getElementById('chatbotButton');
           const chatbotContainer = document.getElementById('chatbotContainer');
           const chatbotClose = document.getElementById('chatbotClose');
@@ -524,25 +614,15 @@
           const quickReplies = document.getElementById('quickReplies');
           const userInput = document.getElementById('userInput');
           const sendButton = document.getElementById('sendButton');
-  
-          // Qytetet kryesore në Kosovë
           const kosovoCities = ["Prishtinë", "Prizren", "Pejë", "Gjakovë", "Mitrovicë", "Ferizaj", "Gjilan", "Podujevë"];
-          
-          // Llojet e pronave
           const propertyTypes = ["Banesë", "Shtëpi", "Zyrë", "Truall", "Dyqan", "Depo"];
-          
-          // Çmimet tipike në Kosovë (në Euro)
           const priceRanges = {
               "Banesë": "50,000 - 200,000€",
               "Shtëpi": "100,000 - 500,000€",
               "Zyrë": "80,000 - 300,000€",
               "Truall": "20,000 - 150,000€"
           };
-  
-          // Kontrollo gjendjen e chatbot-it
           let isChatbotActive = false;
-  
-          // Aktivizo/deaktivizo chatbot
           chatbotButton.addEventListener('click', toggleChatbot);
           chatbotClose.addEventListener('click', toggleChatbot);
   
@@ -564,8 +644,6 @@
                   chatbotButton.classList.remove('active');
               }
           }
-  
-          // Dërgo mesazh
           sendButton.addEventListener('click', sendMessage);
           userInput.addEventListener('keypress', function(e) {
               if (e.key === 'Enter') {
@@ -587,8 +665,6 @@
                   generateBotResponse(message);
               }, 1000 + Math.random() * 2000);
           }
-  
-          // Shto mesazh të përdoruesit
           function addUserMessage(text) {
               const messageDiv = document.createElement('div');
               messageDiv.className = 'message user-message';
@@ -596,8 +672,6 @@
               chatbotMessages.appendChild(messageDiv);
               scrollToBottom();
           }
-  
-          // Shto mesazh të bot-it
           function addBotMessage(text) {
               const messageDiv = document.createElement('div');
               messageDiv.className = 'message bot-message';
@@ -605,8 +679,6 @@
               chatbotMessages.appendChild(messageDiv);
               scrollToBottom();
           }
-  
-          // Shfaq indikatorin e shtypjes
           function showTypingIndicator() {
               const typingDiv = document.createElement('div');
               typingDiv.className = 'typing-indicator';
@@ -619,16 +691,12 @@
               chatbotMessages.appendChild(typingDiv);
               scrollToBottom();
           }
-  
-          // Fshi indikatorin e shtypjes
           function removeTypingIndicator() {
               const typingIndicator = document.getElementById('typingIndicator');
               if (typingIndicator) {
                   typingIndicator.remove();
               }
           }
-  
-          // Shfaq përgjigjet e shpejta
           function showQuickReplies(replies) {
               quickReplies.innerHTML = '';
               replies.forEach(reply => {
@@ -637,8 +705,6 @@
                   replyButton.textContent = reply;
                   quickReplies.appendChild(replyButton);
               });
-              
-              // Shto event listener për përgjigjet e shpejta
               document.querySelectorAll('.quick-reply').forEach(button => {
                   button.addEventListener('click', function() {
                       const message = this.textContent;
@@ -652,17 +718,11 @@
                   });
               });
           }
-  
-          // Scroll në fund të chat-it
           function scrollToBottom() {
               chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
           }
-  
-          // Gjenero përgjigje nga bot-i bazuar në Kosovë
           function generateBotResponse(message) {
               message = message.toLowerCase();
-              
-              // Përshëndetje
               if (message.includes('përshëndetje') || message.includes('tungjatjeta') || message.includes('hello') || message.includes('hi')) {
                   addBotMessage("Përshëndetje! Si mund t'ju ndihmoj me tregun e pasurive të paluajtshme në Kosovë sot?");
                   showQuickReplies([
@@ -672,12 +732,9 @@
                       "Si të shes pronën time?"
                   ]);
               }
-              // Kërkim për pronë sipas qytetit
               else if (kosovoCities.some(city => message.toLowerCase().includes(city.toLowerCase()))) {
                   const city = kosovoCities.find(c => message.toLowerCase().includes(c.toLowerCase()));
                   addBotMessage(`Këtu janë disa pronë të disponueshme në ${city}:`);
-                  
-                  // Shto shembuj të pronave (në jetën reale këto do të merreshin nga një API)
                   addPropertyCard(
                       `Banesë 3+1 në ${city}`,
                       city,
@@ -706,7 +763,6 @@
                       "Kontakto agjent"
                   ]);
               }
-              // Pyetje për çmime
               else if (message.includes('çmim') || message.includes('cmim') || message.includes('price')) {
                   addBotMessage("Çmimet në Kosovë variojnë sipas qytetit dhe llojit të pronës:");
                   
@@ -724,7 +780,6 @@
                       "Kthehu në fillim"
                   ]);
               }
-              // Kontakt me agjent
               else if (message.includes('kontakt') || message.includes('agjent') || message.includes('agent')) {
                   addBotMessage("Mund t'ju lidh me një agjent lokal në Kosovë. Ju lutem tregoni:");
                   addBotMessage("1. Qytetin që ju intereson\n2. Llojin e pronës (banesë, shtëpi, etj.)\n3. Buxhetin tuaj (nëse keni)");
@@ -735,7 +790,6 @@
                       "Nuk jam i sigurt"
                   ]);
               }
-              // Listimi i pronës
               else if (message.includes('shes') || message.includes('list') || message.includes('shitet')) {
                   addBotMessage("Për të listuar pronën tuaj në treg, na duhen disa detaje:");
                   addBotMessage("1. Lloji i pronës (banesë, shtëpi, etj.)\n2. Vendndodhja (qyteti, lagjia)\n3. Madhësia (m²)\n4. Numri i dhomave\n5. Çmimi i dëshiruar");
@@ -747,7 +801,6 @@
                       "Kthehu në fillim"
                   ]);
               }
-              // Faleminderit
               else if (message.includes('faleminderit') || message.includes('rrofsh') || message.includes('thanks')) {
                   addBotMessage("Ju faleminderit që përdorni shërbimet tona! Nëse keni ndonjë pyetje tjetër për tregun e pasurive të paluajtshme në Kosovë, më thoni.");
                   showQuickReplies([
@@ -756,7 +809,6 @@
                       "Kthehu në fillim"
                   ]);
               }
-              // Default response
               else {
                   addBotMessage("Më vjen keq, nuk e kuptova plotësisht. A mund të specifikoni më shumë ose të zgjidhni një nga opsionet e mëposhtme?");
                   showQuickReplies([

@@ -34,3 +34,4 @@ end;
 post session= Stripe::CHECKOUT_SESSION_ID =10;
 return_url:https://Myspace.com;
 api_key§
+requte pk_test_51RACzSRjGiyNVx7klgg7BYwtyREqge6Yidy2EnXUuy4ssgCqny8W5BLc3fgUBPtNy6Cpyn6sD8H5fAVGp45hKbF300tZ3ssFK5

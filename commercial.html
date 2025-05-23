@@ -126,7 +126,6 @@
   </div>
   
   <main>
-     <!--Permbajtja e Faqes-->
   </main>
     <section class="latest-properties">
       <div class="containers">
@@ -502,11 +501,9 @@
       </div>
   
       <div class="chatbot-messages" id="chatbotMessages">
-          <!-- Mesazhet do të shfaqen këtu -->
       </div>
   
       <div class="quick-replies" id="quickReplies">
-          <!-- Përgjigjet e shpejta do të shfaqen këtu -->
       </div>
   
       <div class="chatbot-input">
@@ -517,7 +514,6 @@
       </div>
   </div>
   <script>
-      // Elementet DOM
       const chatbotButton = document.getElementById('chatbotButton');
           const chatbotContainer = document.getElementById('chatbotContainer');
           const chatbotClose = document.getElementById('chatbotClose');
@@ -525,25 +521,15 @@
           const quickReplies = document.getElementById('quickReplies');
           const userInput = document.getElementById('userInput');
           const sendButton = document.getElementById('sendButton');
-  
-          // Qytetet kryesore në Kosovë
           const kosovoCities = ["Prishtinë", "Prizren", "Pejë", "Gjakovë", "Mitrovicë", "Ferizaj", "Gjilan", "Podujevë"];
-          
-          // Llojet e pronave
           const propertyTypes = ["Banesë", "Shtëpi", "Zyrë", "Truall", "Dyqan", "Depo"];
-          
-          // Çmimet tipike në Kosovë (në Euro)
           const priceRanges = {
               "Banesë": "50,000 - 200,000€",
               "Shtëpi": "100,000 - 500,000€",
               "Zyrë": "80,000 - 300,000€",
               "Truall": "20,000 - 150,000€"
           };
-  
-          // Kontrollo gjendjen e chatbot-it
           let isChatbotActive = false;
-  
-          // Aktivizo/deaktivizo chatbot
           chatbotButton.addEventListener('click', toggleChatbot);
           chatbotClose.addEventListener('click', toggleChatbot);
   
@@ -565,8 +551,6 @@
                   chatbotButton.classList.remove('active');
               }
           }
-  
-          // Dërgo mesazh
           sendButton.addEventListener('click', sendMessage);
           userInput.addEventListener('keypress', function(e) {
               if (e.key === 'Enter') {
@@ -588,8 +572,6 @@
                   generateBotResponse(message);
               }, 1000 + Math.random() * 2000);
           }
-  
-          // Shto mesazh të përdoruesit
           function addUserMessage(text) {
               const messageDiv = document.createElement('div');
               messageDiv.className = 'message user-message';
@@ -597,8 +579,6 @@
               chatbotMessages.appendChild(messageDiv);
               scrollToBottom();
           }
-  
-          // Shto mesazh të bot-it
           function addBotMessage(text) {
               const messageDiv = document.createElement('div');
               messageDiv.className = 'message bot-message';
@@ -606,8 +586,6 @@
               chatbotMessages.appendChild(messageDiv);
               scrollToBottom();
           }
-  
-          // Shfaq indikatorin e shtypjes
           function showTypingIndicator() {
               const typingDiv = document.createElement('div');
               typingDiv.className = 'typing-indicator';
@@ -620,16 +598,12 @@
               chatbotMessages.appendChild(typingDiv);
               scrollToBottom();
           }
-  
-          // Fshi indikatorin e shtypjes
           function removeTypingIndicator() {
               const typingIndicator = document.getElementById('typingIndicator');
               if (typingIndicator) {
                   typingIndicator.remove();
               }
           }
-  
-          // Shfaq përgjigjet e shpejta
           function showQuickReplies(replies) {
               quickReplies.innerHTML = '';
               replies.forEach(reply => {
@@ -638,8 +612,6 @@
                   replyButton.textContent = reply;
                   quickReplies.appendChild(replyButton);
               });
-              
-              // Shto event listener për përgjigjet e shpejta
               document.querySelectorAll('.quick-reply').forEach(button => {
                   button.addEventListener('click', function() {
                       const message = this.textContent;
@@ -653,17 +625,11 @@
                   });
               });
           }
-  
-          // Scroll në fund të chat-it
           function scrollToBottom() {
               chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
           }
-  
-          // Gjenero përgjigje nga bot-i bazuar në Kosovë
           function generateBotResponse(message) {
               message = message.toLowerCase();
-              
-              // Përshëndetje
               if (message.includes('përshëndetje') || message.includes('tungjatjeta') || message.includes('hello') || message.includes('hi')) {
                   addBotMessage("Përshëndetje! Si mund t'ju ndihmoj me tregun e pasurive të paluajtshme në Kosovë sot?");
                   showQuickReplies([
@@ -673,12 +639,9 @@
                       "Si të shes pronën time?"
                   ]);
               }
-              // Kërkim për pronë sipas qytetit
               else if (kosovoCities.some(city => message.toLowerCase().includes(city.toLowerCase()))) {
                   const city = kosovoCities.find(c => message.toLowerCase().includes(c.toLowerCase()));
                   addBotMessage(`Këtu janë disa pronë të disponueshme në ${city}:`);
-                  
-                  // Shto shembuj të pronave (në jetën reale këto do të merreshin nga një API)
                   addPropertyCard(
                       `Banesë 3+1 në ${city}`,
                       city,
@@ -707,7 +670,6 @@
                       "Kontakto agjent"
                   ]);
               }
-              // Pyetje për çmime
               else if (message.includes('çmim') || message.includes('cmim') || message.includes('price')) {
                   addBotMessage("Çmimet në Kosovë variojnë sipas qytetit dhe llojit të pronës:");
                   
@@ -725,7 +687,6 @@
                       "Kthehu në fillim"
                   ]);
               }
-              // Kontakt me agjent
               else if (message.includes('kontakt') || message.includes('agjent') || message.includes('agent')) {
                   addBotMessage("Mund t'ju lidh me një agjent lokal në Kosovë. Ju lutem tregoni:");
                   addBotMessage("1. Qytetin që ju intereson\n2. Llojin e pronës (banesë, shtëpi, etj.)\n3. Buxhetin tuaj (nëse keni)");
@@ -736,7 +697,6 @@
                       "Nuk jam i sigurt"
                   ]);
               }
-              // Listimi i pronës
               else if (message.includes('shes') || message.includes('list') || message.includes('shitet')) {
                   addBotMessage("Për të listuar pronën tuaj në treg, na duhen disa detaje:");
                   addBotMessage("1. Lloji i pronës (banesë, shtëpi, etj.)\n2. Vendndodhja (qyteti, lagjia)\n3. Madhësia (m²)\n4. Numri i dhomave\n5. Çmimi i dëshiruar");
@@ -748,7 +708,6 @@
                       "Kthehu në fillim"
                   ]);
               }
-              // Faleminderit
               else if (message.includes('faleminderit') || message.includes('rrofsh') || message.includes('thanks')) {
                   addBotMessage("Ju faleminderit që përdorni shërbimet tona! Nëse keni ndonjë pyetje tjetër për tregun e pasurive të paluajtshme në Kosovë, më thoni.");
                   showQuickReplies([
@@ -757,7 +716,6 @@
                       "Kthehu në fillim"
                   ]);
               }
-              // Default response
               else {
                   addBotMessage("Më vjen keq, nuk e kuptova plotësisht. A mund të specifikoni më shumë ose të zgjidhni një nga opsionet e mëposhtme?");
                   showQuickReplies([
@@ -849,4 +807,8 @@
   </script>
     <script src="main.js"></script>
   </body>
+
+  
+
+  
 </html>

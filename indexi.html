@@ -72,6 +72,8 @@
   }
 });
 
+
+
                 </script>
                 
                 
@@ -103,35 +105,25 @@
   const minValue = document.getElementById('minValue');
   const applyButton = document.querySelector('.apply-filters');
 
-  // Vendos vlerat fillestare të min/max
+ 
   minValue.textContent = `$${parseInt(priceRange.min).toLocaleString()}`;
   maxValue.textContent = `$${parseInt(priceRange.max).toLocaleString()}`;
   currentValue.textContent = `$${parseInt(priceRange.value).toLocaleString()}`;
-
-  // Event: Ndryshimi i slider-it
   priceRange.addEventListener('input', () => {
     currentValue.textContent = `$${parseInt(priceRange.value).toLocaleString()}`;
   });
-
-  // Event: Aktivizimi i një filtri
   filterOptions.forEach(option => {
     option.addEventListener('click', () => {
       const group = option.closest('.filter-group');
       const isMultiple = group.querySelectorAll('.filter-option').length > 0 && group.querySelector('h4').textContent === 'Bedrooms';
-
-      // Heq klasen "active" nëse s’lejon multiple
       if (!isMultiple || option.textContent === 'All') {
         group.querySelectorAll('.filter-option').forEach(o => o.classList.remove('active'));
       }
-
-      // Toggle për multiple
       if (isMultiple && option.classList.contains('active')) {
         option.classList.remove('active');
       } else {
         option.classList.add('active');
       }
-
-      // Nëse u zgjodh "All", hiq të tjerët
       if (option.textContent === 'All') {
         group.querySelectorAll('.filter-option:not(:first-child)').forEach(o => o.classList.remove('active'));
       } else {
@@ -142,8 +134,6 @@
       }
     });
   });
-
-  // Event: Apliko filtrat
   applyButton.addEventListener('click', () => {
     const selectedFilters = {
       propertyType: getSelectedOptions('Property Type'),
@@ -152,11 +142,8 @@
     };
 
     console.log('Filtrat e zgjedhur:', selectedFilters);
-
-    // Këtu mund të shtosh logjikën për të filtruar të dhëna reale
   });
 
-  // Merr filtrat nga një kategori
   function getSelectedOptions(title) {
     const group = [...document.querySelectorAll('.filter-group')].find(g =>
       g.querySelector('h4')?.textContent.trim() === title
@@ -179,34 +166,22 @@
                     const closeModal = document.querySelector('.close-modal');
                     const tabBtns = document.querySelectorAll('.tab-btn');
                     const tabContents = document.querySelectorAll('.auth-tab-content');
-                
-                    // Show modal when login button is clicked
                     loginBtn.addEventListener('click', function() {
                         authModal.style.display = 'block';
                     });
-                
-                    // Close modal when X is clicked
                     closeModal.addEventListener('click', function() {
                         authModal.style.display = 'none';
                     });
-                
-                    // Close modal when clicking outside the modal
                     window.addEventListener('click', function(event) {
                         if (event.target === authModal) {
                             authModal.style.display = 'none';
                         }
                     });
-                
-                    // Tab switching functionality
                     tabBtns.forEach(btn => {
                         btn.addEventListener('click', function() {
                             const tabId = this.getAttribute('data-tab');
-                            
-                            // Remove active class from all buttons and contents
                             tabBtns.forEach(btn => btn.classList.remove('active'));
                             tabContents.forEach(content => content.classList.remove('active'));
-                            
-                            // Add active class to clicked button and corresponding content
                             this.classList.add('active');
                             document.getElementById(tabId + 'Tab').classList.add('active');
                         });
@@ -268,7 +243,7 @@
                 <textarea id="descriptionInput" placeholder="Pershkrimi i prones (optional)"></textarea>
         
                 <input type="number" id="priceInput" placeholder="Vendos Qmimin (€)" required>
-            
+            <button id="addFormBtn">Shto Pronen</button>
                 <script async
                 src="https://js.stripe.com/v3/buy-button.js">
               </script>
@@ -278,7 +253,171 @@
                 publishable-key="pk_test_51RACzSRjGiyNVx7klgg7BYwtyREqge6Yidy2EnXUuy4ssgCqny8W5BLc3fgUBPtNy6Cpyn6sD8H5fAVGp45hKbF300tZ3ssFK5"
               >
               </stripe-buy-button>
-                
+                <script>document.addEventListener('DOMContentLoaded', function() {
+    const addFormBtn = document.getElementById('addFormBtn');
+    const STORAGE_KEY = 'user_properties';
+   
+    // Load user-added properties when page loads
+    loadUserProperties();
+
+    if (addFormBtn) {
+        addFormBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+           
+            // Get form values
+            const propertyData = {
+                name: document.getElementById('nameInput').value.trim(),
+                surname: document.getElementById('surnameInput').value.trim(),
+                email: document.getElementById('emailInput').value.trim(),
+                propertyType: document.querySelector('input[name="propertyType"]:checked')?.value,
+                description: document.getElementById('descriptionInput').value.trim(),
+                price: document.getElementById('priceInput').value.trim(),
+                timestamp: new Date().getTime()
+            };
+
+            // Validate required fields
+            if (!propertyData.name || !propertyData.surname || !propertyData.email ||
+                !propertyData.propertyType || !propertyData.price) {
+                alert('Ju lutem plotësoni të gjitha fushat e detyrueshme!');
+                return;
+            }
+           
+            if (!validateEmail(propertyData.email)) {
+                alert('Ju lutem shkruani një email adresë të vlefshme!');
+                return;
+            }
+
+            // Handle image upload
+            const propertyImage = document.getElementById('propertyImage').files[0];
+            if (propertyImage) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    propertyData.image = e.target.result;
+                    saveAndDisplayProperty(propertyData);
+                };
+                reader.readAsDataURL(propertyImage);
+            } else {
+                propertyData.image = 'images/default-property.jpg';
+                saveAndDisplayProperty(propertyData);
+            }
+        });
+    }
+   
+    function saveAndDisplayProperty(propertyData) {
+        // Get existing user properties or initialize empty array
+        const userProperties = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+       
+        // Add new property to beginning of array
+        userProperties.unshift(propertyData);
+       
+        // Save to localStorage
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(userProperties));
+       
+        // Display just this new property (without affecting existing ones)
+        displayUserProperty(propertyData);
+       
+        // Reset form
+        resetPropertyForm();
+       
+        alert('Prona juaj u shtua me sukses!');
+    }
+
+    function loadUserProperties() {
+        const userProperties = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+        userProperties.forEach(property => {
+            displayUserProperty(property);
+        });
+    }
+
+    function displayUserProperty(property) {
+        const propertiesGrid = document.querySelector('.properties-grid');
+        const propertyCard = createPropertyCard(property);
+       
+        // Insert new card after the section title but before existing cards
+        if (propertiesGrid.children.length > 0) {
+            propertiesGrid.insertBefore(propertyCard, propertiesGrid.children[1]);
+        } else {
+            propertiesGrid.appendChild(propertyCard);
+        }
+    }
+
+    function createPropertyCard(property) {
+        // Determine property details
+        let propertyTitle, featuresHtml, badgeText;
+       
+        switch(property.propertyType) {
+            case 'house':
+                propertyTitle = `Shtëpi nga ${property.name} ${property.surname}`;
+                featuresHtml = `
+                    <span><i class="fas fa-bed"></i> 3 Dhoma</span>
+                    <span><i class="fas fa-bath"></i> 2 Banjo</span>
+                `;
+                badgeText = 'Shtëpi';
+                break;
+            case 'apartment-sale':
+                propertyTitle = `Apartament nga ${property.name} ${property.surname}`;
+                featuresHtml = `
+                    <span><i class="fas fa-bed"></i> 2 Dhoma</span>
+                    <span><i class="fas fa-bath"></i> 1 Banjo</span>
+                `;
+                badgeText = 'Shitje';
+                break;
+            case 'apartment-rent':
+                propertyTitle = `Apartament nga ${property.name} ${property.surname}`;
+                featuresHtml = `
+                    <span><i class="fas fa-bed"></i> 1 Dhomë</span>
+                    <span><i class="fas fa-bath"></i> 1 Banjo</span>
+                `;
+                badgeText = 'Qera';
+                break;
+        }
+       
+        // Add description if provided
+        if (property.description) {
+            featuresHtml += `<p class="property-description">${property.description}</p>`;
+        }
+       
+        // Create the card
+        const propertyCard = document.createElement('div');
+        propertyCard.className = 'property-card';
+        propertyCard.innerHTML = `
+            <div class="property-image" style="background-image: url('${property.image}')">
+                <div class="property-price">€${parseFloat(property.price).toLocaleString()}</div>
+            </div>
+            <div class="property-badge">${badgeText}</div>
+            <div class="property-details">
+                <h3>${propertyTitle}</h3>
+                <p class="property-location"><i class="fas fa-map-marker-alt"></i> Prishtinë, Kosovë</p>
+                <div class="property-features">
+                    ${featuresHtml}
+                    <p><i class="fas fa-envelope"></i> ${property.email}</p>
+                </div>
+                <button class="property-btn">Shiko Detajet</button>
+            </div>
+        `;
+       
+        return propertyCard;
+    }
+
+    function resetPropertyForm() {
+        document.getElementById('nameInput').value = '';
+        document.getElementById('surnameInput').value = '';
+        document.getElementById('emailInput').value = '';
+        document.querySelectorAll('input[name="propertyType"]').forEach(radio => radio.checked = false);
+        document.getElementById('propertyImage').value = '';
+        document.getElementById('descriptionInput').value = '';
+        document.getElementById('priceInput').value = '';
+       
+        document.getElementById('addOptions').classList.remove('show');
+        document.getElementById('overlay').classList.remove('active');
+    }
+
+    function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+});</script>
+
                 
             </div>
 
@@ -286,8 +425,6 @@
             
         
         </header>
-        
-        <!-- Header-i i dytë me foto dhe tekst -->
         <div class="hero-header">
             <iframe src='https://my.spline.design/worldplanet-kNAk4ZzrZ9qdnREZQ3mDjykG/' frameborder='0' width='50%' height='200%'></iframe>
             
@@ -309,7 +446,7 @@
                         }, 4000);
                         setTimeout(() => {
                             text.textContent = "Zyre";
-                        }, 8000); //1s = 1000 milliseconds
+                        }, 8000);
                     }
             
                     textLoad();
@@ -321,73 +458,194 @@
         </div>
         
         <main>
-           <!--Permbajtja e Faqes-->
         </main>
-       
-  
-    <section class="latest-properties">
-        <div class="containers">
-            <h2 class="section-title">Pronat e Fundit</h2>
-            <p class="section-subtitle">Zbuloni ofertat tona më të reja</p>
-            
-            <div class="properties-grid">
-                <!-- Prona 1 -->
-                <div class="property-card">
-                    <div class="property-image" style="background-image: url('images/vushtrri1.png');">
-                        <div class="property-price">$350,000</div>
-                    </div>
-                    <div class="property-badge">E Re</div>
-                    <div class="property-details">
-                        <h3>Banesë Moderne në Vushtrri</h3>
-                        <p class="property-location"><i class="fas fa-map-marker-alt"></i> Vushtrri, Kovose</p>
-                        <div class="property-features">
-                            <span><i class="fas fa-bed"></i> 4 Dhoma</span>
-                            <span><i class="fas fa-bath"></i> 3 Banjo</span>
-                            <span><i class="fas fa-vector-square"></i> 220m²</span>
-                        </div>
-                        <button class="property-btn">Shiko Detajet</button>
-                    </div>
+        <section class="latest-properties">
+    <div class="containers">
+        <h2 class="section-title">Pronat e Fundit</h2>
+        <p class="section-subtitle">Zbuloni ofertat tona më të reja</p>
+        
+        <div class="properties-grid">
+            <div class="property-card">
+                <div class="property-image" style="background-image: url('images/vushtrri1.png');">
+                    <div class="property-price">$350,000</div>
                 </div>
-                
-                <!-- Prona 2 -->
-                <div class="property-card featured">
-                    <div class="property-image" style="background-image: url('images/prishtina1.png');">
-                        <div class="property-price">$275,000</div>
+                <div class="property-badge">E Re</div>
+                <div class="property-details">
+                    <h3>Banesë Moderne në Vushtrri</h3>
+                    <p class="property-location"><i class="fas fa-map-marker-alt"></i> Vushtrri, Kosovë</p>
+                    <div class="property-features">
+                        <span><i class="fas fa-bed"></i> 4 Dhoma</span>
+                        <span><i class="fas fa-bath"></i> 3 Banjo</span>
+                        <span><i class="fas fa-vector-square"></i> 220m²</span>
                     </div>
-                    <div class="property-badge">Featured</div>
-                    <div class="property-details">
-                        <h3>Apartament Premium në Prishtine</h3>
-                        <p class="property-location"><i class="fas fa-map-marker-alt"></i> Blloku4, Prishtinë</p>
-                        <div class="property-features">
-                            <span><i class="fas fa-bed"></i> 3 Dhoma</span>
-                            <span><i class="fas fa-bath"></i> 2 Banjo</span>
-                            <span><i class="fas fa-vector-square"></i> 145m²</span>
-                        </div>
-                        <button class="property-btn">Shiko Detajet</button>
-                    </div>
+                    <button class="property-btn" onclick="showPropertyDetails(1)">Shiko Detajet</button>
                 </div>
-                
-                <!-- Prona 3 -->
-                <div class="property-card featured">
-                <div class="property-card">
-                  
-                    <div class="property-image" style="background-image: url('images/prishtina2.png');">
-                        <div class="property-price">$180,000</div>
+            </div>
+            <div class="property-card featured">
+                <div class="property-image" style="background-image: url('images/prishtina1.png');">
+                    <div class="property-price">$275,000</div>
+                </div>
+                <div class="property-badge">Featured</div>
+                <div class="property-details">
+                    <h3>Apartament Premium në Prishtinë</h3>
+                    <p class="property-location"><i class="fas fa-map-marker-alt"></i> Blloku, Prishtinë</p>
+                    <div class="property-features">
+                        <span><i class="fas fa-bed"></i> 3 Dhoma</span>
+                        <span><i class="fas fa-bath"></i> 2 Banjo</span>
+                        <span><i class="fas fa-vector-square"></i> 145m²</span>
                     </div>
-                    <div class="property-details">
-                        <h3>Shtëpi Familjare në Prishtine</h3>
-                        <p class="property-location"><i class="fas fa-map-marker-alt"></i> Prishtine, Kosove</p>
-                        <div class="property-features">
-                            <span><i class="fas fa-bed"></i> 5 Dhoma</span>
-                            <span><i class="fas fa-bath"></i> 3 Banjo</span>
-                            <span><i class="fas fa-vector-square"></i> 320m²</span>
-                        </div>
-                        <button class="property-btn">Shiko Detajet</button>
+                    <button class="property-btn" onclick="showPropertyDetails(2)">Shiko Detajet</button>
+                </div>
+            </div>
+            <div class="property-card">
+                <div class="property-image" style="background-image: url('images/prishtina2.png');">
+                    <div class="property-price">$180,000</div>
+                </div>
+                <div class="property-details">
+                    <h3>Shtëpi Familjare në Prishtinë</h3>
+                    <p class="property-location"><i class="fas fa-map-marker-alt"></i> Prishtinë, Kosovë</p>
+                    <div class="property-features">
+                        <span><i class="fas fa-bed"></i> 5 Dhoma</span>
+                        <span><i class="fas fa-bath"></i> 3 Banjo</span>
+                        <span><i class="fas fa-vector-square"></i> 320m²</span>
                     </div>
+                    <button class="property-btn" onclick="showPropertyDetails(3)">Shiko Detajet</button>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+<div id="propertyModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-header">
+            <h2 id="modalTitle">Banesë Moderne në Vushtrri</h2>
+            <p class="modal-location"><i class="fas fa-map-marker-alt"></i> <span id="modalLocation">Vushtrri, Kosovë</span></p>
+            <div class="modal-price" id="modalPrice">$350,000</div>
+        </div>
+        
+        <div class="modal-body">
+            <div class="modal-gallery">
+                <img id="modalImage" src="images/vushtrri1.png" alt="Property Image">
+            </div>
+            
+            <div class="modal-details">
+                <h3>Detajet e Pronës</h3>
+                <div class="details-grid">
+                    <div class="detail-item">
+                        <i class="fas fa-home"></i>
+                        <span>Lloji: <strong id="modalType">Apartament</strong></span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-bed"></i>
+                        <span>Dhoma: <strong id="modalBedrooms">4</strong></span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-bath"></i>
+                        <span>Banjo: <strong id="modalBathrooms">3</strong></span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-vector-square"></i>
+                        <span>Siperfaqja: <strong id="modalArea">220</strong>m²</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-building"></i>
+                        <span>Kati: <strong id="modalFloor">2</strong></span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-car"></i>
+                        <span>Parking: <strong id="modalParking">Po</strong></span>
+                    </div>
+                </div>
+                
+                <div class="modal-description">
+                    <h3>Përshkrim</h3>
+                    <p id="modalDescription">Kjo banesë moderne e përfunduar me standarde të larta ndodhet në zonën më të mirë të qytetit të Vushtrrisë. Përmban 4 dhoma gjumi, 3 banjo, kuzhinë të hapur dhe ballkon të gjerë.</p>
+                </div>
+                
+                <div class="modal-contact">
+                    <h3>Kontakto</h3>
+                    <p><i class="fas fa-phone"></i> <strong>+383 44 123 456</strong></p>
+                    <p><i class="fas fa-envelope"></i> <strong>info@realestate.com</strong></p>
+                    <button class="contact-btn"><i class="fas fa-calendar-alt"></i> Bëni Takim</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const properties = {
+    1: {
+        title: "Banesë Moderne në Vushtrri",
+        location: "Vushtrri, Kosovë",
+        price: "$350,000",
+        image: "images/vushtrri1.png",
+        type: "Apartament",
+        bedrooms: 4,
+        bathrooms: 3,
+        area: 220,
+        floor: 2,
+        parking: "Po",
+        description: "Kjo banesë moderne e përfunduar me standarde të larta ndodhet në zonën më të mirë të qytetit të Vushtrrisë. Përmban 4 dhoma gjumi, 3 banjo, kuzhinë të hapur dhe ballkon të gjerë me pamje të bukur të qytetit."
+    },
+    2: {
+        title: "Apartament Premium në Prishtinë",
+        location: "Blloku, Prishtinë",
+        price: "$275,000",
+        image: "images/prishtina1.png",
+        type: "Apartament",
+        bedrooms: 3,
+        bathrooms: 2,
+        area: 145,
+        floor: 5,
+        parking: "Po (2 vende)",
+        description: "Apartament premium në një nga zonat më të mira të Prishtinës. Përfshin kuzhinë të hapur, ambiente të ndritshme dhe akses të drejtë në qendër të qytetit."
+    },
+    3: {
+        title: "Shtëpi Familjare në Prishtinë",
+        location: "Prishtinë, Kosovë",
+        price: "$180,000",
+        image: "images/prishtina2.png",
+        type: "Shtëpi",
+        bedrooms: 5,
+        bathrooms: 3,
+        area: 320,
+        floor: "Kati i parë",
+        parking: "Po (garazh)",
+        description: "Shtëpi familjare e përshtatshme për familje të mëdha. Ka oborr të gjerë, 5 dhoma gjumi, 3 banjo, kuzhinë të gjerë dhe garazh për 2 makina."
+    }
+};
+
+function showPropertyDetails(propertyId) {
+    const property = properties[propertyId];
+    if (!property) return;
+    
+    document.getElementById('modalTitle').textContent = property.title;
+    document.getElementById('modalLocation').textContent = property.location;
+    document.getElementById('modalPrice').textContent = property.price;
+    document.getElementById('modalImage').src = property.image;
+    document.getElementById('modalType').textContent = property.type;
+    document.getElementById('modalBedrooms').textContent = property.bedrooms;
+    document.getElementById('modalBathrooms').textContent = property.bathrooms;
+    document.getElementById('modalArea').textContent = property.area;
+    document.getElementById('modalFloor').textContent = property.floor;
+    document.getElementById('modalParking').textContent = property.parking;
+    document.getElementById('modalDescription').textContent = property.description;
+    
+    document.getElementById('propertyModal').style.display = 'block';
+}
+
+function closeModal() {
+    document.getElementById('propertyModal').style.display = 'none';
+}
+window.onclick = function(event) {
+    const modal = document.getElementById('propertyModal');
+    if (event.target == modal) {
+        closeModal();
+    }
+}
+</script>
     
     
         <div class="view-all-container">
@@ -476,7 +734,6 @@
  
   
   <script>
-    // JavaScript i thjeshtë për ndërrimin e tab-ve
     document.addEventListener('DOMContentLoaded', function() {
       const tabBtns = document.querySelectorAll('.tab-btn');
       const tabContents = document.querySelectorAll('.tab-content');
@@ -484,12 +741,8 @@
       tabBtns.forEach(btn => {
         btn.addEventListener('click', function() {
           const tabId = this.getAttribute('data-tab');
-          
-          // Hiq klasën active nga të gjitha butonat dhe përmbajtjet
           tabBtns.forEach(btn => btn.classList.remove('active'));
           tabContents.forEach(content => content.classList.remove('active'));
-          
-          // Shto klasën active për butonin dhe përmbajtjen e zgjedhur
           this.classList.add('active');
           document.getElementById(tabId).classList.add('active');
         });
@@ -498,17 +751,12 @@
   </script>
 
 
-
-
-<!-- Seksioni i Pronave Premium -->
 <section class="property-showcase">
     <div class="container">
       <div class="section-header">
         <h2>Prona Premium në Dispozicion</h2>
         <p>Zbuloni koleksionin tonë të pronave të zgjedhura me kujdes</p>
       </div>
-  
-      <!-- Filter Controls -->
       <div class="property-filters">
         <div class="filter-group">
           <label for="property-type">Lloji i Pronës:</label>
@@ -554,10 +802,7 @@
           </select>
         </div>
       </div>
-  
-      <!-- Property Grid -->
       <div class="property-grid">
-        <!-- Property 1 -->
         <div class="property-card" data-type="apartment" data-bedrooms="2" data-price="180000" data-location="tirana">
           <div class="property-badge">E Re</div>
           <div class="property-image">
@@ -575,8 +820,6 @@
             <button class="property-btn">Shiko Detajet</button>
           </div>
         </div>
-  
-        <!-- Property 2 -->
         <div class="property-card" data-type="villa" data-bedrooms="4" data-price="350000" data-location="durres">
           <div class="property-badge">Premium</div>
           <div class="property-image">
@@ -594,8 +837,6 @@
             <button class="property-btn">Shiko Detajet</button>
           </div>
         </div>
-  
-        <!-- Property 3 -->
         <div class="property-card" data-type="house" data-bedrooms="3" data-price="275000" data-location="vlora">
           <div class="property-image">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTq97sLdl_ahH0PvPrVuOp2q_Kj8RquRViiXQ&s" alt="Shtëpi në Vlorë">
@@ -612,8 +853,6 @@
             <button class="property-btn">Shiko Detajet</button>
           </div>
         </div>
-  
-        <!-- Property 4 -->
         <div class="property-card" data-type="apartment" data-bedrooms="1" data-price="120000" data-location="tirana">
           <div class="property-image">
             <img src="https://crm-cdn.ams3.cdn.digitaloceanspaces.com/anem/storage/anem/2024/September/week4/1024x768/41531_IMG_2797_resize.jpg" alt="Studio Apartament">
@@ -630,8 +869,6 @@
             <button class="property-btn">Shiko Detajet</button>
           </div>
         </div>
-  
-        <!-- Property 5 -->
         <div class="property-card" data-type="commercial" data-bedrooms="0" data-price="420000" data-location="saranda">
           <div class="property-badge">Ofertë</div>
           <div class="property-image">
@@ -649,8 +886,6 @@
             <button class="property-btn">Shiko Detajet</button>
           </div>
         </div>
-  
-        <!-- Property 6 -->
         <div class="property-card" data-type="house" data-bedrooms="5" data-price="380000" data-location="tirana">
           <div class="property-badge">Ekskluzive</div>
           <div class="property-image">
@@ -670,7 +905,6 @@
         </div>
       </div>
       <script>
-        // JavaScript for Filter Functionality
      document.addEventListener('DOMContentLoaded', function() {
       const filterType = document.getElementById('property-type');
       const filterBedrooms = document.getElementById('bedrooms');
@@ -689,14 +923,8 @@
           const cardBedrooms = parseInt(card.getAttribute('data-bedrooms'));
           const cardPrice = parseInt(card.getAttribute('data-price'));
           const cardLocation = card.getAttribute('data-location');
-  
-          // Check type filter
           const typeMatch = typeValue === 'all' || cardType === typeValue;
-          
-          // Check bedrooms filter
           const bedroomsMatch = bedroomsValue === 'any' || cardBedrooms >= parseInt(bedroomsValue);
-          
-          // Check price filter
           let priceMatch = true;
           if (priceValue !== 'any') {
             if (priceValue === '300000+') {
@@ -706,11 +934,8 @@
               priceMatch = cardPrice >= min && cardPrice <= max;
             }
           }
-          
-          // Check location filter
+
           const locationMatch = locationValue === 'any' || cardLocation === locationValue;
-  
-          // Show or hide card based on all filters
           if (typeMatch && bedroomsMatch && priceMatch && locationMatch) {
             card.style.display = 'block';
           } else {
@@ -718,8 +943,6 @@
           }
         });
       }
-  
-      // Add event listeners to all filters
       filterType.addEventListener('change', filterProperties);
       filterBedrooms.addEventListener('change', filterProperties);
       filterPrice.addEventListener('change', filterProperties);
@@ -733,19 +956,12 @@
       </div>
     </div>
   </section>
-
-  
-  
-
-    <!-- Header/Navigation -->
    
             <div class="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
             </div>
         </div>
     </header>
-
-    <!-- Hero Section -->
     <section class="hero about-hero">
         <iframe src='https://my.spline.design/cubic-ibpeCEiuWgWAz2rApRlCbDT0/' frameborder='0' width='100%' height='500%'></iframe>
         <div class="container">
@@ -755,8 +971,6 @@
             <p>Njohuni me ekipin dhe filozofinë tonë të punës</p>
         </div>
     </section>
-
-    <!-- Breadcrumbs -->
     <section class="breadcrumbs">
         <div class="container">
             <ul>
@@ -765,8 +979,6 @@
             </ul>
         </div>
     </section>
-
-    <!-- About Section -->
      
     <section class="about-section">
         
@@ -816,13 +1028,13 @@
                     if (count === target) {
                         clearInterval(interval);
                     }
-                }, 20); // Interval to animate the counter
+                }, 20);
             }
         });
     };
 
     window.addEventListener('scroll', animateCounters);
-    animateCounters(); // To trigger on page load if already in view
+    animateCounters();
 });
 
 
@@ -833,8 +1045,6 @@
             </div>
         </div>
     </section>
-
-    <!--blog-->
     <section class="blog-section">
         <div class="container">
             <div class="section-title">
@@ -843,7 +1053,6 @@
             </div>
             
             <div class="blog-container">
-                <!-- Artikulli 1 -->
                 <article class="blog-card">
                     <div class="blog-image">
                         <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Tregu i pasurive në Prishtinë">
@@ -859,8 +1068,6 @@
                         <a href="#" class="read-more">Lexo më shumë →</a>
                     </div>
                 </article>
-                
-                <!-- Artikulli 2 -->
                 <article class="blog-card">
                     <div class="blog-image">
                         <img src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Kreditë për shtëpi në Kosovë">
@@ -876,8 +1083,6 @@
                         <a href="#" class="read-more">Lexo më shumë →</a>
                     </div>
                 </article>
-                
-                <!-- Artikulli 3 -->
                 <article class="blog-card">
                     <div class="blog-image">
                         <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Investime në Pejë">
@@ -894,10 +1099,7 @@
                     </div>
                 </article>
             </div>
-            
-            <!-- Artikuj shtesë (të fshehur fillimisht) -->
             <div class="additional-articles" id="additionalArticles">
-                <!-- Artikulli 4 -->
                 <article class="blog-card">
                     <div class="blog-image">
                         <img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Ligjet e reja në Kosovë">
@@ -913,8 +1115,6 @@
                         <a href="#" class="read-more">Lexo më shumë →</a>
                     </div>
                 </article>
-                
-                <!-- Artikulli 5 -->
                 <article class="blog-card">
                     <div class="blog-image">
                         <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Zhvillimet në Gjilan">
@@ -930,8 +1130,6 @@
                         <a href="#" class="read-more">Lexo më shumë →</a>
                     </div>
                 </article>
-                
-                <!-- Artikulli 6 -->
                 <article class="blog-card">
                     <div class="blog-image">
                         <img src="https://images.unsplash.com/photo-1605146769289-440113cc3d00?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Çmimet në Prizren">
@@ -964,7 +1162,6 @@
                 if (articlesVisible) {
                     additionalArticles.classList.remove('show');
                     viewAllBtn.textContent = 'Shiko të Gjitha Artikujt';
-                    // Shkon në fillim të seksionit
                     window.scrollTo({
                         top: additionalArticles.offsetTop - 100,
                         behavior: 'smooth'
@@ -972,7 +1169,6 @@
                 } else {
                     additionalArticles.classList.add('show');
                     viewAllBtn.textContent = 'Shfaq Më Pak';
-                    // Shkon në fillim të artikujve shtesë
                     window.scrollTo({
                         top: additionalArticles.offsetTop - 100,
                         behavior: 'smooth'
@@ -983,8 +1179,6 @@
             });
         });
 </script>
-
-    <!-- Mission/Vision Section -->
     <section class="mission-section">
         <div class="container">
             <div class="mission-card">
@@ -1088,10 +1282,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 </script>
-
-
-
-<!-- Seksioni i Shërbimeve -->
 <section class="services-section">
     <div class="container">
         <div class="section-header">
@@ -1101,7 +1291,6 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
 
         <div class="services-grid">
-            <!-- Shërbimi 1 -->
             <div class="service-card">
                 <div class="service-icon">
                     <i class="fas fa-home"></i>
@@ -1121,8 +1310,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     </ul>
                 </div>
             </div>
-
-            <!-- Shërbimi 2 -->
             <div class="service-card featured">
                 <div class="featured-ribbon">POPULLORE</div>
                 <div class="service-icon">
@@ -1143,8 +1330,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     </ul>
                 </div>
             </div>
-
-            <!-- Shërbimi 3 -->
             <div class="service-card">
                 <div class="service-icon">
                     <i class="fas fa-chart-line"></i>
@@ -1164,8 +1349,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     </ul>
                 </div>
             </div>
-
-            <!-- Shërbimi 4 -->
             <div class="service-card">
                 <div class="service-icon">
                     <i class="fas fa-file-contract"></i>
@@ -1185,8 +1368,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     </ul>
                 </div>
             </div>
-
-            <!-- Shërbimi 5 -->
             <div class="service-card">
                 <div class="service-icon">
                     <i class="fas fa-search-dollar"></i>
@@ -1206,8 +1387,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     </ul>
                 </div>
             </div>
-
-            <!-- Shërbimi 6 -->
             <div class="service-card">
                 <div class="service-icon">
                     <i class="fas fa-handshake"></i>
@@ -1266,14 +1445,11 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
 </section>
 <script>
-    // JavaScript to toggle the visibility of answers
 const faqQuestions = document.querySelectorAll('.faq-question');
 
 faqQuestions.forEach(question => {
     question.addEventListener('click', () => {
         const answer = question.nextElementSibling;
-
-        // Toggle the visibility of the answer
         if (answer.style.display === 'block') {
             answer.style.display = 'none';
         } else {
@@ -1283,11 +1459,6 @@ faqQuestions.forEach(question => {
 });
 
 </script>
-
-
-
-
-    <!-- CTA Section -->
      
     <section class="cta-section">
         
@@ -1304,9 +1475,6 @@ faqQuestions.forEach(question => {
             </div>
         </div>
     </section>
-
-   
-    <!-- Footer -->
     <footer class="footer">
         
         <div class="container">
@@ -1379,11 +1547,9 @@ faqQuestions.forEach(question => {
     </div>
 
     <div class="chatbot-messages" id="chatbotMessages">
-        <!-- Mesazhet do të shfaqen këtu -->
     </div>
 
     <div class="quick-replies" id="quickReplies">
-        <!-- Përgjigjet e shpejta do të shfaqen këtu -->
     </div>
 
     <div class="chatbot-input">
@@ -1394,7 +1560,6 @@ faqQuestions.forEach(question => {
     </div>
 </div>
 <script>
-    // Elementet DOM
     const chatbotButton = document.getElementById('chatbotButton');
         const chatbotContainer = document.getElementById('chatbotContainer');
         const chatbotClose = document.getElementById('chatbotClose');
@@ -1402,25 +1567,15 @@ faqQuestions.forEach(question => {
         const quickReplies = document.getElementById('quickReplies');
         const userInput = document.getElementById('userInput');
         const sendButton = document.getElementById('sendButton');
-
-        // Qytetet kryesore në Kosovë
         const kosovoCities = ["Prishtinë", "Prizren", "Pejë", "Gjakovë", "Mitrovicë", "Ferizaj", "Gjilan", "Podujevë"];
-        
-        // Llojet e pronave
         const propertyTypes = ["Banesë", "Shtëpi", "Zyrë", "Truall", "Dyqan", "Depo"];
-        
-        // Çmimet tipike në Kosovë (në Euro)
         const priceRanges = {
             "Banesë": "50,000 - 200,000€",
             "Shtëpi": "100,000 - 500,000€",
             "Zyrë": "80,000 - 300,000€",
             "Truall": "20,000 - 150,000€"
         };
-
-        // Kontrollo gjendjen e chatbot-it
         let isChatbotActive = false;
-
-        // Aktivizo/deaktivizo chatbot
         chatbotButton.addEventListener('click', toggleChatbot);
         chatbotClose.addEventListener('click', toggleChatbot);
 
@@ -1442,8 +1597,6 @@ faqQuestions.forEach(question => {
                 chatbotButton.classList.remove('active');
             }
         }
-
-        // Dërgo mesazh
         sendButton.addEventListener('click', sendMessage);
         userInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
@@ -1465,8 +1618,6 @@ faqQuestions.forEach(question => {
                 generateBotResponse(message);
             }, 1000 + Math.random() * 2000);
         }
-
-        // Shto mesazh të përdoruesit
         function addUserMessage(text) {
             const messageDiv = document.createElement('div');
             messageDiv.className = 'message user-message';
@@ -1474,8 +1625,6 @@ faqQuestions.forEach(question => {
             chatbotMessages.appendChild(messageDiv);
             scrollToBottom();
         }
-
-        // Shto mesazh të bot-it
         function addBotMessage(text) {
             const messageDiv = document.createElement('div');
             messageDiv.className = 'message bot-message';
@@ -1483,8 +1632,6 @@ faqQuestions.forEach(question => {
             chatbotMessages.appendChild(messageDiv);
             scrollToBottom();
         }
-
-        // Shfaq indikatorin e shtypjes
         function showTypingIndicator() {
             const typingDiv = document.createElement('div');
             typingDiv.className = 'typing-indicator';
@@ -1497,16 +1644,12 @@ faqQuestions.forEach(question => {
             chatbotMessages.appendChild(typingDiv);
             scrollToBottom();
         }
-
-        // Fshi indikatorin e shtypjes
         function removeTypingIndicator() {
             const typingIndicator = document.getElementById('typingIndicator');
             if (typingIndicator) {
                 typingIndicator.remove();
             }
         }
-
-        // Shfaq përgjigjet e shpejta
         function showQuickReplies(replies) {
             quickReplies.innerHTML = '';
             replies.forEach(reply => {
@@ -1515,8 +1658,6 @@ faqQuestions.forEach(question => {
                 replyButton.textContent = reply;
                 quickReplies.appendChild(replyButton);
             });
-            
-            // Shto event listener për përgjigjet e shpejta
             document.querySelectorAll('.quick-reply').forEach(button => {
                 button.addEventListener('click', function() {
                     const message = this.textContent;
@@ -1530,17 +1671,11 @@ faqQuestions.forEach(question => {
                 });
             });
         }
-
-        // Scroll në fund të chat-it
         function scrollToBottom() {
             chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
         }
-
-        // Gjenero përgjigje nga bot-i bazuar në Kosovë
         function generateBotResponse(message) {
             message = message.toLowerCase();
-            
-            // Përshëndetje
             if (message.includes('përshëndetje') || message.includes('tungjatjeta') || message.includes('hello') || message.includes('hi')) {
                 addBotMessage("Përshëndetje! Si mund t'ju ndihmoj me tregun e pasurive të paluajtshme në Kosovë sot?");
                 showQuickReplies([
@@ -1550,12 +1685,9 @@ faqQuestions.forEach(question => {
                     "Si të shes pronën time?"
                 ]);
             }
-            // Kërkim për pronë sipas qytetit
             else if (kosovoCities.some(city => message.toLowerCase().includes(city.toLowerCase()))) {
                 const city = kosovoCities.find(c => message.toLowerCase().includes(c.toLowerCase()));
                 addBotMessage(`Këtu janë disa pronë të disponueshme në ${city}:`);
-                
-                // Shto shembuj të pronave (në jetën reale këto do të merreshin nga një API)
                 addPropertyCard(
                     `Banesë 3+1 në ${city}`,
                     city,
@@ -1584,7 +1716,6 @@ faqQuestions.forEach(question => {
                     "Kontakto agjent"
                 ]);
             }
-            // Pyetje për çmime
             else if (message.includes('çmim') || message.includes('cmim') || message.includes('price')) {
                 addBotMessage("Çmimet në Kosovë variojnë sipas qytetit dhe llojit të pronës:");
                 
@@ -1602,7 +1733,6 @@ faqQuestions.forEach(question => {
                     "Kthehu në fillim"
                 ]);
             }
-            // Kontakt me agjent
             else if (message.includes('kontakt') || message.includes('agjent') || message.includes('agent')) {
                 addBotMessage("Mund t'ju lidh me një agjent lokal në Kosovë. Ju lutem tregoni:");
                 addBotMessage("1. Qytetin që ju intereson\n2. Llojin e pronës (banesë, shtëpi, etj.)\n3. Buxhetin tuaj (nëse keni)");
@@ -1613,7 +1743,6 @@ faqQuestions.forEach(question => {
                     "Nuk jam i sigurt"
                 ]);
             }
-            // Listimi i pronës
             else if (message.includes('shes') || message.includes('list') || message.includes('shitet')) {
                 addBotMessage("Për të listuar pronën tuaj në treg, na duhen disa detaje:");
                 addBotMessage("1. Lloji i pronës (banesë, shtëpi, etj.)\n2. Vendndodhja (qyteti, lagjia)\n3. Madhësia (m²)\n4. Numri i dhomave\n5. Çmimi i dëshiruar");
@@ -1625,7 +1754,6 @@ faqQuestions.forEach(question => {
                     "Kthehu në fillim"
                 ]);
             }
-            // Faleminderit
             else if (message.includes('faleminderit') || message.includes('rrofsh') || message.includes('thanks')) {
                 addBotMessage("Ju faleminderit që përdorni shërbimet tona! Nëse keni ndonjë pyetje tjetër për tregun e pasurive të paluajtshme në Kosovë, më thoni.");
                 showQuickReplies([
@@ -1634,7 +1762,6 @@ faqQuestions.forEach(question => {
                     "Kthehu në fillim"
                 ]);
             }
-            // Default response
             else {
                 addBotMessage("Më vjen keq, nuk e kuptova plotësisht. A mund të specifikoni më shumë ose të zgjidhni një nga opsionet e mëposhtme?");
                 showQuickReplies([
@@ -1728,7 +1855,6 @@ faqQuestions.forEach(question => {
     setTimeout(function() {
       document.getElementById('loginOverlay').style.display = 'flex';
   }, 3000);
-  // Handle login form
   document.getElementById('loginForm').addEventListener('submit', function (e) {
    e.preventDefault();
   document.getElementById('loginOverlay').style.display = 'none';
@@ -1740,9 +1866,6 @@ faqQuestions.forEach(question => {
 alert("Account created!");
 document.getElementById('signupOverlay').style.display = 'none';
 });
-
-
-// Switch to signup
 document.getElementById('showSignup').addEventListener('click', function (e) {
 e.preventDefault();
 document.getElementById('loginOverlay').style.display = 'none';
