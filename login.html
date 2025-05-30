@@ -1,64 +1,118 @@
 <!DOCTYPE html>
-<html lang="sq">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login/Register - Shitje Pronash</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
- 
-</head>
-<body class="bg-gradient-to-br from-blue-100 to-white min-h-screen flex items-center justify-center p-4">
-  <div class="relative w-full max-w-6xl bg-white rounded-2xl shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2">
-    <div class="bg-gradient-to-b from-blue-600 to-blue-400 p-10 flex flex-col justify-center items-center text-white relative">
-      <h2 class="text-3xl font-extrabold mb-6 animate-pulse">Mirë se vini në Shitje Pronash</h2>
-      <img src="https://cdn-icons-png.flaticon.com/512/263/263115.png" class="w-64 h-auto animate-building drop-shadow-lg" alt="Banesë">
-      <p class="mt-6 text-center text-lg">Gjeni banesën e ëndrrave tuaja ose regjistrohuni për të ofruar pronën tuaj në shitje.</p>
-    </div>
-    <div class="p-8 md:p-12 bg-white relative">
-      <div class="flex justify-center mb-6 gap-2">
-        <button onclick="showForm('login')" id="loginBtn" class="px-6 py-2 font-semibold text-blue-600 hover:text-white border border-blue-600 hover:bg-blue-600 rounded-xl transition">Kyçu</button>
-        <button onclick="showForm('register')" id="registerBtn" class="px-6 py-2 font-semibold text-blue-600 hover:text-white border border-blue-600 hover:bg-blue-600 rounded-xl transition">Regjistrohu</button>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login MySpace</title>
+    <link rel="stylesheet" href="login.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="container" id="container">
+      <div class="form-container register-container">
+        <form>
+          <h1>Regjistrohu këtu</h1>
+          <div class="form-control">
+            <input type="text" id="username" placeholder="Emri" />
+            <small id="username-error"></small>
+            <span></span>
+          </div>
+          <div class="form-control">
+            <input type="email" id="email" placeholder="Email" />
+            <small id="email-error"></small>
+            <span></span>
+          </div>
+          <div class="form-control">
+            <input type="password" id="password" placeholder="Fjalëkalimi" />
+            <small id="password-error"></small>
+            <span></span>
+          </div>
+          <button type="submit" value="submit" id="register-button">Regjistrohu</button>
+          <span>ose përdorni llogarinë tuaj</span>
+          <div class="social-container">
+            <a href="#" class="social"
+              ><i class="fa-brands fa-facebook-f"></i
+            ></a>
+            <a href="#" class="social"><i class="fa-brands fa-google"></i></a>
+            <a href="#" class="social"><i class="fa-brands fa-tiktok"></i></a>
+          </div>
+        </form>
       </div>
-      <form id="loginForm" class="space-y-4" onsubmit="return handleLogin(event)">
-        <div class="relative">
-          <input id="loginEmail" type="email" placeholder="Email" class="w-full px-4 py-2 border rounded-xl pl-10 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
-          <i class="fas fa-envelope absolute left-3 top-3 text-gray-400">'</i>
-        </div>
-        <div class="relative">
-          <input id="loginPassword" type="password" placeholder="Fjalëkalimi" class="w-full px-4 py-2 border rounded-xl pl-10 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
-          <i class="fas fa-lock absolute left-3 top-3 text-gray-400"></i>
-        </div>
-        <div class="flex justify-between items-center">
-          <label class="flex items-center space-x-2">
-            <input type="checkbox" class="form-checkbox"> <span class="text-sm">Më mbaj mend</span>
-          </label>
-          <a href="#" class="text-blue-600 hover:underline text-sm">Ke harruar fjalëkalimin?</a>
-        </div>
-        <button type="submit" class="w-full py-2 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition">Kyçu</button>
-      </form>
-      <form id="registerForm" class="space-y-4 hidden">
-        <div class="relative">
-          <input type="text" placeholder="Emri i plotë" class="w-full px-4 py-2 border rounded-xl pl-10 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
-          <i class="fas fa-user absolute left-3 top-3 text-gray-400"></i>
-        </div>
-        <div class="relative">
-          <input type="email" placeholder="Email" class="w-full px-4 py-2 border rounded-xl pl-10 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
-          <i class="fas fa-envelope absolute left-3 top-3 text-gray-400"></i>
-        </div>
-        <div class="relative">
-          <input type="password" placeholder="Fjalëkalimi" class="w-full px-4 py-2 border rounded-xl pl-10 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
-          <i class="fas fa-lock absolute left-3 top-3 text-gray-400"></i>
-        </div>
-        <div class="relative">
-          <input type="password" placeholder="Konfirmo fjalëkalimin" class="w-full px-4 py-2 border rounded-xl pl-10 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
-          <i class="fas fa-lock absolute left-3 top-3 text-gray-400"></i>
-        </div>
-        <button type="submit" class="w-full py-2 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition">Regjistrohu</button>
-      </form>
-    </div>
-  </div>
 
+      <div class="form-container login-container">
+        <form class="form-lg">
+          <h1>Identifikohu këtu</h1>
+          <div class="form-control2">
+            <input type="email" class="email-2" placeholder="Email" />
+            <small class="email-error-2"></small>
+            <span></span>
+          </div>
+          <div class="form-control2">
+            <input type="password" class="password-2" placeholder="Fjalëkalimi" />
+            <small class="password-error-2"></small>
+            <span></span>
+          </div>
+
+          <div class="content">
+            <div class="checkbox">
+              <input type="checkbox" name="checkbox" id="checkbox" />
+              <label for="">Më kujto mua</label>
+            </div>
+            <div class="pass-link">
+              <a href="#">Keni harruar fjalëkalimin tuaj?</a>
+            </div>
+          </div>
+          <button type="submit" value="submit">Identifikohu</button>
+          <span>Ose përdorni llogarinë tuaj</span>
+          <div class="social-container">
+            <a href="#" class="social"
+              ><i class="fa-brands fa-facebook-f"></i
+            ></a>
+            <a href="#" class "social"><i class="fa-brands fa-google"></i></a>
+            <a href="#" class="social"><i class="fa-brands fa-tiktok"></i></a>
+          </div>
+        </form>
+      </div>
+
+      <div class="overlay-container">
+        <div class="overlay">
+          <div class="overlay-panel overlay-left">
+            <h1 class="title">
+             Filloni tuajin <br />
+           udhëtoni tani
+            </h1>
+            <p>Nëse keni një llogari, regjistrohuni këtu dhe argëtohuni!</p>
+            <button class="ghost" id="login">
+             Identifikohu
+              <i class="fa-solid fa-arrow-left"></i>
+            </button>
+          </div>
+
+          <div class="overlay-panel overlay-right">
+            <h1 class="title">
+              Filloni tuajin <br />
+              udhëtoni tani
+            </h1>
+            <p>
+             Nëse nuk keni ende një llogari, bashkohuni me ne dhe filloni udhëtimin tuaj.
+            </p>
+            <button class="ghost" id="register">
+          Regjistrohu
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
   <script src="login.js"></script>
-</body>
 </html>
+
+            

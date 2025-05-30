@@ -1,8 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap');
+
+
+
+h1, h2, h3 {
+  font-family: 'DM Serif Display', serif;
+  font-weight: 400;
+}
+
+/* Për titujt e çmimeve */
+.property-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+
+/* Për butonat */
+.cta-btn {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
 body {
-  font-family: Arial, sans-serif;
+ font-family: 'Inter', sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f4f4f4;
+
 }
 
 :root {
@@ -27,9 +50,9 @@ body {
 }
 
 .advanced-header {
-background-color: #2c3e50;
+
 color: white;
-padding: 15px 0;
+padding: 10px 0;
 box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 position: relative;
 z-index: 100;
@@ -136,13 +159,13 @@ font-size: 0.9rem;
 }
 
 .nav-container {
-max-width: 1200px;
+max-width: 1000px;
 margin: 0 auto;
 display: flex;
 justify-content: space-between;
 align-items: center;
 padding: 0 20px;
-gap: 20px;
+gap: 10px;
 }
 .header-actions {
 display: flex;
@@ -310,13 +333,16 @@ cursor: pointer;
 .hero-header {
 position: relative;
 width: 100%;
-height: 600px;
+height: 650px;
+flex: 1;
+padding: 2rem;
+border: none;
 
 display: flex;
 align-items: center;
 justify-content: center;
 margin-top: -1px;
-background: linear-gradient(135deg, rgb(0, 0, 0), rgba(61, 2, 189, 0.7));
+background: black;
 opacity: 1;
 }
 
@@ -777,7 +803,7 @@ box-shadow: 0 2px 10px rgba(52, 152, 219, 0.3);
 font-size: 24px;
 padding: 12px;
 border: none;
-background-color: #3498db;
+background-color:rgb(91, 209, 215);
 color: white;
 cursor: pointer;
 display: flex;
@@ -1969,9 +1995,6 @@ img {
   margin: 0 auto;
 }
 
-.about-hero {
-  background: linear-gradient(rgb(0, 0, 0), rgb(0, 0, 0));
-}
 
 /* ===== Breadcrumbs ===== */
 .breadcrumbs {
@@ -3051,7 +3074,6 @@ color: #333;
 text-align: left;
 }
 
-
 container{
   width: 246px;
   overflow: hidden;
@@ -4040,10 +4062,55 @@ container{
 }
 
 .advanced-header {
-  background: linear-gradient(90deg, #1a2a6c, #b21f1f, #fdbb2d);
+  
+  
+ background:rgba(20, 20, 50, 0.95);
+      color: white;
+     
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 2px 80px rgba(0,0,0,0.3);
   background-size: 200% 200%;
   animation: gradientShift 8s ease infinite;
 }
+
+.advanced-header {
+  position: relative;
+  background: rgba(20, 20, 50, 0.95);
+  color: white;
+  overflow: hidden;
+  box-shadow: 0 2px 80px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+/* Valë animuar */
+.advanced-header::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  opacity: 0.4;
+  animation: waveAnimation 6s linear infinite;
+  clip-path: polygon(
+    0% 60%, 10% 65%, 20% 60%, 30% 55%, 40% 60%,
+    50% 65%, 60% 60%, 70% 55%, 80% 60%, 90% 65%, 100% 60%,
+    100% 100%, 0% 100%
+  );
+  z-index: 0;
+}
+
+@keyframes waveAnimation {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
  /* Animacioni për logo */
  @keyframes logoGlow {
   0% {
@@ -5567,7 +5634,8 @@ html {
 
 @media (max-width: 1000px) {
   .hero-header {
-    height: 600px;
+    height: 800px;
+    
   }
   
   .hero-title {
@@ -6091,3 +6159,46 @@ html {
   box-shadow: 0 8px 25px rgba(46, 204, 113, 0.25);
 }
 
+
+
+
+
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+  gap: 5px;
+}
+
+.page-btn, .control-btn {
+  padding: 8px 15px;
+  border: 1px solid #ddd;
+  background: white;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+.page-btn:hover, .control-btn:hover {
+  background: #f0f0f0;
+}
+
+.page-btn.active {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.control-btn {
+  padding: 8px 12px;
+}
+
+iframe {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+        }
+        iframe:focus {
+            outline: none;
+        }

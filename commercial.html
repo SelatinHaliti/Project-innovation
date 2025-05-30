@@ -47,46 +47,6 @@
           </a>
         </div>
 
-        <div class="filters-dropdown">
-          <button class="filters-toggle">
-            <i class="fas fa-sliders-h"></i>
-            <span>Filters</span>
-          </button>
-          <div class="filters-panel">
-            <div class="filter-group">
-              <h4>Property Type</h4>
-              <div class="filter-options">
-                <div class="filter-option active">All</div>
-                <div class="filter-option">House</div>
-                <div class="filter-option">Apartment</div>
-                <div class="filter-option">Office</div>
-                <div class="filter-option">Commercial</div>
-              </div>
-            </div>
-        
-            <div class="filter-group">
-              <h4>Price Range</h4>
-              <input type="range" class="range-slider" min="0" max="1000000" step="10000" id="priceRange" value="500000">
-              <div class="range-values">
-                <span id="minValue">$0</span>
-                <span id="maxValue"></span>
-                <span id="currentValue">$500,000</span>
-              </div>
-            </div>
-        
-            <div class="filter-group">
-              <h4>Bedrooms</h4>
-              <div class="filter-options">
-                <div class="filter-option">Studio</div>
-                <div class="filter-option">1</div>
-                <div class="filter-option">2</div>
-                <div class="filter-option">3+</div>
-              </div>
-            </div>
-        
-            <button class="apply-filters">Apply Filters</button>
-          </div>
-        </div>
 
         <button class="mobile-menu-btn">
           <i class="fas fa-bars"></i>
@@ -94,7 +54,7 @@
       </div>
     </header>
     <div class="hero-header">
-      <iframe src='https://my.spline.design/worldplanet-kNAk4ZzrZ9qdnREZQ3mDjykG/' frameborder='0' width='50%' height='200%'></iframe>
+     <iframe src='https://my.spline.design/spacetexttransition-QwtvjIMIdiOcqf038twd2KDF/' frameborder='0' width='100%' height='100%'></iframe>
       
       <div class="hero-text">
           <div class="container">
@@ -398,21 +358,275 @@
             </div>
           </div>
         </div>
-        <div class="testimonials-controls">
-          <button class="control-btn prev-btn">
-            <i class="fas fa-chevron-left"></i>
-          </button>
-          <p class="control-btn prev-btn dots-container next-btn">1</p>
-          <p class="control-btn prev-btn dots-container next-btn">2</p>
-          <p class="control-btn prev-btn dots-container next-btn">3</p>
-          <p class="control-btn prev-btn dots-container next-btn">4</p>
-          <p class="control-btn prev-btn dots-container next-btn">5</p>
-          <div class="dots-container"></div>
-          <button class="control-btn next-btn">
-            <i class="fas fa-chevron-right"></i>
-          </button>
-        </div>
+
+        
+             <div class="pagination-controls">
+  <button class="control-btn prev-btn">
+    <i class="fas fa-chevron-left"></i>
+  </button>
+  <button class="page-btn active" data-page="1">1</button>
+  <button class="page-btn" data-page="2">2</button>
+  <button class="page-btn" data-page="3">3</button>
+  <button class="page-btn" data-page="4">4</button>
+  <button class="page-btn" data-page="5">5</button>
+  <button class="control-btn next-btn">
+    <i class="fas fa-chevron-right"></i>
+  </button>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+  const propertyCards = document.querySelectorAll('.property-card');
+  const itemsPerPage = 4; 
+  const pageButtons = document.querySelectorAll('.page-btn');
+  const prevBtn = document.querySelector('.prev-btn');
+  const nextBtn = document.querySelector('.next-btn');
+  
+  let currentPage = 1;
+  
+ 
+  function showPage(page) {
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    
+    propertyCards.forEach((card, index) => {
+      if (index >= startIndex && index < endIndex) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+    
+   
+    pageButtons.forEach(btn => {
+      btn.classList.remove('active');
+      if (parseInt(btn.dataset.page) === page) {
+        btn.classList.add('active');
+      }
+    });
+    
+    currentPage = page;
+    
+   
+    prevBtn.disabled = page === 1;
+    nextBtn.disabled = endIndex >= propertyCards.length;
+  }
+  
+
+  showPage(1);
+  
+  
+  pageButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const page = parseInt(this.dataset.page);
+      showPage(page);
+    });
+  });
+  
+  // Butoni për faqen e mëparshme
+  prevBtn.addEventListener('click', function() {
+    if (currentPage > 1) {
+      showPage(currentPage - 1);
+    }
+  });
+  
+  // Butoni për faqen tjetër
+  nextBtn.addEventListener('click', function() {
+    const totalPages = Math.ceil(propertyCards.length / itemsPerPage);
+    if (currentPage < totalPages) {
+      showPage(currentPage + 1);
+    }
+  });
+});
+</script>
+      
       </div>
+      <style>
+        /* Modal Styles */
+.property-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.8);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+  width: 80%;
+  max-width: 900px;
+  position: relative;
+  animation: modalopen 0.5s;
+}
+
+@keyframes modalopen {
+  from {opacity: 0; transform: translateY(-50px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+.close-modal {
+  position: absolute;
+  right: 25px;
+  top: 15px;
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-modal:hover {
+  color: #333;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.modal-images {
+  flex: 1;
+  min-width: 300px;
+}
+
+.main-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.thumbnail-container {
+  display: flex;
+  gap: 10px;
+}
+
+.thumbnail {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 5px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.thumbnail:hover {
+  opacity: 1;
+}
+
+.modal-details {
+  flex: 1;
+  min-width: 300px;
+}
+
+.modal-price {
+  font-size: 28px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.modal-address {
+  color: #7f8c8d;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.modal-features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+}
+
+.feature-item i {
+  margin-right: 10px;
+  color: #3498db;
+}
+
+.modal-description {
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 25px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.modal-btn {
+  padding: 12px 25px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.primary-btn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+}
+
+.primary-btn:hover {
+  background-color: #2980b9;
+}
+
+.secondary-btn {
+  background-color: white;
+  color: #3498db;
+  border: 1px solid #3498db;
+}
+
+.secondary-btn:hover {
+  background-color: #f8f9fa;
+}
+
+.amenities {
+  margin-top: 25px;
+}
+
+.amenities h4 {
+  margin-bottom: 15px;
+}
+
+.amenities-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.amenity {
+  background-color: #f8f9fa;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+      </style>
     </section>
     <section class="cta-section">
       <div class="container">

@@ -48,46 +48,7 @@
           </a>
         </div>
 
-        <div class="filters-dropdown">
-          <button class="filters-toggle">
-            <i class="fas fa-sliders-h"></i>
-            <span>Filters</span>
-          </button>
-          <div class="filters-panel">
-            <div class="filter-group">
-              <h4>Property Type</h4>
-              <div class="filter-options">
-                <div class="filter-option active">All</div>
-                <div class="filter-option">House</div>
-                <div class="filter-option">Apartment</div>
-                <div class="filter-option">Office</div>
-                <div class="filter-option">Commercial</div>
-              </div>
-            </div>
-        
-            <div class="filter-group">
-              <h4>Price Range</h4>
-              <input type="range" class="range-slider" min="0" max="1000000" step="10000" id="priceRange" value="500000">
-              <div class="range-values">
-                <span id="minValue">$0</span>
-                <span id="maxValue"></span>
-                <span id="currentValue">$500,000</span>
-              </div>
-            </div>
-        
-            <div class="filter-group">
-              <h4>Bedrooms</h4>
-              <div class="filter-options">
-                <div class="filter-option">Studio</div>
-                <div class="filter-option">1</div>
-                <div class="filter-option">2</div>
-                <div class="filter-option">3+</div>
-              </div>
-            </div>
-        
-            <button class="apply-filters">Apply Filters</button>
-          </div>
-        </div>
+     
         
 
         <button class="mobile-menu-btn">
@@ -96,7 +57,7 @@
       </div>
     </header>
     <div class="hero-header">
-      <iframe src='https://my.spline.design/worldplanet-kNAk4ZzrZ9qdnREZQ3mDjykG/' frameborder='0' width='50%' height='200%'></iframe>
+     <iframe src='https://my.spline.design/spacetexttransition-QwtvjIMIdiOcqf038twd2KDF/' frameborder='0' width='100%' height='100%'></iframe>
       
       <div class="hero-text">
           <div class="container">
@@ -400,19 +361,85 @@
             </div>
           </div>
         </div>
-        <div class="testimonials-controls">
-          <button class="control-btn prev-btn">
-            <i class="fas fa-chevron-left"></i>
-          </button>
-          <p class="control-btn prev-btn dots-container next-btn">1</p>
-          <p class="control-btn prev-btn dots-container next-btn">2</p>
-          <p class="control-btn prev-btn dots-container next-btn">3</p>
-          <p class="control-btn prev-btn dots-container next-btn">4</p>
-          <p class="control-btn prev-btn dots-container next-btn">5</p>
-          <div class="dots-container"></div>
-          <button class="control-btn next-btn">
-            <i class="fas fa-chevron-right"></i>
-          </button>
+       <div class="pagination-controls">
+  <button class="control-btn prev-btn">
+    <i class="fas fa-chevron-left"></i>
+  </button>
+  <button class="page-btn active" data-page="1">1</button>
+  <button class="page-btn" data-page="2">2</button>
+  <button class="page-btn" data-page="3">3</button>
+  <button class="page-btn" data-page="4">4</button>
+  <button class="page-btn" data-page="5">5</button>
+  <button class="control-btn next-btn">
+    <i class="fas fa-chevron-right"></i>
+  </button>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+  const propertyCards = document.querySelectorAll('.property-card');
+  const itemsPerPage = 4; // Numri i shtëpive për faqe
+  const pageButtons = document.querySelectorAll('.page-btn');
+  const prevBtn = document.querySelector('.prev-btn');
+  const nextBtn = document.querySelector('.next-btn');
+  
+  let currentPage = 1;
+  
+  // Funksioni për shfaqjen e shtëpive sipas faqes
+  function showPage(page) {
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    
+    propertyCards.forEach((card, index) => {
+      if (index >= startIndex && index < endIndex) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+    
+    // Përditëso butonin aktiv
+    pageButtons.forEach(btn => {
+      btn.classList.remove('active');
+      if (parseInt(btn.dataset.page) === page) {
+        btn.classList.add('active');
+      }
+    });
+    
+    currentPage = page;
+    
+    // Aktivizo/çaktivizo butonat e navigimit
+    prevBtn.disabled = page === 1;
+    nextBtn.disabled = endIndex >= propertyCards.length;
+  }
+  
+  // Ngarko faqen e parë fillimisht
+  showPage(1);
+  
+  // Shto event listeners për butonat e faqeve
+  pageButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const page = parseInt(this.dataset.page);
+      showPage(page);
+    });
+  });
+  
+  // Butoni për faqen e mëparshme
+  prevBtn.addEventListener('click', function() {
+    if (currentPage > 1) {
+      showPage(currentPage - 1);
+    }
+  });
+  
+  // Butoni për faqen tjetër
+  nextBtn.addEventListener('click', function() {
+    const totalPages = Math.ceil(propertyCards.length / itemsPerPage);
+    if (currentPage < totalPages) {
+      showPage(currentPage + 1);
+    }
+  });
+});
+</script>
+          
         </div>
       </div>
     </section>

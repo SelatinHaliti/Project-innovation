@@ -637,3 +637,16 @@ payAndSubmit.style.pointerEvents = 'none';
 
 
 
+function saveAndDisplayProperty(propertyData) {
+    propertyData.id = Date.now();
+    
+    const userProperties = JSON.parse(localStorage.getItem('user_properties')) || [];
+    userProperties.unshift(propertyData);
+    localStorage.setItem('user_properties', JSON.stringify(userProperties));
+    
+    displayUserProperty(propertyData);
+    resetPropertyForm();
+}
+
+
+

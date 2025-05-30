@@ -10,10 +10,6 @@
 </head>
 <body>
    
-   
-    <body>
-    </head>
-    <body>
         
         <header class="advanced-header">
             <div class="nav-container">
@@ -25,47 +21,6 @@
                   </div>
                   
                 
-                <div class="search-container">
-                    <div class="search-bar">
-                        <input type="text" class="search-input" placeholder="Kerko sipas lokacionit, llojin e prones...">
-                        <button class="search-btn">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-                <script>
-                    document.addEventListener("DOMContentLoaded", () => {
-  const searchInput = document.querySelector('.search-input');
-  const searchBtn = document.querySelector('.search-btn');
-
-  searchBtn.addEventListener('click', handleSearch);
-  searchInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') handleSearch();
-  });
-
-  function handleSearch() {
-    const keyword = searchInput.value.trim().toLowerCase();
-
-    const filters = {
-      keyword: keyword,
-      propertyType: getSelectedOptions('Property Type'),
-      priceMax: parseInt(document.getElementById('priceRange').value),
-      bedrooms: getSelectedOptions('Bedrooms')
-    };
-
-    console.log("Te dhenat e kerkuara:", filters);
-
-    
-  }
-
-  function getSelectedOptions(title) {
-    const group = [...document.querySelectorAll('.filter-group')].find(g =>
-      g.querySelector('h4')?.textContent.trim() === title
-    );
-    if (!group) return null;
-    return [...group.querySelectorAll('.filter-option.active')].map(el => el.textContent.trim());
-  }
-});
 
 
 
@@ -86,103 +41,6 @@
                         <span>Zyre</span>
                     </a>
                 </div>
-            
-
-                  
-                  
-                  
-                  <script>
-                    document.addEventListener("DOMContentLoaded", () => {
-  const filterOptions = document.querySelectorAll('.filter-option');
-  const priceRange = document.getElementById('priceRange');
-  const currentValue = document.getElementById('currentValue');
-  const maxValue = document.getElementById('maxValue');
-  const minValue = document.getElementById('minValue');
-  const applyButton = document.querySelector('.apply-filters');
-
- 
-  minValue.textContent = `$${parseInt(priceRange.min).toLocaleString()}`;
-  maxValue.textContent = `$${parseInt(priceRange.max).toLocaleString()}`;
-  currentValue.textContent = `$${parseInt(priceRange.value).toLocaleString()}`;
-  priceRange.addEventListener('input', () => {
-    currentValue.textContent = `$${parseInt(priceRange.value).toLocaleString()}`;
-  });
-  filterOptions.forEach(option => {
-    option.addEventListener('click', () => {
-      const group = option.closest('.filter-group');
-      const isMultiple = group.querySelectorAll('.filter-option').length > 0 && group.querySelector('h4').textContent === 'Bedrooms';
-      if (!isMultiple || option.textContent === 'All') {
-        group.querySelectorAll('.filter-option').forEach(o => o.classList.remove('active'));
-      }
-      if (isMultiple && option.classList.contains('active')) {
-        option.classList.remove('active');
-      } else {
-        option.classList.add('active');
-      }
-      if (option.textContent === 'All') {
-        group.querySelectorAll('.filter-option:not(:first-child)').forEach(o => o.classList.remove('active'));
-      } else {
-        const allOption = group.querySelector('.filter-option:first-child');
-        if (allOption && allOption.classList.contains('active')) {
-          allOption.classList.remove('active');
-        }
-      }
-    });
-  });
-  applyButton.addEventListener('click', () => {
-    const selectedFilters = {
-      propertyType: getSelectedOptions('Property Type'),
-      priceMax: parseInt(priceRange.value),
-      bedrooms: getSelectedOptions('Bedrooms')
-    };
-
-    console.log('Filtrat e zgjedhur:', selectedFilters);
-  });
-
-  function getSelectedOptions(title) {
-    const group = [...document.querySelectorAll('.filter-group')].find(g =>
-      g.querySelector('h4')?.textContent.trim() === title
-    );
-    if (!group) return null;
-    return [...group.querySelectorAll('.filter-option.active')].map(el => el.textContent.trim());
-  }
-});
-
-                  </script>
-                 
-                        
-                
-                
-                
-                <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    const loginBtn = document.getElementById('loginBtn');
-                    const authModal = document.getElementById('authModal');
-                    const closeModal = document.querySelector('.close-modal');
-                    const tabBtns = document.querySelectorAll('.tab-btn');
-                    const tabContents = document.querySelectorAll('.auth-tab-content');
-                    loginBtn.addEventListener('click', function() {
-                        authModal.style.display = 'block';
-                    });
-                    closeModal.addEventListener('click', function() {
-                        authModal.style.display = 'none';
-                    });
-                    window.addEventListener('click', function(event) {
-                        if (event.target === authModal) {
-                            authModal.style.display = 'none';
-                        }
-                    });
-                    tabBtns.forEach(btn => {
-                        btn.addEventListener('click', function() {
-                            const tabId = this.getAttribute('data-tab');
-                            tabBtns.forEach(btn => btn.classList.remove('active'));
-                            tabContents.forEach(content => content.classList.remove('active'));
-                            this.classList.add('active');
-                            document.getElementById(tabId + 'Tab').classList.add('active');
-                        });
-                    });
-                });
-                </script>
                 <head>
   <title>Shitje Apartamentesh në Prishtinë | MySpace</title>
   <meta name="description" content="Gjeni apartamente të shkëlqyera për shitje në Prishtinë. Zgjidhni nga një gamë e gjerë e pasurive të paluajtshme. Shikoni tani ofertat e fundit në MySpace!">
@@ -245,11 +103,7 @@
                 src="https://js.stripe.com/v3/buy-button.js">
               </script>
               
-              <stripe-buy-button
-                buy-button-id="buy_btn_1RHojfRjGiyNVx7k19X5R6UM"
-                publishable-key="pk_test_51RACzSRjGiyNVx7klgg7BYwtyREqge6Yidy2EnXUuy4ssgCqny8W5BLc3fgUBPtNy6Cpyn6sD8H5fAVGp45hKbF300tZ3ssFK5"
-              >
-              </stripe-buy-button>
+             
                 <script>document.addEventListener('DOMContentLoaded', function() {
     const addFormBtn = document.getElementById('addFormBtn');
     const STORAGE_KEY = 'user_properties';
@@ -421,7 +275,7 @@
         
         </header>
         <div class="hero-header">
-            <iframe src='https://my.spline.design/worldplanet-kNAk4ZzrZ9qdnREZQ3mDjykG/' frameborder='0' width='50%' height='200%'></iframe>
+           <iframe src='https://my.spline.design/spacetexttransition-QwtvjIMIdiOcqf038twd2KDF' frameborder='0' width='80%' height='80%'></iframe>
             
             <div class="hero-text">
                 <div class="container">
@@ -447,7 +301,7 @@
                     textLoad();
                     setInterval(textLoad, 12000);
                 </script>
-                <p>Eksploroni pornat tona premium ne lokacionet me te mira te qytetit</p>
+                <p>Eksploroni pronat tona premium ne lokacionet me te mira te qytetit</p>
                 <button class="hero-btn"> <a href="houses.html" target="_blank">Shiko Pronat</a> </button>
             </div>
         </div>
@@ -640,6 +494,7 @@ window.onclick = function(event) {
         closeModal();
     }
 }
+
 </script>
     
     
@@ -1454,6 +1309,7 @@ faqQuestions.forEach(question => {
 });
 
 </script>
+1
      
     <section class="cta-section">
         
@@ -1476,7 +1332,7 @@ faqQuestions.forEach(question => {
             <div class="footer-grid">
                 <div class="footer-col">
                     <h3>  MySpace</h3>
-                    <p>Agjencia jonë ofron shërbime të specializuara në shitje, blerje dhe qira të banesave, shtëpive dhe zyrave në të gjithë Shqipërinë.</p>
+                    <p>Agjencia jonë ofron shërbime të specializuara në shitje, blerje dhe qira të banesave, shtëpive dhe zyrave në të gjithë Kosovën.</p>
                     <div class="social-icons">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
@@ -1874,6 +1730,7 @@ document.getElementById('loginOverlay').style.display = 'flex';
 });
 
 </script>
+
 
 </body>
 </html>
